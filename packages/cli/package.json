@@ -1,0 +1,12 @@
+{
+  "name": "@kino/cli",
+  "version": "0.0.1",
+  "description": "CLI for scaffolding react-kino scroll pages",
+  "private": false,
+  "scripts": {
+    "build": "echo 'CLI not yet implemented'",
+    "dev": "echo 'CLI not yet implemented'",
+    "clean": "rm -rf dist"
+  },
+  "license": "MIT"
+}
