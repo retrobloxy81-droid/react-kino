@@ -1,12 +1,30 @@
 {
   "name": "@kino/cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "CLI for scaffolding react-kino scroll pages",
-  "private": false,
+  "bin": {
+    "kino": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": ["dist", "templates"],
   "scripts": {
-    "build": "echo 'CLI not yet implemented'",
-    "dev": "echo 'CLI not yet implemented'",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "clean": "rm -rf dist"
   },
-  "license": "MIT"
+  "dependencies": {
+    "fs-extra": "^11",
+    "kleur": "^4",
+    "prompts": "^2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11",
+    "@types/prompts": "^2",
+    "tsup": "^8",
+    "typescript": "^5"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
 }
