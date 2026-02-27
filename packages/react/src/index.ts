@@ -7,6 +7,8 @@ export { Counter } from "./counter";
 export { CompareSlider } from "./compare-slider";
 export { HorizontalScroll, Panel } from "./horizontal-scroll";
 export { Progress } from "./progress";
+export { VideoScroll } from "./video-scroll";
+export { TextReveal } from "./text-reveal";
 
 // Hooks
 export { useScrollProgress } from "./hooks/use-scroll-progress";
