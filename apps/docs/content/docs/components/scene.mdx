@@ -1,0 +1,88 @@
+---
+title: Scene
+description: A pinned scroll section. Content stays fixed while the user scrolls through the scene's duration.
+---
+
+## Overview
+
+`<Scene>` is the core building block of react-kino. It creates a tall spacer element and pins its inner content using `position: sticky`. Progress goes from `0` to `1` as the user scrolls through the scene.
+
+## Usage
+
+```tsx
+import { Kino, Scene } from "react-kino";
+
+{/* Static children -- use child components that read progress from context */}
+<Scene duration="200vh">
+  <MyAnimatedContent />
+</Scene>
+
+{/* Render prop -- get progress directly */}
+<Scene duration="400vh">
+  {(progress) => (
+    <div style={{ opacity: progress }}>
+      {Math.round(progress * 100)}% scrolled
+    </div>
+  )}
+</Scene>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `duration` | `string` | -- | Scroll distance the scene spans. Supports `vh` and `px` units (e.g. `"200vh"`, `"1500px"`) |
+| `pin` | `boolean` | `true` | Whether to pin (sticky) the inner content during scroll |
+| `children` | `ReactNode \| (progress: number) => ReactNode` | -- | Static content or render function receiving progress (0-1) |
+| `className` | `string` | -- | CSS class for the outer spacer element |
+| `style` | `CSSProperties` | -- | Inline styles for the sticky inner container |
+
+## How it works
+
+`<Scene>` uses CSS `position: sticky` with a tall spacer `div` whose height matches the `duration` prop. As the user scrolls through the spacer, progress is calculated as:
+
+```
+progress = scrollPositionThroughSpacer / spacerHeight
+```
+
+This is the same technique as GSAP ScrollTrigger, without the dependency.
+
+## Context
+
+`<Scene>` provides a `SceneContext` that child components (`<Reveal>`, `<Counter>`, `<CompareSlider>`) automatically read from. You do not need to pass progress manually when nesting components inside a `<Scene>`.
+
+## Examples
+
+### Progress percentage display
+
+```tsx
+<Kino>
+  <Scene duration="300vh">
+    {(progress) => (
+      <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+        <p style={{ fontSize: "6rem", fontWeight: 700 }}>
+          {Math.round(progress * 100)}%
+        </p>
+      </div>
+    )}
+  </Scene>
+</Kino>
+```
+
+### Multiple scenes in sequence
+
+```tsx
+<Kino>
+  <Scene duration="200vh">
+    {(progress) => <FirstSection progress={progress} />}
+  </Scene>
+
+  <Scene duration="300vh">
+    {(progress) => <SecondSection progress={progress} />}
+  </Scene>
+
+  <Scene duration="150vh">
+    {(progress) => <ThirdSection progress={progress} />}
+  </Scene>
+</Kino>
+```

@@ -1,0 +1,56 @@
+---
+title: useKino
+description: Access the root ScrollTracker instance from Kino.
+---
+
+## Overview
+
+`useKino()` accesses the root `ScrollTracker` instance from `<Kino>`. For advanced use cases where you need direct access to the scroll engine.
+
+## Usage
+
+```tsx
+import { useKino } from "react-kino";
+
+function AdvancedComponent() {
+  const { tracker } = useKino();
+  // tracker.subscribe(), tracker.start(), tracker.stop()
+}
+```
+
+## Returns
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `tracker` | `ScrollTracker` | The root scroll tracker instance |
+
+Throws an error if used outside `<Kino>`.
+
+## ScrollTracker API
+
+The `ScrollTracker` instance provides low-level access to the scroll engine:
+
+- `tracker.subscribe(callback)` -- subscribe to scroll updates
+- `tracker.start()` -- start tracking (called automatically by `<Kino>`)
+- `tracker.stop()` -- stop tracking
+- `tracker.progress` -- current page scroll progress (0-1)
+
+## Example: Subscribe to scroll events
+
+```tsx
+import { useEffect } from "react";
+import { useKino } from "react-kino";
+
+function ScrollLogger() {
+  const { tracker } = useKino();
+
+  useEffect(() => {
+    const unsubscribe = tracker.subscribe((progress) => {
+      console.log("Scroll progress:", progress);
+    });
+    return unsubscribe;
+  }, [tracker]);
+
+  return null;
+}
+```

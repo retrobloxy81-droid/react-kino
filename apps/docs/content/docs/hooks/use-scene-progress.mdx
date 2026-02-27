@@ -1,0 +1,60 @@
+---
+title: useSceneProgress
+description: Returns scene-level scroll progress for a specific element.
+---
+
+## Overview
+
+`useSceneProgress(ref, durationPx)` returns scene-level scroll progress for a specific element. Useful when building custom scroll-driven components outside of `<Scene>`.
+
+## Usage
+
+```tsx
+import { useRef } from "react";
+import { useSceneProgress } from "react-kino";
+
+function CustomScene() {
+  const ref = useRef<HTMLDivElement>(null);
+  const progress = useSceneProgress(ref, 1500); // 1500px scroll distance
+
+  return (
+    <div ref={ref} style={{ height: 1500 }}>
+      <div style={{ position: "sticky", top: 0 }}>
+        Progress: {progress.toFixed(2)}
+      </div>
+    </div>
+  );
+}
+```
+
+## Parameters
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `spacerRef` | `RefObject<HTMLElement \| null>` | Ref to the spacer/container element |
+| `durationPx` | `number` | Total scroll distance in pixels |
+
+## Returns
+
+| Type | Description |
+|------|-------------|
+| `number` | Progress from `0` to `1` |
+
+## Example: Custom parallax section
+
+```tsx
+function CustomParallax() {
+  const ref = useRef<HTMLDivElement>(null);
+  const progress = useSceneProgress(ref, 2000);
+
+  return (
+    <div ref={ref} style={{ height: 2000, position: "relative" }}>
+      <div style={{ position: "sticky", top: 0, height: "100vh" }}>
+        <div style={{ transform: `translateY(${progress * -100}px)` }}>
+          Content moves as you scroll
+        </div>
+      </div>
+    </div>
+  );
+}
+```

@@ -1,0 +1,48 @@
+---
+title: useScrollProgress
+description: Returns the page-level scroll progress as a number from 0 to 1.
+---
+
+## Overview
+
+`useScrollProgress()` returns the page-level scroll progress as a number from `0` (top of page) to `1` (bottom of page).
+
+## Usage
+
+```tsx
+import { useScrollProgress } from "react-kino";
+
+function ScrollPercentage() {
+  const progress = useScrollProgress();
+  return <div>{Math.round(progress * 100)}%</div>;
+}
+```
+
+## Returns
+
+| Type | Description |
+|------|-------------|
+| `number` | Progress from `0` (top of page) to `1` (bottom of page) |
+
+## Example: Custom progress bar
+
+```tsx
+import { useScrollProgress } from "react-kino";
+
+function CustomProgressBar() {
+  const progress = useScrollProgress();
+
+  return (
+    <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 3, zIndex: 9999 }}>
+      <div
+        style={{
+          height: "100%",
+          width: `${progress * 100}%`,
+          background: "#7c3aed",
+          transition: "width 0.1s ease",
+        }}
+      />
+    </div>
+  );
+}
+```

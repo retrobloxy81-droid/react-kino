@@ -1,0 +1,67 @@
+---
+title: Counter
+description: Animated number that counts between two values as the user scrolls.
+---
+
+## Overview
+
+`<Counter>` animates a number between two values as the user scrolls. Automatically reads progress from a parent `<Scene>`, or accepts a `progress` prop directly.
+
+## Usage
+
+```tsx
+import { Scene, Counter } from "react-kino";
+
+<Scene duration="200vh">
+  <Counter from={0} to={1000000} at={0.2} span={0.5} />
+
+  <Counter
+    from={0}
+    to={99.9}
+    format={(n) => `${n.toFixed(1)}%`}
+    easing="ease-in-out"
+  />
+</Scene>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `from` | `number` | -- | Starting value |
+| `to` | `number` | -- | Ending value |
+| `at` | `number` | `0` | Progress value (0-1) when counting begins |
+| `span` | `number` | `0.3` | How much of the progress range (0-1) the count spans |
+| `format` | `(value: number) => string` | `toLocaleString` | Formatting function for the displayed value |
+| `easing` | `string \| (t: number) => number` | `"ease-out"` | Easing preset name or custom easing function |
+| `progress` | `number` | -- | Direct progress override (0-1). If omitted, reads from parent `<Scene>` context |
+| `className` | `string` | -- | CSS class for the `<span>` element |
+
+When both `from` and `to` are integers, the displayed value is automatically rounded.
+
+## Accessibility
+
+When `prefers-reduced-motion` is enabled, the counter displays the final `to` value immediately once progress reaches the `at` threshold.
+
+## Example: Stat counter section
+
+```tsx
+<Kino>
+  <Scene duration="250vh">
+    <div style={{ display: "flex", gap: "4rem", justifyContent: "center", height: "100vh", alignItems: "center" }}>
+      <div style={{ textAlign: "center" }}>
+        <Counter from={0} to={50} at={0.15} span={0.4} />
+        <p>Countries</p>
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <Counter from={0} to={10000000} at={0.25} span={0.4} />
+        <p>Users</p>
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <Counter from={0} to={99.9} at={0.35} span={0.4} format={(n) => `${n.toFixed(1)}%`} />
+        <p>Uptime</p>
+      </div>
+    </div>
+  </Scene>
+</Kino>
+```

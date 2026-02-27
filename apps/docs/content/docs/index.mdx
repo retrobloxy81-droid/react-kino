@@ -1,0 +1,111 @@
+---
+title: Getting Started
+description: Install react-kino and build your first scroll experience in minutes.
+---
+
+## Installation
+
+```bash
+npm install react-kino
+```
+
+```bash
+pnpm add react-kino
+```
+
+```bash
+yarn add react-kino
+```
+
+**Requirements:** React 18+
+
+## Quick Start
+
+Wrap your app with `<Kino>`, add a `<Scene>`, and you have a pinned scroll section:
+
+```tsx
+import { Kino, Scene, Reveal, Counter } from "react-kino";
+
+function App() {
+  return (
+    <Kino>
+      <Scene duration="300vh">
+        {(progress) => (
+          <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+            <Reveal animation="fade-up" at={0}>
+              <h1>Welcome</h1>
+            </Reveal>
+
+            <Reveal animation="scale" at={0.3}>
+              <p>Scroll-driven storytelling, made simple.</p>
+            </Reveal>
+
+            <Reveal animation="fade" at={0.6}>
+              <Counter from={0} to={10000} format={(n) => `${n.toLocaleString()}+ users`} />
+            </Reveal>
+          </div>
+        )}
+      </Scene>
+    </Kino>
+  );
+}
+```
+
+That is a complete scroll experience: the section pins in place, content fades in at different scroll points, and a number counts up -- all in ~20 lines.
+
+## Why react-kino
+
+- **Tiny** -- the core scroll engine is under 3 KB gzipped. GSAP ScrollTrigger alone is 33 KB.
+- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
+- **Zero dependencies** -- no runtime deps. React is a peer dependency. Framer Motion is optional.
+- **SSR-safe** -- every component renders children on the server, animates on the client. Works with Next.js App Router out of the box.
+
+## SSR / Next.js
+
+react-kino is SSR-safe. All components include the `"use client"` directive and defer scroll logic to `useEffect`.
+
+```tsx
+// app/page.tsx
+import { Kino, Scene, Reveal } from "react-kino";
+
+export default function Page() {
+  return (
+    <Kino>
+      <Scene duration="200vh">
+        <Reveal animation="fade-up">
+          <h1>Works with App Router</h1>
+        </Reveal>
+      </Scene>
+    </Kino>
+  );
+}
+```
+
+**What happens on the server:** Components render their children immediately with no animation styles. Scroll tracking starts after hydration on the client.
+
+## Accessibility
+
+react-kino respects the `prefers-reduced-motion` media query:
+
+- `<Reveal>` -- content renders immediately in its visible state
+- `<Parallax>` -- parallax offset is disabled
+- `<Counter>` -- displays the final value immediately
+
+No additional configuration is required.
+
+## Animation Engine
+
+react-kino uses a progressive enhancement strategy for animations:
+
+1. **CSS Scroll Timeline API** (Chrome 115+, Firefox 121+) -- native, best performance
+2. **Web Animations API (WAAPI)** -- JS-controlled but GPU-accelerated fallback
+3. **Framer Motion** -- optional enhancement if installed
+
+## Browser Support
+
+| Feature | Chrome | Firefox | Safari | Edge |
+|---------|--------|---------|--------|------|
+| Core scroll tracking | 64+ | 60+ | 13+ | 79+ |
+| CSS Scroll Timeline | 115+ | 121+ | -- | 115+ |
+| `position: sticky` | 56+ | 59+ | 13+ | 79+ |
+| `prefers-reduced-motion` | 74+ | 63+ | 10.1+ | 79+ |

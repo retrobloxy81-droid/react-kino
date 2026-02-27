@@ -1,0 +1,57 @@
+---
+title: VideoScroll
+description: Scrubs through a video as the user scrolls, like Apple product pages.
+---
+
+## Overview
+
+`<VideoScroll>` scrubs through a video as the user scrolls -- like the AirPods Pro or iPhone product pages. Pair with overlay children for animated text on top of the video.
+
+## Usage
+
+```tsx
+import { VideoScroll } from "react-kino";
+
+<VideoScroll src="/product.mp4" duration="400vh" poster="/poster.jpg">
+  {(progress) => (
+    <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
+      <h2 style={{ opacity: progress, color: "#fff", fontSize: "4rem" }}>
+        Scroll to reveal
+      </h2>
+    </div>
+  )}
+</VideoScroll>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | -- | URL of the video file (MP4 recommended, no audio needed) |
+| `duration` | `string` | `"300vh"` | Scroll distance the video scrubbing spans |
+| `pin` | `boolean` | `true` | Whether to pin the video while scrubbing |
+| `poster` | `string` | -- | Poster image shown before the video loads |
+| `children` | `ReactNode \| (progress: number) => ReactNode` | -- | Overlay content rendered on top of the video |
+| `className` | `string` | -- | CSS class for the outer spacer |
+
+## Behavior
+
+- The video is `muted`, `playsInline`, and never autoplays
+- `currentTime` is set directly from scroll progress
+- `prefers-reduced-motion`: video stays on the poster frame
+
+## Example: Product reveal
+
+```tsx
+<Kino>
+  <VideoScroll src="/product.mp4" duration="400vh" poster="/poster.jpg">
+    {(progress) => (
+      <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
+        <Reveal animation="fade-up" at={0.3} progress={progress}>
+          <h2 style={{ color: "#fff", fontSize: "4rem" }}>The future is here</h2>
+        </Reveal>
+      </div>
+    )}
+  </VideoScroll>
+</Kino>
+```

@@ -1,0 +1,44 @@
+---
+title: Kino
+description: Root provider that initializes the scroll tracking engine.
+---
+
+## Overview
+
+`<Kino>` is the root provider that initializes the scroll tracking engine. Wrap your app or page layout with it to enable scroll-driven animations.
+
+## Usage
+
+```tsx
+import { Kino } from "react-kino";
+
+<Kino>
+  {/* your scenes and content */}
+</Kino>
+```
+
+All scroll-driven components (`<Scene>`, `<Parallax>`, `<Progress>`, etc.) must be descendants of `<Kino>`.
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | -- | Child elements |
+
+## Example
+
+```tsx
+import { Kino, Scene, Reveal } from "react-kino";
+
+function App() {
+  return (
+    <Kino>
+      <Scene duration="300vh">
+        <Reveal animation="fade-up" at={0.2}>
+          <h1>Hello, scroll world</h1>
+        </Reveal>
+      </Scene>
+    </Kino>
+  );
+}
+```

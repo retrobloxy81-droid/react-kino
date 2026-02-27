@@ -1,0 +1,77 @@
+---
+title: HorizontalScroll
+description: Converts vertical scroll into horizontal movement with full-viewport panels.
+---
+
+## Overview
+
+`<HorizontalScroll>` converts vertical scroll into horizontal movement. Wrap `<Panel>` components inside it to create horizontally-scrolling sections.
+
+## Usage
+
+```tsx
+import { HorizontalScroll, Panel } from "react-kino";
+
+<HorizontalScroll>
+  <Panel>
+    <div style={{ background: "#111", color: "#fff", padding: 60 }}>
+      <h2>Panel One</h2>
+    </div>
+  </Panel>
+  <Panel>
+    <div style={{ background: "#222", color: "#fff", padding: 60 }}>
+      <h2>Panel Two</h2>
+    </div>
+  </Panel>
+  <Panel>
+    <div style={{ background: "#333", color: "#fff", padding: 60 }}>
+      <h2>Panel Three</h2>
+    </div>
+  </Panel>
+</HorizontalScroll>
+```
+
+## `<HorizontalScroll>` Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | -- | `<Panel>` components |
+| `className` | `string` | -- | CSS class for the outer spacer |
+| `panelHeight` | `string` | `"100vh"` | Height of each panel as a CSS string |
+
+## `<Panel>` Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | -- | Panel content |
+| `className` | `string` | -- | CSS class |
+| `style` | `CSSProperties` | -- | Inline styles (merged with default `100vw x 100vh` sizing) |
+
+## How it works
+
+The spacer height is automatically set to `childCount * 100vh`, giving each panel a full viewport of scroll distance. Vertical scroll is translated into a horizontal `translateX` on the inner container.
+
+## Example: Feature showcase
+
+```tsx
+<Kino>
+  <HorizontalScroll>
+    {features.map((f) => (
+      <Panel key={f.title}>
+        <div style={{
+          background: f.bg,
+          color: "#fff",
+          height: "100%",
+          display: "grid",
+          placeItems: "center",
+        }}>
+          <div style={{ textAlign: "center" }}>
+            <h2 style={{ fontSize: "3rem" }}>{f.title}</h2>
+            <p style={{ opacity: 0.7 }}>{f.description}</p>
+          </div>
+        </div>
+      </Panel>
+    ))}
+  </HorizontalScroll>
+</Kino>
+```

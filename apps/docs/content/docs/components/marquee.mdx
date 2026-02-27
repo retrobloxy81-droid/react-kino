@@ -1,0 +1,52 @@
+---
+title: Marquee
+description: Infinite scrolling marquee that loops content horizontally.
+---
+
+## Overview
+
+`<Marquee>` creates an infinitely scrolling horizontal marquee. Content loops seamlessly. Supports configurable speed, direction, and hover-to-pause behavior.
+
+## Usage
+
+```tsx
+import { Marquee } from "react-kino";
+
+<Marquee speed={40} pauseOnHover>
+  <span>react-kino</span>
+  <span>Cinematic scroll</span>
+  <span>Zero dependencies</span>
+</Marquee>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `speed` | `number` | `40` | Scroll speed in pixels per second |
+| `direction` | `"left" \| "right"` | `"left"` | Direction of scrolling |
+| `pauseOnHover` | `boolean` | `false` | Whether to pause the animation when hovered |
+| `gap` | `number` | `40` | Gap between repeated items in pixels |
+| `children` | `ReactNode` | -- | Content to scroll |
+| `className` | `string` | -- | CSS class for the container |
+
+## Example: Logo parade
+
+```tsx
+<Marquee speed={30} direction="left" gap={60} pauseOnHover>
+  <img src="/logo-1.svg" alt="Company 1" height={32} />
+  <img src="/logo-2.svg" alt="Company 2" height={32} />
+  <img src="/logo-3.svg" alt="Company 3" height={32} />
+  <img src="/logo-4.svg" alt="Company 4" height={32} />
+</Marquee>
+```
+
+## Example: Reverse direction
+
+```tsx
+<Marquee speed={50} direction="right">
+  <span style={{ padding: "0 2rem", fontSize: "1.5rem" }}>Fast</span>
+  <span style={{ padding: "0 2rem", fontSize: "1.5rem" }}>Declarative</span>
+  <span style={{ padding: "0 2rem", fontSize: "1.5rem" }}>Accessible</span>
+</Marquee>
+```

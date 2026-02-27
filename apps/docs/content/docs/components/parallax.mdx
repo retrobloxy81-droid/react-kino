@@ -1,0 +1,77 @@
+---
+title: Parallax
+description: A layer that scrolls at a different speed, creating depth.
+---
+
+## Overview
+
+`<Parallax>` moves its children at a different scroll speed than the page, creating a sense of depth. Use `speed < 1` for background layers and `speed > 1` for foreground layers.
+
+## Usage
+
+```tsx
+import { Parallax } from "react-kino";
+
+{/* Background image scrolls at half speed */}
+<Parallax speed={0.3}>
+  <img
+    src="/hero-bg.jpg"
+    alt=""
+    style={{ width: "100%", height: "120vh", objectFit: "cover" }}
+  />
+</Parallax>
+
+{/* Foreground element scrolls faster */}
+<Parallax speed={1.5}>
+  <div className="floating-badge">New</div>
+</Parallax>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `speed` | `number` | `0.5` | Speed multiplier. `1` = normal scroll, `< 1` = slower (background feel), `> 1` = faster (foreground feel) |
+| `direction` | `"vertical" \| "horizontal"` | `"vertical"` | Scroll direction for the parallax offset |
+| `children` | `ReactNode` | -- | Content to apply parallax to |
+| `className` | `string` | -- | CSS class |
+| `style` | `CSSProperties` | -- | Inline styles (merged with transform) |
+
+## How it works
+
+The parallax offset is calculated as:
+
+```
+offset = scrollPosition * (1 - speed)
+```
+
+The transform is applied using `translateY` (or `translateX` for horizontal) for GPU-accelerated performance.
+
+## Accessibility
+
+When `prefers-reduced-motion` is enabled, the parallax offset is disabled and content scrolls normally.
+
+## Example: Layered depth effect
+
+```tsx
+<section style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+  {/* Slow background */}
+  <Parallax speed={0.2}>
+    <div style={{ position: "absolute", inset: 0, background: "url(/bg.jpg)" }} />
+  </Parallax>
+
+  {/* Mid layer */}
+  <Parallax speed={0.6}>
+    <div style={{ position: "absolute", top: "20%", right: "10%" }}>
+      <DecorativeCircle />
+    </div>
+  </Parallax>
+
+  {/* Fast foreground */}
+  <Parallax speed={1.4}>
+    <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
+      <h1>Create depth.</h1>
+    </div>
+  </Parallax>
+</section>
+```

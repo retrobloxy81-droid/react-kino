@@ -1,0 +1,60 @@
+---
+title: TextReveal
+description: Word-by-word, character-by-character, or line-by-line text reveal driven by scroll.
+---
+
+## Overview
+
+`<TextReveal>` progressively reveals text as the user scrolls. Supports word, character, and line modes.
+
+## Usage
+
+```tsx
+import { Scene, TextReveal } from "react-kino";
+
+<Scene duration="300vh">
+  {(progress) => (
+    <TextReveal progress={progress} mode="word" at={0.1} span={0.7}>
+      Scroll-driven storytelling components for React. Build cinematic
+      experiences without the complexity.
+    </TextReveal>
+  )}
+</Scene>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `string` | -- | The text to reveal |
+| `mode` | `"word" \| "char" \| "line"` | `"word"` | How to split the text into tokens |
+| `at` | `number` | `0` | Progress value (0-1) when reveal starts |
+| `span` | `number` | `0.8` | How much of the progress range the full reveal spans |
+| `color` | `string` | currentColor | Color of revealed tokens |
+| `dimColor` | `string` | -- | Color of unrevealed tokens (default: 15% opacity) |
+| `progress` | `number` | -- | Direct progress override. If omitted, reads from parent `<Scene>` context |
+| `className` | `string` | -- | CSS class for the wrapper |
+
+## Accessibility
+
+`prefers-reduced-motion`: all text renders immediately at full opacity.
+
+## Modes
+
+| Mode | Behavior |
+|------|----------|
+| `"word"` | Splits on whitespace, reveals one word at a time |
+| `"char"` | Reveals one character at a time |
+| `"line"` | Splits on newlines, reveals one line at a time |
+
+## Example: Character reveal
+
+```tsx
+<Scene duration="400vh">
+  {(progress) => (
+    <TextReveal progress={progress} mode="char" at={0} span={0.9}>
+      Every character matters.
+    </TextReveal>
+  )}
+</Scene>
+```

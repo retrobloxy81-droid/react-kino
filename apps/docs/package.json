@@ -2,21 +2,28 @@
   "name": "@kino/docs",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist"
+    "build": "next build",
+    "dev": "next dev --port 5173",
+    "start": "next start",
+    "clean": "rm -rf .next .source"
   },
   "dependencies": {
+    "fumadocs-core": "^14.7.7",
+    "fumadocs-mdx": "^10.1.0",
+    "fumadocs-ui": "^14.7.7",
+    "next": "^15",
     "react": "^19",
     "react-dom": "^19",
     "react-kino": "workspace:*"
   },
   "devDependencies": {
+    "@types/mdx": "^2",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^5",
-    "typescript": "^5",
-    "vite": "^7"
+    "autoprefixer": "^10",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5"
   }
 }

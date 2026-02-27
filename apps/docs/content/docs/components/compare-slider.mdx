@@ -1,0 +1,68 @@
+---
+title: CompareSlider
+description: Before/after comparison slider with drag and scroll-driven modes.
+---
+
+## Overview
+
+`<CompareSlider>` creates a before/after comparison. Supports both interactive drag mode and scroll-driven mode when nested inside a `<Scene>`.
+
+## Usage
+
+```tsx
+import { CompareSlider } from "react-kino";
+
+{/* Interactive drag mode */}
+<CompareSlider
+  before={<img src="/before.jpg" alt="Before" />}
+  after={<img src="/after.jpg" alt="After" />}
+/>
+
+{/* Scroll-driven mode inside a Scene */}
+<Scene duration="200vh">
+  <CompareSlider
+    scrollDriven
+    before={<img src="/before.jpg" alt="Before" />}
+    after={<img src="/after.jpg" alt="After" />}
+  />
+</Scene>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `before` | `ReactNode` | -- | Content shown on the "before" side (always visible underneath) |
+| `after` | `ReactNode` | -- | Content shown on the "after" side (revealed via clip) |
+| `scrollDriven` | `boolean` | `false` | If `true`, slider position follows scroll progress instead of drag |
+| `progress` | `number` | -- | Progress override (0-1). When `scrollDriven`, defaults to parent `<Scene>` context |
+| `initialPosition` | `number` | `0.5` | Initial slider position (0-1) in drag mode |
+| `className` | `string` | -- | CSS class for the container |
+
+## Example: Scroll-driven comparison
+
+```tsx
+<Kino>
+  <Scene duration="300vh">
+    <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
+      <CompareSlider
+        scrollDriven
+        before={
+          <img
+            src="/old-design.png"
+            alt="Before"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        }
+        after={
+          <img
+            src="/new-design.png"
+            alt="After"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        }
+      />
+    </div>
+  </Scene>
+</Kino>
+```

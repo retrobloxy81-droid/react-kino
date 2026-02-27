@@ -1,0 +1,45 @@
+---
+title: Progress
+description: Fixed scroll progress indicator with bar, dots, and ring styles.
+---
+
+## Overview
+
+`<Progress>` is a fixed scroll progress indicator. It supports bar, dots, and ring visual styles and can be positioned on any edge of the viewport.
+
+## Usage
+
+```tsx
+import { Progress } from "react-kino";
+
+{/* Simple top bar */}
+<Progress />
+
+{/* Ring indicator in the corner */}
+<Progress type="ring" position="bottom" color="#10b981" ringSize={40} />
+
+{/* Dot pagination on the right */}
+<Progress type="dots" position="right" dotCount={8} color="#fff" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"bar" \| "dots" \| "ring"` | `"bar"` | Visual style of the indicator |
+| `position` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Fixed position on screen |
+| `color` | `string` | `"#3b82f6"` | Color of the progress fill / active dots / ring stroke |
+| `trackColor` | `string` | `"transparent"` | Background / inactive color |
+| `progress` | `number` | -- | Progress override (0-1). If omitted, reads page scroll progress |
+| `dotCount` | `number` | `5` | Number of dots (only for `"dots"` type) |
+| `ringSize` | `number` | `48` | Diameter in pixels (only for `"ring"` type) |
+| `className` | `string` | -- | CSS class for the wrapper |
+
+## Example: Purple progress bar
+
+```tsx
+<Kino>
+  <Progress type="bar" color="#7c3aed" />
+  {/* rest of your page */}
+</Kino>
+```

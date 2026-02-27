@@ -1,0 +1,17 @@
+{
+  "title": "Components",
+  "pages": [
+    "kino",
+    "scene",
+    "reveal",
+    "parallax",
+    "counter",
+    "compare-slider",
+    "horizontal-scroll",
+    "progress",
+    "video-scroll",
+    "text-reveal",
+    "marquee",
+    "sticky-header"
+  ]
+}

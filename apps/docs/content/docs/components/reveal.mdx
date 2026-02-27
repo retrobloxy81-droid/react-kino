@@ -1,0 +1,70 @@
+---
+title: Reveal
+description: Scroll-triggered entrance animation with five built-in presets.
+---
+
+## Overview
+
+`<Reveal>` triggers an entrance animation when scroll progress reaches a threshold. Place inside a `<Scene>` or provide a `progress` prop directly.
+
+## Usage
+
+```tsx
+import { Scene, Reveal } from "react-kino";
+
+<Scene duration="300vh">
+  <Reveal animation="fade-up" at={0.2}>
+    <h2>Appears at 20% scroll</h2>
+  </Reveal>
+
+  <Reveal animation="blur" at={0.5} duration={800} delay={200}>
+    <p>Blurs in at 50% with a delay</p>
+  </Reveal>
+</Scene>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `at` | `number` | `0` | Progress value (0-1) when animation triggers |
+| `animation` | `RevealAnimation` | `"fade"` | Animation preset (see below) |
+| `duration` | `number` | `600` | Animation duration in milliseconds |
+| `delay` | `number` | `0` | Delay before animation starts in milliseconds |
+| `progress` | `number` | -- | Direct progress override (0-1). If omitted, reads from parent `<Scene>` context |
+| `children` | `ReactNode` | -- | Content to reveal |
+| `className` | `string` | -- | CSS class for the wrapper div |
+
+## Animation presets
+
+| Preset | Effect |
+|--------|--------|
+| `"fade"` | Opacity 0 to 1 |
+| `"fade-up"` | Fade in + slide up 40px |
+| `"fade-down"` | Fade in + slide down 40px |
+| `"scale"` | Fade in + scale from 0.9 to 1 |
+| `"blur"` | Fade in + unblur from 12px |
+
+## Accessibility
+
+When `prefers-reduced-motion` is enabled, content renders immediately in its visible state with no animation.
+
+## Example: Staggered reveals
+
+```tsx
+<Scene duration="300vh">
+  {(progress) => (
+    <div style={{ display: "flex", gap: "2rem" }}>
+      <Reveal at={0.1} animation="fade-up" progress={progress}>
+        <Card title="First" />
+      </Reveal>
+      <Reveal at={0.2} animation="fade-up" progress={progress}>
+        <Card title="Second" />
+      </Reveal>
+      <Reveal at={0.3} animation="fade-up" progress={progress}>
+        <Card title="Third" />
+      </Reveal>
+    </div>
+  )}
+</Scene>
+```

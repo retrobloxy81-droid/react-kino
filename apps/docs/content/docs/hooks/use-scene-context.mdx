@@ -1,0 +1,53 @@
+---
+title: useSceneContext
+description: Access the progress value from a parent Scene component.
+---
+
+## Overview
+
+`useSceneContext()` accesses the progress value from a parent `<Scene>`. Useful for building custom components that react to scene progress.
+
+## Usage
+
+```tsx
+import { useSceneContext } from "react-kino";
+
+function CustomFadeIn() {
+  const { progress } = useSceneContext();
+  return <div style={{ opacity: progress }}>I fade in as you scroll</div>;
+}
+```
+
+## Returns
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `progress` | `number` | Current scene progress from `0` to `1` |
+
+Throws an error if used outside a `<Scene>`.
+
+## Example: Custom scroll-driven component
+
+```tsx
+import { useSceneContext } from "react-kino";
+
+function RotatingElement() {
+  const { progress } = useSceneContext();
+
+  return (
+    <div
+      style={{
+        transform: `rotate(${progress * 360}deg)`,
+        transition: "transform 0.1s ease",
+      }}
+    >
+      I rotate as you scroll
+    </div>
+  );
+}
+
+// Usage:
+<Scene duration="300vh">
+  <RotatingElement />
+</Scene>
+```
