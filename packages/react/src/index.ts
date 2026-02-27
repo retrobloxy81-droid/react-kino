@@ -9,6 +9,10 @@ export { HorizontalScroll, Panel } from "./horizontal-scroll";
 export { Progress } from "./progress";
 export { VideoScroll } from "./video-scroll";
 export { TextReveal } from "./text-reveal";
+export { Marquee } from "./marquee";
+export type { MarqueeProps } from "./marquee";
+export { StickyHeader } from "./sticky-header";
+export type { StickyHeaderProps } from "./sticky-header";
 
 // Hooks
 export { useScrollProgress } from "./hooks/use-scroll-progress";
