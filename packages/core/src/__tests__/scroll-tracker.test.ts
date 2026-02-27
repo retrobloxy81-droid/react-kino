@@ -1,0 +1,143 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { ScrollTracker } from "../scroll-tracker";
+
+// Mock browser globals for node environment
+const mockWindow = {
+  scrollY: 0,
+  innerHeight: 768,
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+};
+
+const mockDocument = {
+  documentElement: {
+    scrollHeight: 3000,
+  },
+};
+
+beforeEach(() => {
+  // Set up globals
+  (globalThis as any).window = mockWindow;
+  (globalThis as any).document = mockDocument;
+  (globalThis as any).requestAnimationFrame = vi.fn((cb: Function) => {
+    cb(0);
+    return 1;
+  });
+  (globalThis as any).cancelAnimationFrame = vi.fn();
+
+  // Reset mocks
+  mockWindow.scrollY = 0;
+  mockWindow.addEventListener.mockClear();
+  mockWindow.removeEventListener.mockClear();
+});
+
+afterEach(() => {
+  delete (globalThis as any).window;
+  delete (globalThis as any).document;
+  delete (globalThis as any).requestAnimationFrame;
+  delete (globalThis as any).cancelAnimationFrame;
+});
+
+describe("ScrollTracker", () => {
+  it("does not start automatically on construction", () => {
+    new ScrollTracker();
+    expect(mockWindow.addEventListener).not.toHaveBeenCalled();
+  });
+
+  it("adds scroll listener on start()", () => {
+    const tracker = new ScrollTracker();
+    tracker.start();
+    expect(mockWindow.addEventListener).toHaveBeenCalledWith(
+      "scroll",
+      expect.any(Function),
+      { passive: true }
+    );
+    tracker.stop();
+  });
+
+  it("removes scroll listener on stop()", () => {
+    const tracker = new ScrollTracker();
+    tracker.start();
+    tracker.stop();
+    expect(mockWindow.removeEventListener).toHaveBeenCalledWith(
+      "scroll",
+      expect.any(Function)
+    );
+  });
+
+  it("subscribe() returns an unsubscribe function", () => {
+    const tracker = new ScrollTracker();
+    const callback = vi.fn();
+    const unsub = tracker.subscribe(callback);
+    expect(typeof unsub).toBe("function");
+    tracker.stop();
+  });
+
+  it("calls subscriber on start() with initial state", () => {
+    const tracker = new ScrollTracker();
+    const callback = vi.fn();
+    tracker.subscribe(callback);
+    tracker.start();
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith(
+      expect.objectContaining({
+        scrollY: expect.any(Number),
+        viewportHeight: expect.any(Number),
+        scrollHeight: expect.any(Number),
+        progress: expect.any(Number),
+      })
+    );
+    tracker.stop();
+  });
+
+  it("does not call subscriber after unsubscribe", () => {
+    const tracker = new ScrollTracker();
+    const callback = vi.fn();
+    const unsub = tracker.subscribe(callback);
+    unsub();
+    tracker.start();
+
+    expect(callback).not.toHaveBeenCalled();
+    tracker.stop();
+  });
+
+  it("start() is idempotent — calling twice does not double-add listeners", () => {
+    const tracker = new ScrollTracker();
+    tracker.start();
+    tracker.start();
+    expect(mockWindow.addEventListener).toHaveBeenCalledTimes(1);
+    tracker.stop();
+  });
+
+  it("stop() is idempotent — calling twice does not error", () => {
+    const tracker = new ScrollTracker();
+    tracker.start();
+    tracker.stop();
+    tracker.stop();
+    expect(mockWindow.removeEventListener).toHaveBeenCalledTimes(1);
+  });
+
+  it("emits ProgressData with correct shape", () => {
+    mockWindow.scrollY = 100;
+    mockDocument.documentElement.scrollHeight = 3000;
+
+    const tracker = new ScrollTracker();
+    const callback = vi.fn();
+    tracker.subscribe(callback);
+    tracker.start();
+
+    const data = callback.mock.calls[0][0];
+    expect(data).toHaveProperty("scrollY");
+    expect(data).toHaveProperty("viewportHeight");
+    expect(data).toHaveProperty("scrollHeight");
+    expect(data).toHaveProperty("progress");
+    expect(typeof data.scrollY).toBe("number");
+    expect(typeof data.viewportHeight).toBe("number");
+    expect(typeof data.scrollHeight).toBe("number");
+    expect(typeof data.progress).toBe("number");
+    expect(data.progress).toBeGreaterThanOrEqual(0);
+    expect(data.progress).toBeLessThanOrEqual(1);
+    tracker.stop();
+  });
+});
