@@ -341,15 +341,63 @@ import { Progress } from "react-kino";
 
 ### `<VideoScroll>`
 
-> Coming in v0.2
+Scrubs through a video as the user scrolls — like the AirPods Pro / iPhone product pages. Pair with overlay children for animated text on top of the video.
 
-Scrub through a video based on scroll progress. Pair with `<Scene>` for frame-accurate video playback tied to scroll position.
+```tsx
+import { VideoScroll } from "react-kino";
+
+<VideoScroll src="/product.mp4" duration="400vh" poster="/poster.jpg">
+  {(progress) => (
+    <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
+      <h2 style={{ opacity: progress, color: "#fff", fontSize: "4rem" }}>
+        Scroll to reveal
+      </h2>
+    </div>
+  )}
+</VideoScroll>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | -- | URL of the video file (MP4 recommended, no audio needed) |
+| `duration` | `string` | `"300vh"` | Scroll distance the video scrubbing spans |
+| `pin` | `boolean` | `true` | Whether to pin the video while scrubbing |
+| `poster` | `string` | -- | Poster image shown before the video loads |
+| `children` | `ReactNode \| (progress: number) => ReactNode` | -- | Overlay content rendered on top of the video |
+| `className` | `string` | -- | CSS class for the outer spacer |
+
+The video is `muted`, `playsInline`, and never autoplays. `currentTime` is set directly from scroll progress. `prefers-reduced-motion`: video stays on the poster frame.
+
+---
 
 ### `<TextReveal>`
 
-> Coming in v0.2
+Word-by-word, character-by-character, or line-by-line text reveal driven by scroll progress.
 
-Word-by-word or line-by-line text reveal driven by scroll progress. Highlight words as they enter the viewport.
+```tsx
+import { TextReveal } from "react-kino";
+
+<Scene duration="300vh">
+  {(progress) => (
+    <TextReveal progress={progress} mode="word" at={0.1} span={0.7}>
+      Scroll-driven storytelling components for React. Build cinematic experiences without the complexity.
+    </TextReveal>
+  )}
+</Scene>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `string` | -- | The text to reveal |
+| `mode` | `"word" \| "char" \| "line"` | `"word"` | How to split the text into tokens |
+| `at` | `number` | `0` | Progress value (0-1) when reveal starts |
+| `span` | `number` | `0.8` | How much of the progress range the full reveal spans |
+| `color` | `string` | currentColor | Color of revealed tokens |
+| `dimColor` | `string` | -- | Color of unrevealed tokens (default: 15% opacity) |
+| `progress` | `number` | -- | Direct progress override. If omitted, reads from parent `<Scene>` context |
+| `className` | `string` | -- | CSS class for the wrapper |
+
+`prefers-reduced-motion`: all text renders immediately at full opacity.
 
 ---
 
@@ -607,6 +655,83 @@ function FeatureShowcase() {
 
 ---
 
+## Scaffolding with the CLI
+
+```bash
+npx kino init
+```
+
+Prompts you to choose a template, enter a project name, and scaffolds a complete scroll page into your project.
+
+```
+  ✦ react-kino — cinematic scroll experiences for React
+
+  ? What would you like to scaffold? ›
+  ❯ Product Launch page
+    Case Study page
+    Portfolio page
+    Blank scroll page
+
+  ? Project name › my-launch-page
+
+  ✓ Created src/app.tsx
+  ✓ Created src/page.tsx (Next.js App Router)
+
+  Done! Add react-kino and start scrolling.
+```
+
+---
+
+## Pre-built Templates
+
+`@kino/templates` ships three full-page scroll experiences you can drop in and customize:
+
+```bash
+npm install @kino/templates
+```
+
+```tsx
+import { ProductLaunch } from "@kino/templates/product-launch";
+
+<ProductLaunch
+  name="Your Product"
+  tagline="The tagline that changes everything."
+  accentColor="#7c3aed"
+  stats={[
+    { value: 10000, label: "Users", format: (n) => `${n.toLocaleString()}+` },
+    { value: 99, label: "Uptime", format: (n) => `${n}%` },
+  ]}
+  features={[
+    { title: "Zero deps", description: "Only React as peer dep.", icon: "⚡" },
+    { title: "GPU accelerated", description: "Compositor-only properties.", icon: "🚀" },
+  ]}
+/>
+```
+
+| Template | Import | Description |
+|----------|--------|-------------|
+| `ProductLaunch` | `@kino/templates/product-launch` | Apple-style launch page with hero, stats, and feature panels |
+| `CaseStudy` | `@kino/templates/case-study` | Portfolio project page with challenge/solution/results |
+| `Portfolio` | `@kino/templates/portfolio` | Personal portfolio with bio, projects, and contact |
+
+---
+
+## shadcn Registry
+
+Install any component directly into your project using the shadcn CLI:
+
+```bash
+npx shadcn add https://react-kino.dev/registry/components/scene.json
+```
+
+Or install the full package (recommended):
+
+```bash
+npm install react-kino
+```
+
+---
+
 ## SSR / Next.js
 
 react-kino is SSR-safe. All components include the `"use client"` directive and defer scroll logic to `useEffect`.
@@ -676,7 +801,7 @@ All components work without CSS Scroll Timeline -- it is a progressive enhanceme
 Contributions are welcome. Please open an issue first to discuss what you would like to change.
 
 ```bash
-git clone https://github.com/bilaltahseen/react-kino.git
+git clone https://github.com/bilaltahir/react-kino.git
 cd react-kino
 pnpm install
 pnpm dev
