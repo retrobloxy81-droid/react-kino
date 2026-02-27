@@ -7,6 +7,8 @@ export function ParallaxDemo() {
   const [speed, setSpeed] = useState(0.5);
   const [horizontal, setHorizontal] = useState(false);
 
+  const code = `<Parallax\n  speed={${speed}}\n  direction="${horizontal ? "horizontal" : "vertical"}"\n>\n  <div>Parallax content</div>\n</Parallax>`;
+
   return {
     controls: (
       <>
@@ -25,6 +27,7 @@ export function ParallaxDemo() {
         />
       </>
     ),
+    code,
     preview: (
       <div
         style={{

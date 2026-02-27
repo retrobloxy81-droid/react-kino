@@ -4,6 +4,9 @@ import { ParallaxDemo } from "./demos/parallax-demo";
 import { CounterDemo } from "./demos/counter-demo";
 import { CompareSliderDemo } from "./demos/compare-slider-demo";
 import { ProgressDemo } from "./demos/progress-demo";
+import { HorizontalScrollDemo } from "./demos/horizontal-scroll-demo";
+import { TextRevealDemo } from "./demos/text-reveal-demo";
+import { VideoScrollDemo } from "./demos/video-scroll-demo";
 
 export const COMPONENTS = [
   { id: "scene", label: "Scene", component: SceneDemo },
@@ -12,4 +15,7 @@ export const COMPONENTS = [
   { id: "counter", label: "Counter", component: CounterDemo },
   { id: "compare-slider", label: "CompareSlider", component: CompareSliderDemo },
   { id: "progress", label: "Progress", component: ProgressDemo },
+  { id: "horizontal-scroll", label: "HorizontalScroll", component: HorizontalScrollDemo },
+  { id: "text-reveal", label: "TextReveal", component: TextRevealDemo },
+  { id: "video-scroll", label: "VideoScroll", component: VideoScrollDemo },
 ] as const;

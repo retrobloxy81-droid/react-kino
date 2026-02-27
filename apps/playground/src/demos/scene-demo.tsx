@@ -7,6 +7,8 @@ export function SceneDemo() {
   const [durationVh, setDurationVh] = useState(200);
   const [pin, setPin] = useState(true);
 
+  const code = `<Scene duration="${durationVh}vh" pin={${pin}}>\n  {(progress) => (\n    <div>{(progress * 100).toFixed(1)}%</div>\n  )}\n</Scene>`;
+
   return {
     controls: (
       <>
@@ -21,6 +23,7 @@ export function SceneDemo() {
         <ToggleControl label="Pin" value={pin} onChange={setPin} />
       </>
     ),
+    code,
     preview: (
       <div style={{ padding: "40px 0" }}>
         <Scene duration={`${durationVh}vh`} pin={pin}>

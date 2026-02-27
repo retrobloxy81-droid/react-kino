@@ -254,6 +254,24 @@ body,
   min-height: 100%;
 }
 
+/* Copy button */
+.copy-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-control);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.copy-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 /* Value display */
 .value-display {
   font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, monospace;

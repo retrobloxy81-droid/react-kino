@@ -9,6 +9,8 @@ export function CounterDemo() {
   const [at, setAt] = useState(0.1);
   const [span, setSpan] = useState(0.5);
 
+  const code = `<Counter\n  from={${from}}\n  to={${to}}\n  at={${at}}\n  span={${span}}\n/>`;
+
   return {
     controls: (
       <>
@@ -32,6 +34,7 @@ export function CounterDemo() {
         />
       </>
     ),
+    code,
     preview: (
       <div style={{ padding: "40px 0" }}>
         <Scene duration="300vh">

@@ -41,6 +41,8 @@ export function CompareSliderDemo() {
     </div>
   );
 
+  const code = `<CompareSlider\n  before={<img src="/before.jpg" />}\n  after={<img src="/after.jpg" />}\n  initialPosition={${initialPosition}}\n  scrollDriven={${scrollDriven}}\n/>`;
+
   return {
     controls: (
       <>
@@ -59,6 +61,7 @@ export function CompareSliderDemo() {
         />
       </>
     ),
+    code,
     preview: (
       <div
         style={{

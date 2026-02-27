@@ -5,9 +5,17 @@ type ComponentId = (typeof COMPONENTS)[number]["id"];
 
 export function App() {
   const [activeId, setActiveId] = useState<ComponentId>(COMPONENTS[0].id);
+  const [copied, setCopied] = useState(false);
 
   const active = COMPONENTS.find((c) => c.id === activeId)!;
-  const { controls, preview } = active.component();
+  const { controls, preview, code } = active.component();
+
+  const handleCopy = async () => {
+    if (!code) return;
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   return (
     <div className="playground">
@@ -41,6 +49,14 @@ export function App() {
             <h2>Props</h2>
             <div className="controls">{controls}</div>
           </div>
+
+          {code && (
+            <div className="sidebar-section">
+              <button className="copy-btn" onClick={handleCopy}>
+                {copied ? "Copied!" : "Copy JSX"}
+              </button>
+            </div>
+          )}
         </aside>
 
         <main className="preview">

@@ -22,6 +22,8 @@ export function ProgressDemo() {
   const [color, setColor] = useState("#7c3aed");
   const [progressValue, setProgressValue] = useState(0.5);
 
+  const code = `<Progress\n  type="${type}"\n  position="${position}"\n  color="${color}"\n  progress={${progressValue}}\n/>`;
+
   return {
     controls: (
       <>
@@ -55,6 +57,7 @@ export function ProgressDemo() {
         />
       </>
     ),
+    code,
     preview: (
       <div
         style={{

@@ -22,6 +22,8 @@ export function RevealDemo() {
     setKey((k) => k + 1);
   };
 
+  const code = `<Reveal\n  animation="${animation}"\n  duration={${duration}}\n  at={${at}}\n>\n  <div>Revealed Content</div>\n</Reveal>`;
+
   return {
     controls: (
       <>
@@ -49,6 +51,7 @@ export function RevealDemo() {
         />
       </>
     ),
+    code,
     preview: (
       <div key={key} style={{ padding: "40px 0" }}>
         <Scene duration="300vh">
