@@ -129,6 +129,10 @@ import { Scene } from "react-kino";
 
 **Context:** `<Scene>` provides a `SceneContext` that child components (`<Reveal>`, `<Counter>`, `<CompareSlider>`) automatically read from. You do not need to pass progress manually.
 
+<p align="center">
+  <img src="apps/docs/public/demos/scene.gif" alt="Scene component demo" width="80%" />
+</p>
+
 ---
 
 ### `<Reveal>`
@@ -169,6 +173,10 @@ import { Reveal } from "react-kino";
 | `"scale"` | Fade in + scale from 0.9 to 1 |
 | `"blur"` | Fade in + unblur from 12px |
 
+<p align="center">
+  <img src="apps/docs/public/demos/reveal.gif" alt="Reveal animation demo" width="80%" />
+</p>
+
 ---
 
 ### `<Parallax>`
@@ -198,7 +206,7 @@ import { Parallax } from "react-kino";
 | `style` | `CSSProperties` | -- | Inline styles (merged with transform) |
 
 <p align="center">
-  <img src="apps/docs/public/parallax-demo.png" alt="Parallax depth effect demo" width="80%" />
+  <img src="apps/docs/public/demos/parallax.gif" alt="Parallax depth effect demo" width="80%" />
 </p>
 
 ---
@@ -235,6 +243,10 @@ import { Counter } from "react-kino";
 
 When both `from` and `to` are integers, the displayed value is automatically rounded.
 
+<p align="center">
+  <img src="apps/docs/public/demos/counter.gif" alt="Counter animation demo" width="80%" />
+</p>
+
 ---
 
 ### `<CompareSlider>`
@@ -270,7 +282,7 @@ import { CompareSlider } from "react-kino";
 | `className` | `string` | -- | CSS class for the container |
 
 <p align="center">
-  <img src="apps/docs/public/compare-slider-demo.png" alt="CompareSlider before/after reveal demo" width="80%" />
+  <img src="apps/docs/public/demos/compare-slider.gif" alt="CompareSlider before/after reveal demo" width="80%" />
 </p>
 
 ---
@@ -410,6 +422,10 @@ import { TextReveal } from "react-kino";
 | `className` | `string` | -- | CSS class for the wrapper |
 
 `prefers-reduced-motion`: all text renders immediately at full opacity.
+
+<p align="center">
+  <img src="apps/docs/public/demos/text-reveal.gif" alt="TextReveal animation demo" width="80%" />
+</p>
 
 ---
 

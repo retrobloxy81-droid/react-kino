@@ -870,30 +870,18 @@ function VideoScrollSection() {
   )}
 </VideoScroll>`}
     >
-      <div
+      <video
+        src="/demos/text-reveal.mp4"
+        muted
+        playsInline
+        autoPlay
+        loop
         style={{
-          height: "180px",
-          background: "#0a0a0a",
+          width: "100%",
           borderRadius: "8px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "12px",
           border: "1px solid #141414",
         }}
-      >
-        <div style={{ fontSize: "32px", opacity: 0.15 }}>▶</div>
-        <span
-          style={{
-            fontSize: "13px",
-            color: "#444",
-            fontFamily: "'JetBrains Mono', monospace",
-          }}
-        >
-          Provide an MP4 src to scrub on scroll
-        </span>
-      </div>
+      />
     </DemoSection>
   );
 }

@@ -972,6 +972,81 @@ function FeatureShowcase() {
   );
 }
 
+/* ─── Demo Video Grid ─── */
+function DemoVideoGrid() {
+  const demos = [
+    { name: "Scene", file: "scene" },
+    { name: "Marquee", file: "marquee" },
+    { name: "StickyHeader", file: "sticky-header" },
+    { name: "VideoScroll", file: "video-scroll" },
+    { name: "HorizontalScroll", file: "horizontal-scroll" },
+    { name: "Progress", file: "progress" },
+  ];
+
+  return (
+    <section
+      style={{
+        width: "100%",
+        padding: "80px 24px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h2
+        className="section-heading"
+        style={{
+          fontSize: "clamp(28px, 4vw, 44px)",
+          marginBottom: "12px",
+          textAlign: "center",
+        }}
+      >
+        See Every Component.
+      </h2>
+      <p style={{ fontSize: "15px", color: "#666", marginBottom: "40px", textAlign: "center" }}>
+        Each clip shows a component in action — loop, watch, build.
+      </p>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gap: "20px",
+          maxWidth: "1040px",
+          width: "100%",
+        }}
+      >
+        {demos.map((d) => (
+          <div key={d.file} style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <video
+              src={`/demos/${d.file}.mp4`}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: "100%",
+                borderRadius: "10px",
+                border: "1px solid rgba(220, 38, 38, 0.15)",
+                boxShadow: "0 0 60px rgba(220, 38, 38, 0.06)",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "12px",
+                color: "#555",
+                paddingLeft: "4px",
+              }}
+            >
+              {"<"}{d.name}{" />"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ─── Component Gallery (unlock cascade) ─── */
 function ComponentGallery() {
   const components = [
@@ -1354,30 +1429,6 @@ export default function LandingPage() {
         <Progress type="bar" position="top" color="#dc2626" />
         <Hero />
 
-        {/* Launch video */}
-        <section
-          style={{
-            padding: "80px 24px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <video
-            src="/launch-video.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{
-              width: "100%",
-              maxWidth: "960px",
-              borderRadius: "12px",
-              border: "1px solid rgba(220, 38, 38, 0.15)",
-              boxShadow: "0 0 80px rgba(220, 38, 38, 0.08)",
-            }}
-          />
-        </section>
-
         <MarqueeStrip />
         <SceneDemo />
         <TextRevealDemo />
@@ -1386,6 +1437,7 @@ export default function LandingPage() {
         <CompareDemo />
         <MarqueeStrip />
         <FeatureShowcase />
+        <DemoVideoGrid />
         <ComponentGallery />
         <Footer />
       </Kino>
