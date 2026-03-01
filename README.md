@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="apps/docs/public/hero.png" alt="react-kino — cinematic scroll-driven storytelling for React" width="100%" />
+  <img src="apps/docs/public/hero.gif" alt="react-kino — cinematic scroll-driven storytelling for React" width="100%" />
 </p>
 
 <p align="center">
