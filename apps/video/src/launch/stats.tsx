@@ -5,7 +5,7 @@ import {
   interpolate,
   spring,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_BODY } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_BODY } from "../theme";
 
 const STATS = [
   { value: "< 1 KB", label: "Core engine, gzipped", delay: 3 },

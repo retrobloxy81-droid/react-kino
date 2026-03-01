@@ -60,3 +60,14 @@ export const SCENES = {
 export const FPS = 30;
 export const WIDTH = 1920;
 export const HEIGHT = 1080;
+
+/* Demo clip durations */
+export const DEMO_DURATION = 120; // 4s at 30fps
+
+/* Social (vertical) */
+export const SOCIAL_WIDTH = 1080;
+export const SOCIAL_HEIGHT = 1920;
+export const SOCIAL_DURATION = 450; // 15s at 30fps
+
+/* Comparison video */
+export const COMPARISON_DURATION = 600; // 20s at 30fps

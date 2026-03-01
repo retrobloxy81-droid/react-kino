@@ -6,7 +6,7 @@ import {
   spring,
   Easing,
 } from "remotion";
-import { BRAND, FONT_CODE, FONT_DISPLAY, FONT_BODY } from "./theme";
+import { BRAND, FONT_CODE, FONT_DISPLAY, FONT_BODY } from "../theme";
 
 export const CompareDemo: React.FC = () => {
   const frame = useCurrentFrame();

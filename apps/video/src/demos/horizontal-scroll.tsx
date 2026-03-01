@@ -6,7 +6,7 @@ import {
   spring,
   Easing,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "../theme";
 
 const PANELS = [
   { label: "Hero", color: "rgba(220,38,38,0.12)", border: "rgba(220,38,38,0.25)" },

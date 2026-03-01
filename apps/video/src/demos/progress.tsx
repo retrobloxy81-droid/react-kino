@@ -6,7 +6,7 @@ import {
   spring,
   Easing,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "../theme";
 
 const RING_SIZE = 200;
 const RING_STROKE = 6;

@@ -15,10 +15,6 @@ Cinematic scroll-driven storytelling for React.<br/>
 Core scroll engine under 1 KB gzipped.
 </p>
 
-<p align="center">
-  <video src="apps/docs/public/launch-video.mp4" width="100%" autoplay loop muted playsinline></video>
-</p>
-
 ---
 
 ## Why react-kino
@@ -39,7 +35,7 @@ pnpm add react-kino
 ```
 
 ```bash
-yarn add react-kino
+bun add react-kino
 ```
 
 **Requirements:** React 18+
@@ -820,8 +816,3 @@ pnpm install
 pnpm dev
 ```
 
----
-
-## License
-
-[MIT](LICENSE)

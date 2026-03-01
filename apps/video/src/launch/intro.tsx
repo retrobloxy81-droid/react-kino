@@ -6,7 +6,7 @@ import {
   spring,
   Easing,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_BODY } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_BODY } from "../theme";
 
 const GRID_SPACING = 60;
 const GRID_COLS = Math.ceil(1920 / GRID_SPACING) + 1;

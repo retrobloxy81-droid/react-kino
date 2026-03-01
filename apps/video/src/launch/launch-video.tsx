@@ -7,16 +7,16 @@ import { wipe } from "@remotion/transitions/wipe";
 
 import { Intro } from "./intro";
 import { Tagline } from "./tagline";
-import { TextRevealDemo } from "./text-reveal-demo";
-import { ParallaxDemo } from "./parallax-demo";
-import { CompareDemo } from "./compare-demo";
-import { HorizontalScrollDemo } from "./horizontal-scroll-demo";
-import { ProgressDemo } from "./progress-demo";
-import { CounterDemo } from "./counter-demo";
+import { TextRevealDemo } from "../demos/text-reveal";
+import { ParallaxDemo } from "../demos/parallax";
+import { CompareDemo } from "../demos/compare-slider";
+import { HorizontalScrollDemo } from "../demos/horizontal-scroll";
+import { ProgressDemo } from "../demos/progress";
+import { CounterDemo } from "../demos/counter";
 import { ComponentGrid } from "./component-grid";
 import { Stats } from "./stats";
 import { Outro } from "./outro";
-import { SCENES, waitForFonts } from "./theme";
+import { SCENES, waitForFonts } from "../theme";
 
 const T = SCENES.TRANSITION;
 

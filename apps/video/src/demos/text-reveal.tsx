@@ -5,7 +5,7 @@ import {
   interpolate,
   spring,
 } from "remotion";
-import { BRAND, FONT_BODY, FONT_CODE, FONT_DISPLAY } from "./theme";
+import { BRAND, FONT_BODY, FONT_CODE, FONT_DISPLAY } from "../theme";
 
 const TEXT = "Every pixel tells a story";
 const WORDS = TEXT.split(" ");

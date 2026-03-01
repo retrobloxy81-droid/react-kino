@@ -5,7 +5,7 @@ import {
   interpolate,
   spring,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "../theme";
 
 const COMPONENTS = [
   { name: "<Scene>", desc: "Pinned scroll sections" },

@@ -5,7 +5,7 @@ import {
   interpolate,
   spring,
 } from "remotion";
-import { BRAND, FONT_CODE, FONT_DISPLAY } from "./theme";
+import { BRAND, FONT_CODE, FONT_DISPLAY } from "../theme";
 
 const LAYERS = [
   {

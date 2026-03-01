@@ -5,7 +5,7 @@ import {
   interpolate,
   spring,
 } from "remotion";
-import { BRAND, FONT_BODY, FONT_CODE } from "./theme";
+import { BRAND, FONT_BODY, FONT_CODE } from "../theme";
 
 const WORDS = ["Cinematic", "scroll-driven", "storytelling", "for", "React."];
 const REVEAL_START = 4;

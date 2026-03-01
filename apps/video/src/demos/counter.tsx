@@ -6,7 +6,7 @@ import {
   spring,
   Easing,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_CODE, FONT_BODY } from "../theme";
 
 const COUNTERS = [
   { from: 0, to: 1, label: "KB gzipped", prefix: "<", suffix: "", delay: 4 },

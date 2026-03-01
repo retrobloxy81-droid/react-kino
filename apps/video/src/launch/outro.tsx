@@ -5,7 +5,7 @@ import {
   interpolate,
   spring,
 } from "remotion";
-import { BRAND, FONT_DISPLAY, FONT_BODY, FONT_CODE } from "./theme";
+import { BRAND, FONT_DISPLAY, FONT_BODY, FONT_CODE } from "../theme";
 
 export const Outro: React.FC = () => {
   const frame = useCurrentFrame();
