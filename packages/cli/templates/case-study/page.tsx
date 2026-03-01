@@ -1,13 +1,13 @@
 "use client";
 
-import { Kino, Scene, ScrollFade, ScrollReveal } from "react-kino";
+import { Kino, Scene, Reveal } from "react-kino";
 
 export default function __PROJECT_NAME__Page() {
   return (
     <Kino>
       {/* Title card */}
       <Scene duration="150vh">
-        <ScrollFade>
+        <Reveal animation="fade" at={0.05}>
           <div style={{ padding: "30vh 2rem", textAlign: "center" }}>
             <p style={{ fontSize: "0.875rem", textTransform: "uppercase", letterSpacing: "0.1em", opacity: 0.5 }}>
               Case Study
@@ -16,12 +16,12 @@ export default function __PROJECT_NAME__Page() {
               __PROJECT_NAME__
             </h1>
           </div>
-        </ScrollFade>
+        </Reveal>
       </Scene>
 
       {/* The Challenge */}
       <Scene duration="200vh">
-        <ScrollReveal>
+        <Reveal animation="fade-up" at={0.15}>
           <section style={{ maxWidth: 720, margin: "0 auto", padding: "10vh 2rem" }}>
             <h2 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>The Challenge</h2>
             <p style={{ fontSize: "1.125rem", lineHeight: 1.8, opacity: 0.8 }}>
@@ -29,12 +29,12 @@ export default function __PROJECT_NAME__Page() {
               What made this project unique?
             </p>
           </section>
-        </ScrollReveal>
+        </Reveal>
       </Scene>
 
       {/* The Solution */}
       <Scene duration="200vh">
-        <ScrollReveal>
+        <Reveal animation="fade-up" at={0.15}>
           <section style={{ maxWidth: 720, margin: "0 auto", padding: "10vh 2rem" }}>
             <h2 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>The Solution</h2>
             <p style={{ fontSize: "1.125rem", lineHeight: 1.8, opacity: 0.8 }}>
@@ -42,12 +42,12 @@ export default function __PROJECT_NAME__Page() {
               and creative breakthroughs.
             </p>
           </section>
-        </ScrollReveal>
+        </Reveal>
       </Scene>
 
       {/* Results */}
       <Scene duration="250vh">
-        <ScrollReveal stagger={0.2}>
+        <Reveal animation="fade-up" at={0.15}>
           <section style={{ maxWidth: 720, margin: "0 auto", padding: "10vh 2rem" }}>
             <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Results</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2rem", textAlign: "center" }}>
@@ -56,7 +56,7 @@ export default function __PROJECT_NAME__Page() {
               <Stat value="99.9%" label="Uptime" />
             </div>
           </section>
-        </ScrollReveal>
+        </Reveal>
       </Scene>
     </Kino>
   );

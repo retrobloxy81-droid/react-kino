@@ -1,11 +1,11 @@
-import { Kino, Scene, ScrollFade, ScrollReveal, CompareSlider } from "react-kino";
+import { Kino, Scene, Reveal, CompareSlider } from "react-kino";
 
 export default function __PROJECT_NAME__() {
   return (
     <Kino>
       {/* Hero section — fades in on scroll */}
       <Scene duration="200vh">
-        <ScrollFade>
+        <Reveal animation="fade" at={0.05}>
           <div style={{ textAlign: "center", padding: "20vh 2rem" }}>
             <h1 style={{ fontSize: "4rem", fontWeight: 700 }}>
               Introducing __PROJECT_NAME__
@@ -14,18 +14,18 @@ export default function __PROJECT_NAME__() {
               A cinematic scroll experience built with react-kino.
             </p>
           </div>
-        </ScrollFade>
+        </Reveal>
       </Scene>
 
       {/* Features section — each feature reveals on scroll */}
       <Scene duration="300vh">
-        <ScrollReveal stagger={0.15}>
+        <Reveal animation="fade-up" at={0.15}>
           <div style={{ display: "grid", gap: "4rem", padding: "10vh 2rem", maxWidth: 800, margin: "0 auto" }}>
             <Feature title="Blazing Fast" description="Built on CSS Scroll Timeline for native performance." />
             <Feature title="Framework Ready" description="Works with Next.js, Vite, and any React setup." />
             <Feature title="Accessible" description="Respects prefers-reduced-motion out of the box." />
           </div>
-        </ScrollReveal>
+        </Reveal>
       </Scene>
 
       {/* Before / After comparison */}

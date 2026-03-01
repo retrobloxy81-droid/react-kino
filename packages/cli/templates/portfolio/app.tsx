@@ -1,23 +1,23 @@
-import { Kino, Scene, ScrollFade, ScrollReveal } from "react-kino";
+import { Kino, Scene, Reveal } from "react-kino";
 
 export default function __PROJECT_NAME__() {
   return (
     <Kino>
       {/* Intro */}
       <Scene duration="150vh">
-        <ScrollFade>
+        <Reveal animation="fade" at={0.05}>
           <div style={{ padding: "30vh 2rem", textAlign: "center" }}>
             <h1 style={{ fontSize: "3.5rem", fontWeight: 700 }}>__PROJECT_NAME__</h1>
             <p style={{ fontSize: "1.25rem", opacity: 0.6, marginTop: "1rem" }}>
               Designer &amp; Developer
             </p>
           </div>
-        </ScrollFade>
+        </Reveal>
       </Scene>
 
       {/* Project Grid */}
       <Scene duration="300vh">
-        <ScrollReveal stagger={0.12}>
+        <Reveal animation="fade-up" at={0.15}>
           <section style={{ maxWidth: 960, margin: "0 auto", padding: "10vh 2rem" }}>
             <h2 style={{ fontSize: "1.5rem", marginBottom: "2rem" }}>Selected Work</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2rem" }}>
@@ -27,12 +27,12 @@ export default function __PROJECT_NAME__() {
               <ProjectCard title="Project Delta" category="Motion Design" />
             </div>
           </section>
-        </ScrollReveal>
+        </Reveal>
       </Scene>
 
       {/* About */}
       <Scene duration="200vh">
-        <ScrollReveal>
+        <Reveal animation="fade-up" at={0.15}>
           <section style={{ maxWidth: 640, margin: "0 auto", padding: "10vh 2rem" }}>
             <h2 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>About</h2>
             <p style={{ fontSize: "1.125rem", lineHeight: 1.8, opacity: 0.8 }}>
@@ -40,17 +40,17 @@ export default function __PROJECT_NAME__() {
               and what you are looking for.
             </p>
           </section>
-        </ScrollReveal>
+        </Reveal>
       </Scene>
 
       {/* Contact */}
       <Scene duration="100vh">
-        <ScrollFade>
+        <Reveal animation="fade" at={0.05}>
           <div style={{ textAlign: "center", padding: "20vh 2rem" }}>
             <h2 style={{ fontSize: "2.5rem", fontWeight: 700 }}>Get in Touch</h2>
             <p style={{ marginTop: "1rem", opacity: 0.6 }}>hello@example.com</p>
           </div>
-        </ScrollFade>
+        </Reveal>
       </Scene>
     </Kino>
   );

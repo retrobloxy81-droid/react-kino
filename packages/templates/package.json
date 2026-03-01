@@ -2,29 +2,29 @@
   "name": "@kino/templates",
   "version": "0.1.0",
   "description": "Pre-built full-page scroll experience templates for react-kino",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.js"
     },
     "./product-launch": {
       "types": "./dist/product-launch.d.ts",
       "import": "./dist/product-launch.js",
-      "require": "./dist/product-launch.cjs"
+      "require": "./dist/product-launch.js"
     },
     "./case-study": {
       "types": "./dist/case-study.d.ts",
       "import": "./dist/case-study.js",
-      "require": "./dist/case-study.cjs"
+      "require": "./dist/case-study.js"
     },
     "./portfolio": {
       "types": "./dist/portfolio.d.ts",
       "import": "./dist/portfolio.js",
-      "require": "./dist/portfolio.cjs"
+      "require": "./dist/portfolio.js"
     }
   },
   "files": ["dist"],
