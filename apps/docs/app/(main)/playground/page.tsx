@@ -1162,7 +1162,7 @@ export default function PlaygroundPage() {
                 Docs
               </Link>
               <a
-                href="https://github.com/bilaltahir/react-kino"
+                href="https://github.com/btahir/react-kino"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="nav-link"

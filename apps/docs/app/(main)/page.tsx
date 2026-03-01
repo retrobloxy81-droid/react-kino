@@ -270,7 +270,7 @@ function Hero() {
               Playground
             </Link>
             <a
-              href="https://github.com/bilaltahir/react-kino"
+              href="https://github.com/btahir/react-kino"
               target="_blank"
               rel="noopener noreferrer"
               className="gamer-btn-outline"
@@ -1299,7 +1299,7 @@ function Footer() {
           Documentation
         </Link>
         <a
-          href="https://github.com/bilaltahir/react-kino"
+          href="https://github.com/btahir/react-kino"
           target="_blank"
           rel="noopener noreferrer"
           className="nav-link"
@@ -1341,7 +1341,7 @@ export default function LandingPage() {
                 Docs
               </Link>
               <a
-                href="https://github.com/bilaltahir/react-kino"
+                href="https://github.com/btahir/react-kino"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="nav-link"

@@ -16,10 +16,8 @@ Core scroll engine under 1 KB gzipped.
 </p>
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/launch-video.mp4" width="100%" autoplay loop muted playsinline></video>
+  <video src="apps/docs/public/launch-video.mp4" width="100%" autoplay loop muted playsinline></video>
 </p>
-
-> **Note:** If the video doesn't load above, you can [watch it directly](apps/video/out/launch-video.mp4).
 
 ---
 
@@ -816,7 +814,7 @@ No additional configuration is required. This behavior is automatic.
 Contributions are welcome. Please open an issue first to discuss what you would like to change.
 
 ```bash
-git clone https://github.com/bilaltahir/react-kino.git
+git clone https://github.com/btahir/react-kino.git
 cd react-kino
 pnpm install
 pnpm dev

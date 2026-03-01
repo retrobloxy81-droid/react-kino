@@ -13,11 +13,11 @@ export default function Layout({ children }: { children: ReactNode }) {
         { text: "Home", url: "/" },
         {
           text: "GitHub",
-          url: "https://github.com/bilaltahir/react-kino",
+          url: "https://github.com/btahir/react-kino",
           external: true,
         },
       ]}
-      githubUrl="https://github.com/bilaltahir/react-kino"
+      githubUrl="https://github.com/btahir/react-kino"
     >
       {children}
     </DocsLayout>
