@@ -1,5 +1,5 @@
 {
-  "name": "@kino/core",
+  "name": "@react-kino/core",
   "version": "0.1.0",
   "description": "Framework-agnostic scroll engine powering react-kino",
   "main": "./dist/index.js",

@@ -3,8 +3,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { VideoScroll } from "../video-scroll";
 
-// Mock @kino/core to avoid real scroll tracking in tests
-vi.mock("@kino/core", () => ({
+// Mock @react-kino/core to avoid real scroll tracking in tests
+vi.mock("@react-kino/core", () => ({
   ScrollTracker: class {
     subscribe() {
       return () => {};

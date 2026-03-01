@@ -1,5 +1,5 @@
 {
-  "name": "@kino/templates",
+  "name": "@react-kino/templates",
   "version": "0.1.0",
   "description": "Pre-built full-page scroll experience templates for react-kino",
   "main": "./dist/index.js",

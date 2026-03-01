@@ -3,10 +3,10 @@ import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { Counter } from "../counter";
 
-// Mock @kino/core with real implementations for math functions
-vi.mock("@kino/core", async () => {
-  const actual = await vi.importActual<typeof import("@kino/core")>(
-    "@kino/core"
+// Mock @react-kino/core with real implementations for math functions
+vi.mock("@react-kino/core", async () => {
+  const actual = await vi.importActual<typeof import("@react-kino/core")>(
+    "@react-kino/core"
   );
   return {
     ...actual,

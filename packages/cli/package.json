@@ -1,5 +1,5 @@
 {
-  "name": "@kino/cli",
+  "name": "@react-kino/cli",
   "version": "0.1.0",
   "description": "CLI for scaffolding react-kino scroll pages",
   "bin": {

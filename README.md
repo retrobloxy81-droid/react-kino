@@ -21,7 +21,7 @@ Core scroll engine under 1 KB gzipped.
 
 - **Tiny** -- the core scroll engine is under 1 KB gzipped. GSAP ScrollTrigger alone is 33 KB.
 - **Declarative** -- compose `<Scene>`, `<Reveal>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
-- **Lightweight runtime** -- `react-kino` uses a tiny internal engine package (`@kino/core`) plus React peers.
+- **Lightweight runtime** -- `react-kino` uses a tiny internal engine package (`@react-kino/core`) plus React peers.
 - **SSR-safe** -- every component renders children on the server and animates on the client.
 
 ## Installation
@@ -686,7 +686,7 @@ function FeatureShowcase() {
 ## Scaffolding with the CLI
 
 ```bash
-npx @kino/cli init
+npx @react-kino/cli init
 ```
 
 Prompts you to choose a template, enter a project name, and scaffolds a complete scroll page into your project.
@@ -712,14 +712,14 @@ Prompts you to choose a template, enter a project name, and scaffolds a complete
 
 ## Pre-built Templates
 
-`@kino/templates` ships three full-page scroll experiences you can drop in and customize:
+`@react-kino/templates` ships three full-page scroll experiences you can drop in and customize:
 
 ```bash
-npm install @kino/templates
+npm install @react-kino/templates
 ```
 
 ```tsx
-import { ProductLaunch } from "@kino/templates/product-launch";
+import { ProductLaunch } from "@react-kino/templates/product-launch";
 
 <ProductLaunch
   name="Your Product"
@@ -738,9 +738,9 @@ import { ProductLaunch } from "@kino/templates/product-launch";
 
 | Template | Import | Description |
 |----------|--------|-------------|
-| `ProductLaunch` | `@kino/templates/product-launch` | Apple-style launch page with hero, stats, and feature panels |
-| `CaseStudy` | `@kino/templates/case-study` | Portfolio project page with challenge/solution/results |
-| `Portfolio` | `@kino/templates/portfolio` | Personal portfolio with bio, projects, and contact |
+| `ProductLaunch` | `@react-kino/templates/product-launch` | Apple-style launch page with hero, stats, and feature panels |
+| `CaseStudy` | `@react-kino/templates/case-study` | Portfolio project page with challenge/solution/results |
+| `Portfolio` | `@react-kino/templates/portfolio` | Personal portfolio with bio, projects, and contact |
 
 ---
 
@@ -806,7 +806,7 @@ No additional configuration is required. This behavior is automatic.
 - **requestAnimationFrame batching** -- scroll updates are batched via RAF to avoid layout thrashing
 - **GPU-accelerated transforms** -- parallax and reveal animations use `transform` and `opacity` (composite-only properties)
 - **`will-change` hints** -- applied to animating elements for browser optimization
-- **Sub-1 KB core** -- `@kino/core` contains all scroll math with zero dependencies
+- **Sub-1 KB core** -- `@react-kino/core` contains all scroll math with zero dependencies
 - **Tree-shakeable** -- import only the components you use; unused code is eliminated at build time
 
 ---

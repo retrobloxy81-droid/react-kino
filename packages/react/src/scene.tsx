@@ -8,7 +8,7 @@ import React, {
   type ReactNode,
   type CSSProperties,
 } from "react";
-import { calcSceneProgress, parseDuration } from "@kino/core";
+import { calcSceneProgress, parseDuration } from "@react-kino/core";
 import { useIsClient } from "./hooks/use-is-client";
 import { useScrollTracker } from "./hooks/use-scroll-tracker";
 

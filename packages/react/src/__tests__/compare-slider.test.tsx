@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { CompareSlider } from "../compare-slider";
 
-vi.mock("@kino/core", () => ({
+vi.mock("@react-kino/core", () => ({
   ScrollTracker: class MockScrollTracker {
     subscribe = vi.fn(() => vi.fn());
     start = vi.fn();

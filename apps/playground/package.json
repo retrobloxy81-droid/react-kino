@@ -1,5 +1,5 @@
 {
-  "name": "@kino/playground",
+  "name": "@react-kino/playground",
   "private": true,
   "scripts": {
     "dev": "vite",

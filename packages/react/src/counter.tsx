@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, type ReactNode } from "react";
-import { lerp, clamp, EASINGS, type EasingFn } from "@kino/core";
+import { lerp, clamp, EASINGS, type EasingFn } from "@react-kino/core";
 import { useSceneContext } from "./scene";
 
 interface CounterProps {

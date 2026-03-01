@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { ScrollTracker } from "@kino/core";
+import { ScrollTracker } from "@react-kino/core";
 import { useKino } from "../kino";
 
 interface ScrollTrackerHandle {

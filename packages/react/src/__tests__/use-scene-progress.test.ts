@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { useSceneProgress } from "../hooks/use-scene-progress";
 
-vi.mock("@kino/core", () => ({
+vi.mock("@react-kino/core", () => ({
   ScrollTracker: class MockScrollTracker {
     subscribe = vi.fn(() => vi.fn());
     start = vi.fn();

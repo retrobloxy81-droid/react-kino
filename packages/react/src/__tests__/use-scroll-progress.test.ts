@@ -4,7 +4,7 @@ import { useScrollProgress } from "../hooks/use-scroll-progress";
 
 let mockSubscriber: ((data: { progress: number }) => void) | null = null;
 
-vi.mock("@kino/core", () => ({
+vi.mock("@react-kino/core", () => ({
   ScrollTracker: class MockScrollTracker {
     subscribe(cb: (data: { progress: number }) => void) {
       mockSubscriber = cb;

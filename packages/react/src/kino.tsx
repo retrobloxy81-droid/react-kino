@@ -6,7 +6,7 @@ import React, {
   useRef,
   type ReactNode,
 } from "react";
-import { ScrollTracker } from "@kino/core";
+import { ScrollTracker } from "@react-kino/core";
 
 interface KinoContextValue {
   tracker: ScrollTracker;

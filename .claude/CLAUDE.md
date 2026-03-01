@@ -11,16 +11,16 @@ react-kino is a React component library for cinematic scroll-driven storytelling
 ```
 kino/
 ├── packages/
-│   ├── core/       # @kino/core — framework-agnostic scroll engine (pure TS, zero deps)
+│   ├── core/       # @react-kino/core — framework-agnostic scroll engine (pure TS, zero deps)
 │   ├── react/      # react-kino — React components and hooks (the npm-published package)
-│   └── cli/        # @kino/cli — future scaffolding CLI
+│   └── cli/        # @react-kino/cli — future scaffolding CLI
 ├── apps/
 │   ├── docs/       # Vite + React marketing/demo site
 │   └── playground/ # future interactive playground
 └── tooling/        # shared ESLint, TypeScript, and tsup configs
 ```
 
-**Key architectural split:** `@kino/core` contains all scroll math, progress calculation, easing, and pinning logic as pure JS. `react-kino` (packages/react) wraps core with React components and hooks.
+**Key architectural split:** `@react-kino/core` contains all scroll math, progress calculation, easing, and pinning logic as pure JS. `react-kino` (packages/react) wraps core with React components and hooks.
 
 ## Commands
 
@@ -34,7 +34,7 @@ pnpm typecheck            # type-check all packages
 pnpm clean                # clean all dist dirs and node_modules
 ```
 
-Build order enforced by Turborepo: `@kino/core` → `react-kino` → `apps/docs`.
+Build order enforced by Turborepo: `@react-kino/core` → `react-kino` → `apps/docs`.
 
 ## Build & Test Tooling
 

@@ -1,6 +1,6 @@
 "use client";
 import { RefObject, useState, useEffect } from "react";
-import { calcSceneProgress } from "@kino/core";
+import { calcSceneProgress } from "@react-kino/core";
 import { useScrollTracker } from "./use-scroll-tracker";
 
 export function useSceneProgress(
