@@ -3,27 +3,27 @@
   "version": "0.1.0",
   "description": "Pre-built full-page scroll experience templates for react-kino",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./product-launch": {
       "types": "./dist/product-launch.d.ts",
-      "import": "./dist/product-launch.js",
+      "import": "./dist/product-launch.mjs",
       "require": "./dist/product-launch.js"
     },
     "./case-study": {
       "types": "./dist/case-study.d.ts",
-      "import": "./dist/case-study.js",
+      "import": "./dist/case-study.mjs",
       "require": "./dist/case-study.js"
     },
     "./portfolio": {
       "types": "./dist/portfolio.d.ts",
-      "import": "./dist/portfolio.js",
+      "import": "./dist/portfolio.mjs",
       "require": "./dist/portfolio.js"
     }
   },
