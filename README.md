@@ -75,6 +75,67 @@ That is a complete scroll experience: the section pins in place, content fades i
 
 ---
 
+## Scaffolding with the CLI
+
+Skip the setup -- scaffold a complete scroll page from a template:
+
+```bash
+npx @react-kino/cli init
+```
+
+```
+  ✦ react-kino — cinematic scroll experiences for React
+
+  ? What would you like to scaffold? ›
+  ❯ Product Launch page
+    Case Study page
+    Portfolio page
+    Blank scroll page
+
+  ? Project name › my-launch-page
+
+  ✓ Created src/app.tsx
+  ✓ Created src/page.tsx (Next.js App Router)
+
+  Done! Add react-kino and start scrolling.
+```
+
+---
+
+## Pre-built Templates
+
+`@react-kino/templates` ships three full-page scroll experiences you can drop in and customize:
+
+```bash
+npm install @react-kino/templates
+```
+
+```tsx
+import { ProductLaunch } from "@react-kino/templates/product-launch";
+
+<ProductLaunch
+  name="Your Product"
+  tagline="The tagline that changes everything."
+  accentColor="#dc2626"
+  stats={[
+    { value: 10000, label: "Users", format: (n) => `${n.toLocaleString()}+` },
+    { value: 99, label: "Uptime", format: (n) => `${n}%` },
+  ]}
+  features={[
+    { title: "Tiny core", description: "Core engine under 1 KB gzipped.", icon: "⚡" },
+    { title: "GPU accelerated", description: "Compositor-only properties.", icon: "🚀" },
+  ]}
+/>
+```
+
+| Template | Import | Description |
+|----------|--------|-------------|
+| `ProductLaunch` | `@react-kino/templates/product-launch` | Apple-style launch page with hero, stats, and feature panels |
+| `CaseStudy` | `@react-kino/templates/case-study` | Portfolio project page with challenge/solution/results |
+| `Portfolio` | `@react-kino/templates/portfolio` | Personal portfolio with bio, projects, and contact |
+
+---
+
 ## Components
 
 ### `<Kino>`
@@ -680,67 +741,6 @@ function FeatureShowcase() {
   );
 }
 ```
-
----
-
-## Scaffolding with the CLI
-
-```bash
-npx @react-kino/cli init
-```
-
-Prompts you to choose a template, enter a project name, and scaffolds a complete scroll page into your project.
-
-```
-  ✦ react-kino — cinematic scroll experiences for React
-
-  ? What would you like to scaffold? ›
-  ❯ Product Launch page
-    Case Study page
-    Portfolio page
-    Blank scroll page
-
-  ? Project name › my-launch-page
-
-  ✓ Created src/app.tsx
-  ✓ Created src/page.tsx (Next.js App Router)
-
-  Done! Add react-kino and start scrolling.
-```
-
----
-
-## Pre-built Templates
-
-`@react-kino/templates` ships three full-page scroll experiences you can drop in and customize:
-
-```bash
-npm install @react-kino/templates
-```
-
-```tsx
-import { ProductLaunch } from "@react-kino/templates/product-launch";
-
-<ProductLaunch
-  name="Your Product"
-  tagline="The tagline that changes everything."
-  accentColor="#dc2626"
-  stats={[
-    { value: 10000, label: "Users", format: (n) => `${n.toLocaleString()}+` },
-    { value: 99, label: "Uptime", format: (n) => `${n}%` },
-  ]}
-  features={[
-    { title: "Tiny core", description: "Core engine under 1 KB gzipped.", icon: "⚡" },
-    { title: "GPU accelerated", description: "Compositor-only properties.", icon: "🚀" },
-  ]}
-/>
-```
-
-| Template | Import | Description |
-|----------|--------|-------------|
-| `ProductLaunch` | `@react-kino/templates/product-launch` | Apple-style launch page with hero, stats, and feature panels |
-| `CaseStudy` | `@react-kino/templates/case-study` | Portfolio project page with challenge/solution/results |
-| `Portfolio` | `@react-kino/templates/portfolio` | Personal portfolio with bio, projects, and contact |
 
 ---
 
