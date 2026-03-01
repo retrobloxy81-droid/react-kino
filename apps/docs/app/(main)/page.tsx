@@ -170,7 +170,7 @@ function Hero() {
 
 function SceneDemo() {
   return (
-    <Scene duration="200vh">
+    <Scene duration="120vh">
       {(progress) => (
         <div
           style={{
@@ -180,31 +180,32 @@ function SceneDemo() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: `linear-gradient(135deg, rgba(124,58,237,${0.15 * progress}) 0%, #0a0a0a 100%)`,
+            background: `radial-gradient(ellipse at 50% 50%, rgba(124,58,237,${0.12 + 0.18 * progress}) 0%, #0a0a0a 70%)`,
             padding: "0 24px",
           }}
         >
           <p
             style={{
-              fontSize: "14px",
+              fontSize: "13px",
               fontWeight: 500,
               color: "#7c3aed",
               textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              marginBottom: "24px",
+              letterSpacing: "0.15em",
+              marginBottom: "32px",
+              opacity: 0.8,
             }}
           >
             {"<Scene>"}
           </p>
           <div
             style={{
-              fontSize: "clamp(80px, 15vw, 200px)",
+              fontSize: "clamp(80px, 15vw, 180px)",
               fontWeight: 700,
               fontFamily: "'SF Mono', 'Fira Code', 'Fira Mono', monospace",
               letterSpacing: "-0.04em",
               lineHeight: 1,
-              marginBottom: "16px",
-              background: `linear-gradient(135deg, #ffffff ${100 - progress * 100}%, #7c3aed 100%)`,
+              marginBottom: "24px",
+              background: `linear-gradient(135deg, #ffffff ${Math.max(0, 80 - progress * 100)}%, #a78bfa ${100 - progress * 60}%, #7c3aed 100%)`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -212,7 +213,30 @@ function SceneDemo() {
           >
             {Math.round(progress * 100)}%
           </div>
-          <p style={{ fontSize: "16px", color: "#555555" }}>scene progress</p>
+          <p style={{ fontSize: "15px", color: "#555555" }}>scene progress</p>
+
+          {/* Visual element that transforms with progress */}
+          <div
+            style={{
+              marginTop: "40px",
+              display: "flex",
+              gap: "8px",
+              alignItems: "center",
+            }}
+          >
+            {[0, 1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                style={{
+                  width: "4px",
+                  height: `${20 + progress * 40 * (i === 2 ? 1.5 : i === 1 || i === 3 ? 1.2 : 0.8)}px`,
+                  background: `rgba(124, 58, 237, ${0.3 + progress * 0.7})`,
+                  borderRadius: "2px",
+                  transition: "height 0.1s ease",
+                }}
+              />
+            ))}
+          </div>
         </div>
       )}
     </Scene>
@@ -221,245 +245,247 @@ function SceneDemo() {
 
 function TextRevealDemo() {
   return (
-    <section style={{ padding: "80px 0 0" }}>
-      <div
-        style={{
-          textAlign: "center",
-          maxWidth: "600px",
-          margin: "0 auto",
-          padding: "0 24px 60px",
-        }}
-      >
-        <h2
+    <Scene duration="150vh">
+      {(progress) => (
+        <div
           style={{
-            fontSize: "clamp(40px, 5vw, 72px)",
-            fontWeight: 700,
-            letterSpacing: "-0.04em",
-            lineHeight: 1.1,
-            marginBottom: "16px",
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 24px",
           }}
         >
-          Words that appear.
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.7, color: "#888888" }}>
-          Reveal text word-by-word as you scroll.
-        </p>
-      </div>
-      <Scene duration="200vh">
-        {(progress) => (
-          <div
+          <p
             style={{
-              width: "100%",
-              height: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0 24px",
+              fontSize: "13px",
+              fontWeight: 500,
+              color: "#7c3aed",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              marginBottom: "40px",
+              opacity: 0.8,
             }}
           >
-            <div
-              style={{
-                maxWidth: "700px",
-                fontSize: "clamp(24px, 4vw, 42px)",
-                fontWeight: 600,
-                lineHeight: 1.4,
-                letterSpacing: "-0.02em",
-                textAlign: "center",
-              }}
-            >
-              <TextReveal progress={progress} mode="word" at={0.1} span={0.7}>
-                Scroll-driven storytelling components for React. Build cinematic
-                experiences without the complexity.
-              </TextReveal>
-            </div>
+            {"<TextReveal>"}
+          </p>
+          <div
+            style={{
+              maxWidth: "700px",
+              fontSize: "clamp(28px, 4vw, 48px)",
+              fontWeight: 600,
+              lineHeight: 1.4,
+              letterSpacing: "-0.02em",
+              textAlign: "center",
+            }}
+          >
+            <TextReveal progress={progress} mode="word" at={0.0} span={0.75}>
+              Scroll-driven storytelling components for React. Build cinematic
+              experiences without the complexity.
+            </TextReveal>
           </div>
-        )}
-      </Scene>
-    </section>
+        </div>
+      )}
+    </Scene>
   );
 }
 
 function CounterDemo() {
   return (
-    <section style={{ padding: "80px 0 0" }}>
-      <div
-        style={{
-          textAlign: "center",
-          maxWidth: "600px",
-          margin: "0 auto",
-          padding: "0 24px 60px",
-        }}
-      >
-        <h2
+    <Scene duration="120vh">
+      {(progress) => (
+        <div
           style={{
-            fontSize: "clamp(40px, 5vw, 72px)",
-            fontWeight: 700,
-            letterSpacing: "-0.04em",
-            lineHeight: 1.1,
-            marginBottom: "16px",
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 24px",
           }}
         >
-          Numbers that move.
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.7, color: "#888888" }}>
-          Animated counters driven by scroll progress.
-        </p>
-      </div>
-      <Scene duration="150vh">
-        {(progress) => (
-          <div
+          <h2
             style={{
-              width: "100%",
-              height: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0 24px",
+              fontSize: "clamp(36px, 5vw, 64px)",
+              fontWeight: 700,
+              letterSpacing: "-0.04em",
+              lineHeight: 1.1,
+              marginBottom: "12px",
+              textAlign: "center",
+              opacity: Math.min(1, progress * 8),
             }}
           >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                gap: "24px",
-                maxWidth: "900px",
-                width: "100%",
-              }}
-            >
-              {[
-                { label: "Bundle size", to: 3, fmt: (n: number) => `${n.toFixed(1)} KB` },
-                { label: "Dependencies", to: 0, fmt: (n: number) => `${n}` },
-                { label: "Components", to: 12, fmt: (n: number) => `${n}` },
-              ].map((stat, i) => (
-                <div key={stat.label} style={{ textAlign: "center", padding: "32px 16px" }}>
-                  <div
-                    style={{
-                      fontSize: "clamp(40px, 6vw, 72px)",
-                      fontWeight: 700,
-                      color: "#a78bfa",
-                      letterSpacing: "-0.02em",
-                      lineHeight: 1.1,
-                      marginBottom: "8px",
-                    }}
-                  >
-                    <Counter
-                      from={0}
-                      to={stat.to}
-                      at={0.2 + i * 0.1}
-                      progress={progress}
-                      format={stat.fmt}
-                    />
-                  </div>
-                  <span
-                    style={{
-                      fontSize: "15px",
-                      color: "#555555",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.08em",
-                    }}
-                  >
-                    {stat.label}
-                  </span>
+            Numbers that move.
+          </h2>
+          <p
+            style={{
+              fontSize: "17px",
+              lineHeight: 1.7,
+              color: "#888888",
+              marginBottom: "56px",
+              textAlign: "center",
+              opacity: Math.min(1, progress * 6),
+            }}
+          >
+            Animated counters driven by scroll progress.
+          </p>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "24px",
+              maxWidth: "800px",
+              width: "100%",
+            }}
+          >
+            {[
+              { label: "Bundle size", to: 3, fmt: (n: number) => `${n.toFixed(1)} KB` },
+              { label: "Dependencies", to: 0, fmt: (n: number) => `${n}` },
+              { label: "Components", to: 12, fmt: (n: number) => `${n}` },
+            ].map((stat, i) => (
+              <div key={stat.label} style={{ textAlign: "center", padding: "24px 8px" }}>
+                <div
+                  style={{
+                    fontSize: "clamp(36px, 5vw, 64px)",
+                    fontWeight: 700,
+                    color: "#a78bfa",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.1,
+                    marginBottom: "8px",
+                  }}
+                >
+                  <Counter
+                    from={0}
+                    to={stat.to}
+                    at={0.05 + i * 0.05}
+                    span={0.5}
+                    progress={progress}
+                    format={stat.fmt}
+                  />
                 </div>
-              ))}
-            </div>
+                <span
+                  style={{
+                    fontSize: "13px",
+                    color: "#555555",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
           </div>
-        )}
-      </Scene>
-    </section>
+        </div>
+      )}
+    </Scene>
   );
 }
 
 function CompareDemo() {
   return (
-    <section style={{ padding: "80px 0 0" }}>
-      <div
-        style={{
-          textAlign: "center",
-          maxWidth: "600px",
-          margin: "0 auto",
-          padding: "0 24px 60px",
-        }}
-      >
-        <h2
+    <Scene duration="150vh">
+      {(progress) => (
+        <div
           style={{
-            fontSize: "clamp(40px, 5vw, 72px)",
-            fontWeight: 700,
-            letterSpacing: "-0.04em",
-            lineHeight: 1.1,
-            marginBottom: "16px",
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 24px",
           }}
         >
-          Before. After. Scroll.
-        </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.7, color: "#888888" }}>
-          Scroll-driven comparison slider. No dragging required.
-        </p>
-      </div>
-      <Scene duration="200vh">
-        {(progress) => (
-          <div
+          <h2
             style={{
-              width: "100%",
-              height: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0 24px",
+              fontSize: "clamp(36px, 5vw, 64px)",
+              fontWeight: 700,
+              letterSpacing: "-0.04em",
+              lineHeight: 1.1,
+              marginBottom: "12px",
+              textAlign: "center",
+              opacity: Math.min(1, progress * 8),
             }}
           >
-            <div
-              style={{
-                maxWidth: "600px",
-                width: "100%",
-                borderRadius: "16px",
-                overflow: "hidden",
-                border: "1px solid #2a2a2a",
-              }}
-            >
-              <CompareSlider
-                scrollDriven
-                progress={progress}
-                before={
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "400px",
-                      background:
-                        "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: "13px", color: "#555", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                      Before
-                    </span>
+            Before &amp; After.
+          </h2>
+          <p
+            style={{
+              fontSize: "17px",
+              lineHeight: 1.7,
+              color: "#888888",
+              marginBottom: "40px",
+              textAlign: "center",
+              opacity: Math.min(1, progress * 6),
+            }}
+          >
+            Scroll-driven comparison slider.
+          </p>
+
+          <div
+            style={{
+              maxWidth: "640px",
+              width: "100%",
+              borderRadius: "16px",
+              overflow: "hidden",
+              border: "1px solid #2a2a2a",
+            }}
+          >
+            <CompareSlider
+              scrollDriven
+              progress={progress}
+              before={
+                <div
+                  style={{
+                    width: "100%",
+                    height: "360px",
+                    background: "#111111",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "16px",
+                    fontFamily: "'SF Mono', 'Fira Code', monospace",
+                  }}
+                >
+                  <div style={{ fontSize: "48px", opacity: 0.15 }}>{"{ }"}</div>
+                  <div style={{ fontSize: "14px", color: "#444", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    Without react-kino
                   </div>
-                }
-                after={
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "400px",
-                      background:
-                        "linear-gradient(135deg, #1a0a2e 0%, #2d1b69 50%, #7c3aed 100%)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                      After
-                    </span>
+                  <div style={{ fontSize: "13px", color: "#333" }}>Static content</div>
+                </div>
+              }
+              after={
+                <div
+                  style={{
+                    width: "100%",
+                    height: "360px",
+                    background: "linear-gradient(135deg, #1a0a2e 0%, #2d1b69 40%, #7c3aed 100%)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "16px",
+                    fontFamily: "'SF Mono', 'Fira Code', monospace",
+                  }}
+                >
+                  <div style={{ fontSize: "48px" }}>{"{ }"}</div>
+                  <div style={{ fontSize: "14px", color: "rgba(255,255,255,0.8)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    With react-kino
                   </div>
-                }
-              />
-            </div>
+                  <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)" }}>Cinematic scroll experience</div>
+                </div>
+              }
+            />
           </div>
-        )}
-      </Scene>
-    </section>
+        </div>
+      )}
+    </Scene>
   );
 }
 
@@ -478,21 +504,21 @@ function HorizontalDemo() {
           textAlign: "center",
           maxWidth: "600px",
           margin: "0 auto",
-          padding: "120px 24px 60px",
+          padding: "80px 24px 40px",
         }}
       >
         <h2
           style={{
-            fontSize: "clamp(40px, 5vw, 72px)",
+            fontSize: "clamp(36px, 5vw, 64px)",
             fontWeight: 700,
             letterSpacing: "-0.04em",
             lineHeight: 1.1,
-            marginBottom: "16px",
+            marginBottom: "12px",
           }}
         >
           Features worth scrolling for.
         </h2>
-        <p style={{ fontSize: "18px", lineHeight: 1.7, color: "#888888" }}>
+        <p style={{ fontSize: "17px", lineHeight: 1.7, color: "#888888" }}>
           Vertical scroll, horizontal motion. Keep scrolling.
         </p>
       </div>
@@ -565,7 +591,7 @@ function Footer() {
   return (
     <footer
       style={{
-        padding: "120px 24px 60px",
+        padding: "100px 24px 60px",
         textAlign: "center",
         borderTop: "1px solid #1a1a1a",
       }}
@@ -651,7 +677,7 @@ function Footer() {
 
 export default function LandingPage() {
   return (
-    <div className="landing-page" style={{ overflow: "hidden" }}>
+    <div className="landing-page">
       <Kino>
         <Progress type="bar" position="top" color="#7c3aed" />
         <Hero />
