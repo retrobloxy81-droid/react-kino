@@ -7,8 +7,6 @@ import {
   Parallax,
   Counter,
   CompareSlider,
-  HorizontalScroll,
-  Panel,
   TextReveal,
   Progress,
   Marquee,
@@ -30,20 +28,56 @@ function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Deep red glow orb */}
+      {/* Main red glow orb */}
       <Parallax speed={0.15}>
         <div
           style={{
             position: "absolute",
-            top: "15%",
+            top: "5%",
             left: "50%",
             transform: "translateX(-50%)",
-            width: "800px",
-            height: "800px",
+            width: "900px",
+            height: "900px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.03) 40%, transparent 70%)",
+              "radial-gradient(circle, rgba(220, 38, 38, 0.25) 0%, rgba(180, 20, 20, 0.1) 35%, transparent 65%)",
+            filter: "blur(60px)",
+            pointerEvents: "none",
+          }}
+        />
+      </Parallax>
+
+      {/* Secondary warm glow - offset */}
+      <Parallax speed={0.25}>
+        <div
+          style={{
+            position: "absolute",
+            top: "30%",
+            left: "30%",
+            width: "500px",
+            height: "500px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(239, 68, 68, 0.12) 0%, transparent 60%)",
             filter: "blur(80px)",
+            pointerEvents: "none",
+          }}
+        />
+      </Parallax>
+
+      {/* Third glow - bottom right accent */}
+      <Parallax speed={0.35}>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "10%",
+            right: "20%",
+            width: "400px",
+            height: "400px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(153, 27, 27, 0.15) 0%, transparent 60%)",
+            filter: "blur(60px)",
             pointerEvents: "none",
           }}
         />
@@ -56,9 +90,29 @@ function Hero() {
             position: "absolute",
             inset: "-60%",
             backgroundImage:
-              "linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px), " +
-              "linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px)",
+              "linear-gradient(rgba(220, 38, 38, 0.06) 1px, transparent 1px), " +
+              "linear-gradient(90deg, rgba(220, 38, 38, 0.06) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
+            pointerEvents: "none",
+            maskImage:
+              "radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%)",
+          }}
+        />
+      </Parallax>
+
+      {/* Diagonal light streaks */}
+      <Parallax speed={0.4}>
+        <div
+          style={{
+            position: "absolute",
+            top: "-20%",
+            left: "10%",
+            width: "200%",
+            height: "200%",
+            backgroundImage:
+              "linear-gradient(135deg, transparent 40%, rgba(220, 38, 38, 0.03) 40.5%, rgba(220, 38, 38, 0.03) 41%, transparent 41.5%, transparent 55%, rgba(220, 38, 38, 0.02) 55.5%, rgba(220, 38, 38, 0.02) 56%, transparent 56.5%)",
             pointerEvents: "none",
           }}
         />
@@ -69,13 +123,14 @@ function Hero() {
         <div
           style={{
             position: "absolute",
-            top: "20%",
-            right: "15%",
-            width: "80px",
-            height: "80px",
-            border: "1px solid rgba(220, 38, 38, 0.1)",
+            top: "18%",
+            right: "14%",
+            width: "100px",
+            height: "100px",
+            border: "1px solid rgba(220, 38, 38, 0.15)",
             transform: "rotate(45deg)",
             pointerEvents: "none",
+            boxShadow: "0 0 30px rgba(220, 38, 38, 0.05)",
           }}
         />
       </Parallax>
@@ -83,11 +138,40 @@ function Hero() {
         <div
           style={{
             position: "absolute",
-            bottom: "25%",
-            left: "12%",
-            width: "50px",
-            height: "50px",
+            bottom: "22%",
+            left: "10%",
+            width: "70px",
+            height: "70px",
+            border: "1px solid rgba(220, 38, 38, 0.12)",
+            transform: "rotate(45deg)",
+            pointerEvents: "none",
+            boxShadow: "0 0 20px rgba(220, 38, 38, 0.04)",
+          }}
+        />
+      </Parallax>
+      <Parallax speed={0.6}>
+        <div
+          style={{
+            position: "absolute",
+            top: "60%",
+            right: "8%",
+            width: "40px",
+            height: "40px",
             border: "1px solid rgba(220, 38, 38, 0.08)",
+            transform: "rotate(45deg)",
+            pointerEvents: "none",
+          }}
+        />
+      </Parallax>
+      <Parallax speed={0.45}>
+        <div
+          style={{
+            position: "absolute",
+            top: "35%",
+            left: "20%",
+            width: "24px",
+            height: "24px",
+            background: "rgba(220, 38, 38, 0.08)",
             transform: "rotate(45deg)",
             pointerEvents: "none",
           }}
@@ -110,14 +194,15 @@ function Hero() {
             style={{
               fontSize: "clamp(64px, 10vw, 150px)",
               marginBottom: "20px",
-              textShadow: "0 0 80px rgba(220, 38, 38, 0.15)",
+              textShadow:
+                "0 0 80px rgba(220, 38, 38, 0.3), 0 0 160px rgba(220, 38, 38, 0.1)",
             }}
           >
             react-
             <span
               style={{
                 background:
-                  "linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%)",
+                  "linear-gradient(135deg, #f87171 0%, #ef4444 30%, #dc2626 60%, #991b1b 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -180,6 +265,9 @@ function Hero() {
           >
             <Link href="/docs" className="gamer-btn-primary">
               Documentation
+            </Link>
+            <Link href="/playground" className="gamer-btn-outline">
+              Playground
             </Link>
             <a
               href="https://github.com/bilaltahir/react-kino"
@@ -703,9 +791,9 @@ function CompareDemo() {
   );
 }
 
-/* ─── Horizontal Demo ─── */
-function HorizontalDemo() {
-  const features = [
+/* ─── Feature Showcase (bidirectional slide-in) ─── */
+function FeatureShowcase() {
+  const fromLeft = [
     {
       icon: "//",
       title: "Zero Dependencies",
@@ -716,6 +804,8 @@ function HorizontalDemo() {
       title: "Declarative API",
       description: "Compose scenes and animations like JSX.",
     },
+  ];
+  const fromRight = [
     {
       icon: ">>",
       title: "GPU Accelerated",
@@ -729,254 +819,387 @@ function HorizontalDemo() {
   ];
 
   return (
-    <section>
-      <div
-        style={{
-          textAlign: "center",
-          maxWidth: "600px",
-          margin: "0 auto",
-          padding: "100px 24px 40px",
-        }}
-      >
-        <span className="component-tag" style={{ marginBottom: "32px", display: "inline-block" }}>
-          {"<HorizontalScroll>"}
-        </span>
-        <h2
-          className="section-heading"
-          style={{
-            fontSize: "clamp(32px, 5vw, 56px)",
-            marginBottom: "12px",
-            marginTop: "24px",
-          }}
-        >
-          Features worth scrolling for.
-        </h2>
-        <p style={{ fontSize: "16px", color: "#666" }}>
-          Vertical scroll, horizontal motion. Keep scrolling.
-        </p>
-      </div>
-      <HorizontalScroll>
-        {features.map((f) => (
-          <Panel key={f.title}>
-            <div
+    <Scene duration="180vh">
+      {(progress) => {
+        const slide = Math.min(1, progress * 2.5);
+        const ease = 1 - Math.pow(1 - slide, 3); // easeOutCubic
+
+        return (
+          <div
+            style={{
+              width: "100%",
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0 24px",
+              overflow: "hidden",
+            }}
+          >
+            <span className="component-tag" style={{ marginBottom: "32px" }}>
+              {"<Scene>"}
+            </span>
+            <h2
+              className="section-heading"
               style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "24px",
+                fontSize: "clamp(32px, 5vw, 56px)",
+                marginBottom: "12px",
+                textAlign: "center",
+                opacity: Math.min(1, progress * 5),
               }}
             >
-              <div
-                className="gamer-card"
-                style={{ padding: "48px 40px", maxWidth: "380px", width: "100%" }}
-              >
+              Features worth scrolling for.
+            </h2>
+            <p
+              style={{
+                fontSize: "16px",
+                color: "#666",
+                marginBottom: "48px",
+                textAlign: "center",
+                opacity: Math.min(1, progress * 4),
+              }}
+            >
+              Two directions. One scroll.
+            </p>
+
+            {/* Row 1: slides in from left */}
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                marginBottom: "20px",
+                transform: `translateX(${(1 - ease) * -110}%)`,
+                opacity: Math.min(1, progress * 3),
+                transition: "transform 0.05s linear",
+              }}
+            >
+              {fromLeft.map((f) => (
                 <div
+                  key={f.title}
+                  className="gamer-card"
                   style={{
-                    fontSize: "22px",
-                    fontFamily: "'JetBrains Mono', monospace",
-                    color: "#dc2626",
-                    marginBottom: "20px",
-                    fontWeight: 700,
-                    textShadow: "0 0 20px rgba(220, 38, 38, 0.3)",
+                    padding: "36px 32px",
+                    width: "280px",
+                    flexShrink: 0,
                   }}
                 >
-                  {f.icon}
+                  <div
+                    style={{
+                      fontSize: "20px",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color: "#dc2626",
+                      marginBottom: "16px",
+                      fontWeight: 700,
+                      textShadow: "0 0 20px rgba(220, 38, 38, 0.3)",
+                    }}
+                  >
+                    {f.icon}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "'Rajdhani', sans-serif",
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      marginBottom: "8px",
+                    }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.6 }}>
+                    {f.description}
+                  </p>
                 </div>
-                <h3
-                  className="section-heading"
+              ))}
+            </div>
+
+            {/* Row 2: slides in from right */}
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                transform: `translateX(${(1 - ease) * 110}%)`,
+                opacity: Math.min(1, progress * 3),
+                transition: "transform 0.05s linear",
+              }}
+            >
+              {fromRight.map((f) => (
+                <div
+                  key={f.title}
+                  className="gamer-card"
                   style={{
-                    fontSize: "22px",
-                    marginBottom: "10px",
-                    textTransform: "none",
+                    padding: "36px 32px",
+                    width: "280px",
+                    flexShrink: 0,
                   }}
                 >
-                  {f.title}
-                </h3>
-                <p style={{ fontSize: "15px", color: "#666", lineHeight: 1.6 }}>
-                  {f.description}
-                </p>
-              </div>
+                  <div
+                    style={{
+                      fontSize: "20px",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color: "#dc2626",
+                      marginBottom: "16px",
+                      fontWeight: 700,
+                      textShadow: "0 0 20px rgba(220, 38, 38, 0.3)",
+                    }}
+                  >
+                    {f.icon}
+                  </div>
+                  <h3
+                    style={{
+                      fontFamily: "'Rajdhani', sans-serif",
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      marginBottom: "8px",
+                    }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.6 }}>
+                    {f.description}
+                  </p>
+                </div>
+              ))}
             </div>
-          </Panel>
-        ))}
-      </HorizontalScroll>
-    </section>
+          </div>
+        );
+      }}
+    </Scene>
   );
 }
 
-/* ─── Component Gallery ─── */
+/* ─── Component Gallery (unlock cascade) ─── */
 function ComponentGallery() {
   const components = [
     { name: "Kino", code: "<Kino>", desc: "Root scroll tracker provider" },
-    {
-      name: "Scene",
-      code: '<Scene duration="200vh">',
-      desc: "Pinned scroll-driven scenes with progress",
-    },
-    {
-      name: "Reveal",
-      code: '<Reveal animation="fade-up">',
-      desc: "Scroll-triggered entrance animations",
-    },
-    {
-      name: "Parallax",
-      code: "<Parallax speed={0.5}>",
-      desc: "Depth-based scroll parallax effects",
-    },
-    {
-      name: "TextReveal",
-      code: '<TextReveal mode="word">',
-      desc: "Progressive word-by-word text reveal",
-    },
-    {
-      name: "Counter",
-      code: "<Counter from={0} to={100}>",
-      desc: "Scroll-animated number counters",
-    },
-    {
-      name: "CompareSlider",
-      code: "<CompareSlider>",
-      desc: "Before & after comparison slider",
-    },
-    {
-      name: "HorizontalScroll",
-      code: "<HorizontalScroll>",
-      desc: "Vertical scroll to horizontal motion",
-    },
-    {
-      name: "Progress",
-      code: '<Progress type="bar">',
-      desc: "Global scroll progress indicators",
-    },
-    {
-      name: "VideoScroll",
-      code: '<VideoScroll src="…">',
-      desc: "Frame-by-frame video scrubbing on scroll",
-    },
-    {
-      name: "Marquee",
-      code: "<Marquee speed={40}>",
-      desc: "Infinite looping ticker animation",
-    },
-    {
-      name: "StickyHeader",
-      code: "<StickyHeader>",
-      desc: "Scroll-aware fixed header with blur",
-    },
+    { name: "Scene", code: '<Scene duration="200vh">', desc: "Pinned scroll-driven scenes with progress" },
+    { name: "Reveal", code: '<Reveal animation="fade-up">', desc: "Scroll-triggered entrance animations" },
+    { name: "Parallax", code: "<Parallax speed={0.5}>", desc: "Depth-based scroll parallax effects" },
+    { name: "TextReveal", code: '<TextReveal mode="word">', desc: "Progressive word-by-word text reveal" },
+    { name: "Counter", code: "<Counter from={0} to={100}>", desc: "Scroll-animated number counters" },
+    { name: "CompareSlider", code: "<CompareSlider>", desc: "Before & after comparison slider" },
+    { name: "HorizontalScroll", code: "<HorizontalScroll>", desc: "Vertical scroll to horizontal motion" },
+    { name: "Progress", code: '<Progress type="bar">', desc: "Global scroll progress indicators" },
+    { name: "VideoScroll", code: '<VideoScroll src="…">', desc: "Frame-by-frame video scrubbing on scroll" },
+    { name: "Marquee", code: "<Marquee speed={40}>", desc: "Infinite looping ticker animation" },
+    { name: "StickyHeader", code: "<StickyHeader>", desc: "Scroll-aware fixed header with blur" },
+  ];
+
+  const hooks = [
+    { name: "useScrollProgress", desc: "Global page scroll 0→1" },
+    { name: "useSceneProgress", desc: "Per-element scroll tracking" },
+    { name: "useIsClient", desc: "SSR hydration guard" },
   ];
 
   return (
-    <section style={{ padding: "120px 24px 80px", maxWidth: "1040px", margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "64px" }}>
-        <h2
-          className="section-heading"
-          style={{ fontSize: "clamp(32px, 5vw, 56px)", marginBottom: "16px" }}
-        >
-          The Full Arsenal.
-        </h2>
-        <p style={{ fontSize: "16px", color: "#666" }}>
-          12 components &middot; 3 hooks &middot; Zero dependencies
-        </p>
-      </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "16px",
-        }}
-      >
-        {components.map((c) => (
-          <div
-            key={c.name}
-            className="gamer-card gallery-card"
-            style={{ padding: "28px" }}
-          >
-            <code
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "12px",
-                color: "#dc2626",
-                display: "block",
-                marginBottom: "14px",
-                opacity: 0.8,
-              }}
-            >
-              {c.code}
-            </code>
-            <h3
-              style={{
-                fontFamily: "'Rajdhani', sans-serif",
-                fontSize: "20px",
-                fontWeight: 600,
-                marginBottom: "6px",
-                letterSpacing: "0.01em",
-              }}
-            >
-              {c.name}
-            </h3>
-            <p style={{ fontSize: "14px", color: "#555", lineHeight: 1.5 }}>
-              {c.desc}
-            </p>
-          </div>
-        ))}
-      </div>
+    <Scene duration="250vh">
+      {(progress) => {
+        const totalItems = components.length + hooks.length;
+        // How many items are "unlocked" at current progress
+        const unlocked = Math.floor(progress * totalItems * 1.4);
 
-      {/* Hooks row */}
-      <div style={{ marginTop: "48px" }}>
-        <h3
-          style={{
-            fontFamily: "'Rajdhani', sans-serif",
-            fontSize: "18px",
-            fontWeight: 600,
-            color: "#666",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            marginBottom: "20px",
-            textAlign: "center",
-          }}
-        >
-          Hooks
-        </h3>
-        <div
-          style={{
-            display: "flex",
-            gap: "16px",
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          {[
-            { name: "useScrollProgress", desc: "Global page scroll 0→1" },
-            { name: "useSceneProgress", desc: "Per-element scroll tracking" },
-            { name: "useIsClient", desc: "SSR hydration guard" },
-          ].map((h) => (
-            <div
-              key={h.name}
-              className="gamer-card"
-              style={{
-                padding: "20px 24px",
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-              }}
-            >
-              <code
+        return (
+          <div
+            style={{
+              width: "100%",
+              minHeight: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "60px 24px",
+            }}
+          >
+            <div style={{ textAlign: "center", marginBottom: "48px" }}>
+              <h2
+                className="section-heading"
                 style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "13px",
-                  color: "#ef4444",
+                  fontSize: "clamp(32px, 5vw, 56px)",
+                  marginBottom: "16px",
+                  opacity: Math.min(1, progress * 8),
                 }}
               >
-                {h.name}()
-              </code>
-              <span style={{ fontSize: "13px", color: "#555" }}>{h.desc}</span>
+                The Full Arsenal.
+              </h2>
+              <p
+                style={{
+                  fontSize: "16px",
+                  color: "#666",
+                  opacity: Math.min(1, progress * 6),
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: "14px",
+                    color: "#ef4444",
+                  }}
+                >
+                  {Math.min(totalItems, unlocked)}
+                </span>
+                /{totalItems} unlocked &middot; Zero dependencies
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
+
+            {/* Component grid */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                gap: "14px",
+                maxWidth: "1040px",
+                width: "100%",
+                marginBottom: "40px",
+              }}
+            >
+              {components.map((c, i) => {
+                const isUnlocked = i < unlocked;
+                const isJustUnlocked = i === unlocked - 1;
+                return (
+                  <div
+                    key={c.name}
+                    className="gallery-card"
+                    style={{
+                      padding: "24px",
+                      borderRadius: "12px",
+                      background: isUnlocked ? "#111" : "#0a0a0a",
+                      border: `1px solid ${
+                        isJustUnlocked
+                          ? "rgba(220, 38, 38, 0.5)"
+                          : isUnlocked
+                            ? "rgba(220, 38, 38, 0.15)"
+                            : "#111"
+                      }`,
+                      boxShadow: isJustUnlocked
+                        ? "0 0 30px rgba(220, 38, 38, 0.15), 0 0 60px rgba(220, 38, 38, 0.05)"
+                        : "none",
+                      opacity: isUnlocked ? 1 : 0.25,
+                      transform: isUnlocked ? "scale(1)" : "scale(0.97)",
+                      transition:
+                        "opacity 0.4s ease, transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease",
+                    }}
+                  >
+                    <code
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "12px",
+                        color: isUnlocked ? "#dc2626" : "#331111",
+                        display: "block",
+                        marginBottom: "12px",
+                        transition: "color 0.4s ease",
+                      }}
+                    >
+                      {c.code}
+                    </code>
+                    <h3
+                      style={{
+                        fontFamily: "'Rajdhani', sans-serif",
+                        fontSize: "20px",
+                        fontWeight: 600,
+                        marginBottom: "4px",
+                        color: isUnlocked ? "#e8e8e8" : "#333",
+                        transition: "color 0.4s ease",
+                      }}
+                    >
+                      {c.name}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: isUnlocked ? "#555" : "#222",
+                        lineHeight: 1.5,
+                        transition: "color 0.4s ease",
+                      }}
+                    >
+                      {c.desc}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Hooks row */}
+            <div style={{ maxWidth: "1040px", width: "100%" }}>
+              <h3
+                style={{
+                  fontFamily: "'Rajdhani', sans-serif",
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  color: "#444",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  marginBottom: "16px",
+                  textAlign: "center",
+                  opacity: Math.min(1, Math.max(0, (progress - 0.5) * 4)),
+                }}
+              >
+                Hooks
+              </h3>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "14px",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                {hooks.map((h, i) => {
+                  const hookIndex = components.length + i;
+                  const isUnlocked = hookIndex < unlocked;
+                  const isJustUnlocked = hookIndex === unlocked - 1;
+                  return (
+                    <div
+                      key={h.name}
+                      style={{
+                        padding: "16px 20px",
+                        borderRadius: "10px",
+                        background: isUnlocked ? "#111" : "#0a0a0a",
+                        border: `1px solid ${
+                          isJustUnlocked
+                            ? "rgba(220, 38, 38, 0.5)"
+                            : isUnlocked
+                              ? "rgba(220, 38, 38, 0.15)"
+                              : "#111"
+                        }`,
+                        boxShadow: isJustUnlocked
+                          ? "0 0 24px rgba(220, 38, 38, 0.12)"
+                          : "none",
+                        opacity: isUnlocked ? 1 : 0.25,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "14px",
+                        transition:
+                          "opacity 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease",
+                      }}
+                    >
+                      <code
+                        style={{
+                          fontFamily: "'JetBrains Mono', monospace",
+                          fontSize: "13px",
+                          color: isUnlocked ? "#ef4444" : "#331111",
+                          transition: "color 0.4s ease",
+                        }}
+                      >
+                        {h.name}()
+                      </code>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          color: isUnlocked ? "#555" : "#222",
+                          transition: "color 0.4s ease",
+                        }}
+                      >
+                        {h.desc}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        );
+      }}
+    </Scene>
   );
 }
 
@@ -1065,6 +1288,9 @@ function Footer() {
           marginBottom: "48px",
         }}
       >
+        <Link href="/playground" className="nav-link" style={{ color: "#dc2626" }}>
+          Playground
+        </Link>
         <Link href="/docs" className="nav-link" style={{ color: "#dc2626" }}>
           Documentation
         </Link>
@@ -1099,29 +1325,14 @@ export default function LandingPage() {
     <div className="landing-page">
       <Kino>
         <StickyHeader threshold={60} background="rgba(8, 8, 8, 0.92)" blur>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              maxWidth: "1200px",
-              margin: "0 auto",
-              padding: "0 24px",
-              height: "56px",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'Rajdhani', sans-serif",
-                fontWeight: 700,
-                fontSize: "20px",
-                letterSpacing: "0.02em",
-                textTransform: "uppercase",
-              }}
-            >
-              react-<span style={{ color: "#dc2626" }}>kino</span>
-            </span>
-            <div style={{ display: "flex", gap: "28px", alignItems: "center" }}>
+          <div className="site-nav">
+            <Link href="/" className="site-nav-logo" style={{ textDecoration: "none" }}>
+              react-<span>kino</span>
+            </Link>
+            <div className="site-nav-links">
+              <Link href="/playground" className="nav-link">
+                Playground
+              </Link>
               <Link href="/docs" className="nav-link">
                 Docs
               </Link>
@@ -1145,7 +1356,7 @@ export default function LandingPage() {
         <CounterDemo />
         <CompareDemo />
         <MarqueeStrip />
-        <HorizontalDemo />
+        <FeatureShowcase />
         <ComponentGallery />
         <Footer />
       </Kino>
