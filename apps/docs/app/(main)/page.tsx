@@ -647,10 +647,11 @@ function ScrollTransformDemo() {
               </div>
             </ScrollTransform>
 
-            {/* Card 2: Slide in with rotation */}
+            {/* Card 2: Flip Y */}
             <ScrollTransform
-              from={{ x: 120, rotate: 12, opacity: 0 }}
-              to={{ x: 0, rotate: 0, opacity: 1 }}
+              from={{ rotateY: 90, opacity: 0 }}
+              to={{ rotateY: 0, opacity: 1 }}
+              perspective={800}
               at={0.2}
               span={0.4}
               easing="ease-out-cubic"
@@ -671,19 +672,21 @@ function ScrollTransformDemo() {
                     marginBottom: "12px",
                   }}
                 >
-                  {"→ ↻"}
+                  {"↻ Y"}
                 </div>
-                <div style={{ fontSize: "13px", color: "#555" }}>slide + rotate</div>
+                <div style={{ fontSize: "13px", color: "#555" }}>flip Y</div>
               </div>
             </ScrollTransform>
 
-            {/* Card 3: Scale up */}
+            {/* Card 3: Unfold */}
             <ScrollTransform
-              from={{ scale: 0.4, opacity: 0 }}
-              to={{ scale: 1, opacity: 1 }}
+              from={{ rotateX: -60, rotateY: 20, scale: 0.6, opacity: 0 }}
+              to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+              perspective={1200}
+              transformOrigin="top center"
               at={0.35}
               span={0.4}
-              easing="ease-out"
+              easing="ease-out-cubic"
             >
               <div
                 className="gamer-card"
@@ -701,9 +704,9 @@ function ScrollTransformDemo() {
                     marginBottom: "12px",
                   }}
                 >
-                  {"⊕"}
+                  {"⊞"}
                 </div>
-                <div style={{ fontSize: "13px", color: "#555" }}>scale reveal</div>
+                <div style={{ fontSize: "13px", color: "#555" }}>unfold</div>
               </div>
             </ScrollTransform>
           </div>

@@ -723,34 +723,22 @@ const TRANSFORM_PRESETS = {
     perspective: 1000,
     transformOrigin: "center bottom",
   },
-  "slide left": {
-    from: { x: -200, opacity: 0 },
-    to: { x: 0, opacity: 1 },
-    perspective: undefined,
-    transformOrigin: "center center",
+  "flip X": {
+    from: { rotateX: 90, y: 40, opacity: 0 },
+    to: { rotateX: 0, y: 0, opacity: 1 },
+    perspective: 800,
+    transformOrigin: "bottom center",
   },
-  "slide right": {
-    from: { x: 200, rotate: 8, opacity: 0 },
-    to: { x: 0, rotate: 0, opacity: 1 },
-    perspective: undefined,
-    transformOrigin: "center center",
-  },
-  "scale up": {
-    from: { scale: 0.3, opacity: 0 },
-    to: { scale: 1, opacity: 1 },
-    perspective: undefined,
-    transformOrigin: "center center",
-  },
-  "flip in": {
+  "flip Y": {
     from: { rotateY: 90, opacity: 0 },
     to: { rotateY: 0, opacity: 1 },
     perspective: 800,
     transformOrigin: "center center",
   },
-  "drop in": {
-    from: { y: -150, rotate: -15, opacity: 0 },
-    to: { y: 0, rotate: 0, opacity: 1 },
-    perspective: undefined,
+  "unfold": {
+    from: { rotateX: -60, rotateY: 20, scale: 0.6, opacity: 0 },
+    to: { rotateX: 0, rotateY: 0, scale: 1, opacity: 1 },
+    perspective: 1200,
     transformOrigin: "top center",
   },
 } as const;
@@ -829,7 +817,7 @@ function ScrollTransformPlayground() {
                 textShadow: `0 0 20px rgba(220, 38, 38, ${progress * 0.4})`,
               }}
             >
-              {preset === "flip in" ? "↻" : preset === "drop in" ? "↓" : preset === "scale up" ? "⊕" : "{ 3D }"}
+              {"{ 3D }"}
             </div>
             <div style={{ fontSize: "13px", color: "#555" }}>
               {preset}
