@@ -716,9 +716,52 @@ function ProgressPlayground() {
   );
 }
 
+const TRANSFORM_PRESETS = {
+  "3D tilt": {
+    from: { rotateX: 35, rotateY: -10, scale: 0.8, opacity: 0.2 },
+    to: { rotateX: 0, rotateY: 0, scale: 1, opacity: 1 },
+    perspective: 1000,
+    transformOrigin: "center bottom",
+  },
+  "slide left": {
+    from: { x: -200, opacity: 0 },
+    to: { x: 0, opacity: 1 },
+    perspective: undefined,
+    transformOrigin: "center center",
+  },
+  "slide right": {
+    from: { x: 200, rotate: 8, opacity: 0 },
+    to: { x: 0, rotate: 0, opacity: 1 },
+    perspective: undefined,
+    transformOrigin: "center center",
+  },
+  "scale up": {
+    from: { scale: 0.3, opacity: 0 },
+    to: { scale: 1, opacity: 1 },
+    perspective: undefined,
+    transformOrigin: "center center",
+  },
+  "flip in": {
+    from: { rotateY: 90, opacity: 0 },
+    to: { rotateY: 0, opacity: 1 },
+    perspective: 800,
+    transformOrigin: "center center",
+  },
+  "drop in": {
+    from: { y: -150, rotate: -15, opacity: 0 },
+    to: { y: 0, rotate: 0, opacity: 1 },
+    perspective: undefined,
+    transformOrigin: "top center",
+  },
+} as const;
+
+type PresetName = keyof typeof TRANSFORM_PRESETS;
+
 function ScrollTransformPlayground() {
   const [progress, setProgress] = useState(0.0);
-  const [easing, setEasing] = useState<"ease-out" | "ease-out-cubic" | "linear" | "ease-in-out">("ease-out-cubic");
+  const [preset, setPreset] = useState<PresetName>("3D tilt");
+  const [easing, setEasing] = useState<"ease-out-cubic" | "ease-out" | "linear" | "ease-in-out">("ease-out-cubic");
+  const p = TRANSFORM_PRESETS[preset];
   return (
     <DemoSection
       id="scrolltransform"
@@ -734,6 +777,21 @@ function ScrollTransformPlayground() {
   <div>Your content</div>
 </ScrollTransform>`}
     >
+      <div style={{ marginBottom: "4px" }}>
+        <span style={{ fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", color: "#444", letterSpacing: "0.05em" }}>
+          transform
+        </span>
+      </div>
+      <OptionButtons
+        options={Object.keys(TRANSFORM_PRESETS) as PresetName[]}
+        value={preset}
+        onChange={(v) => { setPreset(v); setProgress(0); }}
+      />
+      <div style={{ marginBottom: "4px", marginTop: "8px" }}>
+        <span style={{ fontSize: "11px", fontFamily: "'JetBrains Mono', monospace", color: "#444", letterSpacing: "0.05em" }}>
+          easing
+        </span>
+      </div>
       <OptionButtons
         options={["ease-out-cubic", "ease-out", "linear", "ease-in-out"] as ("ease-out-cubic" | "ease-out" | "linear" | "ease-in-out")[]}
         value={easing}
@@ -745,18 +803,18 @@ function ScrollTransformPlayground() {
           display: "flex",
           justifyContent: "center",
           padding: "32px 0",
-          minHeight: "200px",
+          minHeight: "220px",
           alignItems: "center",
         }}
       >
         <ScrollTransform
-          key={easing}
-          from={{ rotateX: 35, rotateY: -10, scale: 0.8, opacity: 0.2 }}
-          to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
-          perspective={1000}
+          key={`${preset}-${easing}`}
+          from={p.from as Record<string, number>}
+          to={p.to as Record<string, number>}
+          perspective={p.perspective}
           progress={progress}
           easing={easing}
-          transformOrigin="center bottom"
+          transformOrigin={p.transformOrigin}
         >
           <div
             className="gamer-card"
@@ -771,10 +829,10 @@ function ScrollTransformPlayground() {
                 textShadow: `0 0 20px rgba(220, 38, 38, ${progress * 0.4})`,
               }}
             >
-              {"{ 3D }"}
+              {preset === "flip in" ? "↻" : preset === "drop in" ? "↓" : preset === "scale up" ? "⊕" : "{ 3D }"}
             </div>
             <div style={{ fontSize: "13px", color: "#555" }}>
-              easing: {easing}
+              {preset}
             </div>
           </div>
         </ScrollTransform>
