@@ -8,6 +8,9 @@ import {
   HorizontalScroll,
   Panel,
   Progress,
+  StickyHeader,
+  ScrollTransform,
+  Marquee,
 } from "react-kino";
 
 interface PortfolioProps {
@@ -30,6 +33,12 @@ interface PortfolioProps {
   skills?: string[];
   /** Contact email address */
   contactEmail?: string;
+  /** Optional navigation items for sticky header */
+  navItems?: Array<{ label: string; href?: string }>;
+  /** Show scroll-down hint on hero. Default: true */
+  showScrollHint?: boolean;
+  /** Custom items for the skills marquee ticker */
+  marqueeItems?: string[];
 }
 
 export function Portfolio({
@@ -40,6 +49,9 @@ export function Portfolio({
   projects = [],
   skills = [],
   contactEmail,
+  navItems,
+  showScrollHint = true,
+  marqueeItems,
 }: PortfolioProps) {
   const baseStyle: CSSProperties = {
     margin: 0,
@@ -62,61 +74,148 @@ export function Portfolio({
     textAlign: "center",
   };
 
+  const tickerItems = marqueeItems ?? skills;
+
   return (
     <div style={baseStyle}>
       <Kino>
         <Progress color={accentColor} position="top" />
 
-        {/* Hero */}
-        <div
-          style={{
-            position: "relative",
-            height: "100vh",
-            overflow: "hidden",
-          }}
+        {/* Sticky Header */}
+        <StickyHeader
+          threshold={40}
+          background="rgba(0, 0, 0, 0.72)"
+          blur
+          style={{ borderBottom: "0.5px solid rgba(255,255,255,0.08)" }}
         >
-          <Parallax speed={0.3}>
-            <div
-              style={{
-                position: "absolute",
-                inset: "-10%",
-                backgroundImage:
-                  "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)",
-                backgroundSize: "32px 32px",
-              }}
-            />
-          </Parallax>
           <div
             style={{
-              ...sectionCenter,
-              position: "relative",
-              zIndex: 1,
+              maxWidth: "980px",
+              margin: "0 auto",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 24px",
             }}
           >
-            <h1
-              style={{
-                fontSize: "clamp(3.5rem, 12vw, 10rem)",
-                fontWeight: 900,
-                letterSpacing: "-0.05em",
-                lineHeight: 0.95,
-                margin: 0,
-              }}
+            <span
+              style={{ fontSize: "0.875rem", fontWeight: 600, color: "#fff" }}
             >
               {name}
-            </h1>
-            <p
+            </span>
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "24px" }}
+            >
+              {navItems && navItems.length > 0 && (
+                <nav style={{ display: "flex", gap: "20px" }}>
+                  {navItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href ?? "#"}
+                      style={{
+                        fontSize: "0.8rem",
+                        color: "rgba(255,255,255,0.6)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+              )}
+              {contactEmail && (
+                <a
+                  href={`mailto:${contactEmail}`}
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "rgba(255,255,255,0.6)",
+                    textDecoration: "none",
+                  }}
+                >
+                  {contactEmail}
+                </a>
+              )}
+            </div>
+          </div>
+        </StickyHeader>
+
+        {/* Hero with ScrollTransform */}
+        <Scene duration="150vh">
+          {(progress) => (
+            <div
               style={{
-                fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
-                color: accentColor,
-                marginTop: "20px",
-                fontWeight: 500,
-                letterSpacing: "0.02em",
+                position: "relative",
+                height: "100vh",
+                overflow: "hidden",
               }}
             >
-              {role}
-            </p>
-          </div>
-        </div>
+              <Parallax speed={0.3}>
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "-10%",
+                    backgroundImage:
+                      "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)",
+                    backgroundSize: "32px 32px",
+                  }}
+                />
+              </Parallax>
+              <div
+                style={{
+                  ...sectionCenter,
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                <ScrollTransform
+                  from={{ scale: 1, y: 0, opacity: 1 }}
+                  to={{ scale: 0.85, y: -50, opacity: 0 }}
+                  span={0.7}
+                  easing="ease-out"
+                >
+                  <h1
+                    style={{
+                      fontSize: "clamp(3.5rem, 12vw, 10rem)",
+                      fontWeight: 900,
+                      letterSpacing: "-0.05em",
+                      lineHeight: 0.95,
+                      margin: 0,
+                      textAlign: "center",
+                    }}
+                  >
+                    {name}
+                  </h1>
+                  <p
+                    style={{
+                      fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                      color: accentColor,
+                      marginTop: "20px",
+                      fontWeight: 500,
+                      letterSpacing: "0.02em",
+                      textAlign: "center",
+                    }}
+                  >
+                    {role}
+                  </p>
+                </ScrollTransform>
+                {showScrollHint && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "40px",
+                      opacity: Math.max(0, 1 - progress * 5),
+                      fontSize: "1.5rem",
+                      color: "rgba(255, 255, 255, 0.4)",
+                    }}
+                  >
+                    &#8595;
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </Scene>
 
         {/* Bio - TextReveal */}
         <Scene duration="200vh">
@@ -135,7 +234,7 @@ export function Portfolio({
           </div>
         </Scene>
 
-        {/* Projects */}
+        {/* Projects with ScrollTransform cards */}
         {projects.length > 0 && (
           <Scene duration={`${Math.max(projects.length * 80, 200)}vh`}>
             <div style={sectionCenter}>
@@ -165,15 +264,15 @@ export function Portfolio({
                 </Reveal>
                 {projects.map((project, i) => {
                   const step =
-                    projects.length > 1
-                      ? 0.7 / (projects.length - 1)
-                      : 0;
+                    projects.length > 1 ? 0.7 / (projects.length - 1) : 0;
                   return (
-                    <Reveal
+                    <ScrollTransform
                       key={project.title}
+                      from={{ y: 40, opacity: 0 }}
+                      to={{ y: 0, opacity: 1 }}
                       at={0.15 + i * step}
-                      animation="fade-up"
-                      duration={700}
+                      span={0.15}
+                      easing="ease-out"
                     >
                       <div
                         style={{
@@ -244,12 +343,40 @@ export function Portfolio({
                           {project.year}
                         </span>
                       </div>
-                    </Reveal>
+                    </ScrollTransform>
                   );
                 })}
               </div>
             </div>
           </Scene>
+        )}
+
+        {/* Skills Marquee Ticker */}
+        {tickerItems.length > 0 && (
+          <div
+            style={{
+              borderTop: "0.5px solid rgba(255,255,255,0.08)",
+              borderBottom: "0.5px solid rgba(255,255,255,0.08)",
+              padding: "20px 0",
+            }}
+          >
+            <Marquee speed={30}>
+              {tickerItems.map((item) => (
+                <span
+                  key={item}
+                  style={{
+                    fontSize: "0.875rem",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item}
+                </span>
+              ))}
+            </Marquee>
+          </div>
         )}
 
         {/* Skills - Horizontal Scroll */}

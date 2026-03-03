@@ -8,6 +8,9 @@ import {
   HorizontalScroll,
   Panel,
   Progress,
+  StickyHeader,
+  ScrollTransform,
+  Marquee,
 } from "react-kino";
 
 interface ProductLaunchProps {
@@ -27,6 +30,16 @@ interface ProductLaunchProps {
   }>;
   /** Feature panels for horizontal scroll */
   features?: Array<{ title: string; description: string; icon?: string }>;
+  /** Optional navigation items for sticky header */
+  navItems?: Array<{ label: string; href?: string }>;
+  /** CTA button text in the sticky header. Default: "Get Started" */
+  headerCtaText?: string;
+  /** CTA button link in the sticky header */
+  headerCtaHref?: string;
+  /** Show scroll-down hint on hero. Default: true */
+  showScrollHint?: boolean;
+  /** Custom items for the feature marquee ticker */
+  marqueeItems?: string[];
 }
 
 const defaultStats: NonNullable<ProductLaunchProps["stats"]> = [
@@ -67,9 +80,15 @@ export function ProductLaunch({
   accentColor = "#dc2626",
   stats: statsProp,
   features: featuresProp,
+  navItems,
+  headerCtaText = "Get Started",
+  headerCtaHref,
+  showScrollHint = true,
+  marqueeItems,
 }: ProductLaunchProps) {
   const stats = statsProp ?? defaultStats;
   const features = featuresProp ?? defaultFeatures;
+  const tickerItems = marqueeItems ?? features.map((f) => f.title);
   const baseStyle: CSSProperties = {
     margin: 0,
     padding: 0,
@@ -96,52 +115,145 @@ export function ProductLaunch({
       <Kino>
         <Progress color={accentColor} position="top" />
 
-        {/* Hero Section */}
-        <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-          <Parallax speed={0.5}>
-            <div
-              style={{
-                position: "absolute",
-                inset: "-20%",
-                background: heroBackground,
-              }}
-            />
-          </Parallax>
+        {/* Sticky Header */}
+        <StickyHeader
+          threshold={40}
+          background="rgba(0, 0, 0, 0.72)"
+          blur
+          style={{ borderBottom: "0.5px solid rgba(255,255,255,0.08)" }}
+        >
           <div
             style={{
-              ...sectionCenter,
-              position: "relative",
-              zIndex: 1,
+              maxWidth: "980px",
+              margin: "0 auto",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 24px",
             }}
           >
-            <h1
-              style={{
-                fontSize: "clamp(3rem, 10vw, 8rem)",
-                fontWeight: 800,
-                letterSpacing: "-0.04em",
-                lineHeight: 1,
-                margin: 0,
-                backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${accentColor} 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+            <span
+              style={{ fontSize: "0.875rem", fontWeight: 600, color: "#fff" }}
             >
               {name}
-            </h1>
-            <p
+            </span>
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "24px" }}
+            >
+              {navItems && navItems.length > 0 && (
+                <nav style={{ display: "flex", gap: "20px" }}>
+                  {navItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href ?? "#"}
+                      style={{
+                        fontSize: "0.8rem",
+                        color: "rgba(255,255,255,0.6)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+              )}
+              <a
+                href={headerCtaHref ?? "#"}
+                style={{
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                  color: "#fff",
+                  background: accentColor,
+                  padding: "6px 16px",
+                  borderRadius: "8px",
+                  textDecoration: "none",
+                }}
+              >
+                {headerCtaText}
+              </a>
+            </div>
+          </div>
+        </StickyHeader>
+
+        {/* Hero Section with ScrollTransform */}
+        <Scene duration="150vh">
+          {(progress) => (
+            <div
               style={{
-                fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)",
-                color: "rgba(255, 255, 255, 0.6)",
-                marginTop: "24px",
-                maxWidth: "600px",
-                lineHeight: 1.6,
+                position: "relative",
+                height: "100vh",
+                overflow: "hidden",
               }}
             >
-              {tagline}
-            </p>
-          </div>
-        </div>
+              <Parallax speed={0.5}>
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "-20%",
+                    background: heroBackground,
+                  }}
+                />
+              </Parallax>
+              <div
+                style={{
+                  ...sectionCenter,
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                <ScrollTransform
+                  from={{ scale: 1, y: 0, opacity: 1 }}
+                  to={{ scale: 0.85, y: -50, opacity: 0 }}
+                  span={0.7}
+                  easing="ease-out"
+                >
+                  <h1
+                    style={{
+                      fontSize: "clamp(3rem, 10vw, 8rem)",
+                      fontWeight: 800,
+                      letterSpacing: "-0.04em",
+                      lineHeight: 1,
+                      margin: 0,
+                      backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${accentColor} 100%)`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      textAlign: "center",
+                    }}
+                  >
+                    {name}
+                  </h1>
+                  <p
+                    style={{
+                      fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      marginTop: "24px",
+                      maxWidth: "600px",
+                      lineHeight: 1.6,
+                      textAlign: "center",
+                    }}
+                  >
+                    {tagline}
+                  </p>
+                </ScrollTransform>
+                {showScrollHint && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "40px",
+                      opacity: Math.max(0, 1 - progress * 5),
+                      fontSize: "1.5rem",
+                      color: "rgba(255, 255, 255, 0.4)",
+                    }}
+                  >
+                    &#8595;
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </Scene>
 
         {/* Reveal Section - Three feature cards */}
         <Scene duration="150vh">
@@ -316,6 +428,34 @@ export function ProductLaunch({
               </Panel>
             ))}
           </HorizontalScroll>
+        )}
+
+        {/* Feature Marquee Ticker */}
+        {tickerItems.length > 0 && (
+          <div
+            style={{
+              borderTop: "0.5px solid rgba(255,255,255,0.08)",
+              borderBottom: "0.5px solid rgba(255,255,255,0.08)",
+              padding: "20px 0",
+            }}
+          >
+            <Marquee speed={30}>
+              {tickerItems.map((item) => (
+                <span
+                  key={item}
+                  style={{
+                    fontSize: "0.875rem",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item}
+                </span>
+              ))}
+            </Marquee>
+          </div>
         )}
 
         {/* CTA Section */}
