@@ -20,7 +20,7 @@ Core scroll engine under 1 KB gzipped.
 ## Why react-kino
 
 - **Tiny** -- the core scroll engine is under 1 KB gzipped. GSAP ScrollTrigger alone is 33 KB.
-- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<ScrollTransform>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
+- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<ScrollTransform>`, `<Parallax>`, `<Counter>`, `<StickyHeader>`, `<Marquee>`, and `<TextReveal>` like regular React components. No imperative timelines.
 - **Lightweight runtime** -- `react-kino` uses a tiny internal engine package (`@react-kino/core`) plus React peers.
 - **SSR-safe** -- every component renders children on the server and animates on the client.
 
@@ -492,6 +492,61 @@ The video is `muted`, `playsInline`, and never autoplays. `currentTime` is set d
 
 ---
 
+### `<StickyHeader>`
+
+A sticky navigation bar that transitions from transparent to a solid background with backdrop blur as the user scrolls past a threshold.
+
+```tsx
+import { StickyHeader } from "react-kino";
+
+<StickyHeader threshold={40} background="rgba(0, 0, 0, 0.72)" blur>
+  <div style={{ maxWidth: 980, margin: "0 auto", height: 48, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px" }}>
+    <span>My Site</span>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+  </div>
+</StickyHeader>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `threshold` | `number` | `80` | Scroll distance (px) before the header becomes solid |
+| `background` | `string` | `"rgba(0,0,0,0.8)"` | Background color when scrolled past threshold |
+| `blur` | `boolean` | `true` | Whether to apply backdrop blur when scrolled |
+| `children` | `ReactNode` | -- | Header content |
+| `className` | `string` | -- | CSS class |
+| `style` | `CSSProperties` | -- | Inline styles |
+
+---
+
+### `<Marquee>`
+
+An infinitely scrolling ticker. Items are automatically duplicated to create a seamless loop. Respects `prefers-reduced-motion` by falling back to a static flex layout.
+
+```tsx
+import { Marquee } from "react-kino";
+
+<Marquee speed={30} direction="left" pauseOnHover>
+  <span>React</span>
+  <span>TypeScript</span>
+  <span>Next.js</span>
+  <span>Tailwind</span>
+</Marquee>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `speed` | `number` | `40` | Speed in pixels per second |
+| `direction` | `"left" \| "right"` | `"left"` | Scroll direction |
+| `pauseOnHover` | `boolean` | `true` | Pause animation on hover |
+| `gap` | `number` | `32` | Gap between items in px |
+| `children` | `ReactNode` | -- | Items to scroll |
+| `className` | `string` | -- | CSS class |
+
+---
+
 ### `<TextReveal>`
 
 Word-by-word, character-by-character, or line-by-line text reveal driven by scroll progress.
@@ -858,6 +913,8 @@ react-kino respects the `prefers-reduced-motion` media query:
 - **`<Parallax>`** -- parallax offset is disabled, content scrolls normally
 - **`<ScrollTransform>`** -- jumps to the `to` state immediately, no interpolation
 - **`<Counter>`** -- displays the final `to` value immediately once progress reaches `at`
+- **`<Marquee>`** -- renders items in a static flex layout instead of animating
+- **`<StickyHeader>`** -- transitions are disabled, background changes immediately
 
 No additional configuration is required. This behavior is automatic.
 
