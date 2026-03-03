@@ -13,6 +13,7 @@ import {
   Progress,
   Marquee,
   StickyHeader,
+  ScrollTransform,
 } from "react-kino";
 import Link from "next/link";
 import { useState, useEffect, useRef, useCallback, type ReactNode } from "react";
@@ -715,6 +716,73 @@ function ProgressPlayground() {
   );
 }
 
+function ScrollTransformPlayground() {
+  const [progress, setProgress] = useState(0.0);
+  const [easing, setEasing] = useState<"ease-out" | "ease-out-cubic" | "linear" | "ease-in-out">("ease-out-cubic");
+  return (
+    <DemoSection
+      id="scrolltransform"
+      name="ScrollTransform"
+      description="Interpolates CSS transforms and opacity between two states based on scroll progress. Supports 3D rotations, perspective, translate, scale, skew, and 10+ easing presets."
+      code={`<ScrollTransform
+  from={{ rotateX: 40, rotateY: -12, scale: 0.8, opacity: 0.3 }}
+  to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+  perspective={1200}
+  easing="ease-out-cubic"
+  transformOrigin="center bottom"
+>
+  <div>Your content</div>
+</ScrollTransform>`}
+    >
+      <OptionButtons
+        options={["ease-out-cubic", "ease-out", "linear", "ease-in-out"] as ("ease-out-cubic" | "ease-out" | "linear" | "ease-in-out")[]}
+        value={easing}
+        onChange={setEasing}
+      />
+      <ProgressSlider value={progress} onChange={setProgress} />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "32px 0",
+          minHeight: "200px",
+          alignItems: "center",
+        }}
+      >
+        <ScrollTransform
+          key={easing}
+          from={{ rotateX: 35, rotateY: -10, scale: 0.8, opacity: 0.2 }}
+          to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+          perspective={1000}
+          progress={progress}
+          easing={easing}
+          transformOrigin="center bottom"
+        >
+          <div
+            className="gamer-card"
+            style={{ padding: "36px 56px", textAlign: "center" }}
+          >
+            <div
+              style={{
+                fontSize: "28px",
+                fontFamily: "'JetBrains Mono', monospace",
+                color: "#ef4444",
+                marginBottom: "8px",
+                textShadow: `0 0 20px rgba(220, 38, 38, ${progress * 0.4})`,
+              }}
+            >
+              {"{ 3D }"}
+            </div>
+            <div style={{ fontSize: "13px", color: "#555" }}>
+              easing: {easing}
+            </div>
+          </div>
+        </ScrollTransform>
+      </div>
+    </DemoSection>
+  );
+}
+
 /* ════════════════════════════════════════════
    Description-only sections
    ════════════════════════════════════════════ */
@@ -1071,6 +1139,7 @@ const NAV_ITEMS = [
   { id: "compareslider", label: "CompareSlider" },
   { id: "marquee", label: "Marquee" },
   { id: "progress", label: "Progress" },
+  { id: "scrolltransform", label: "ScrollTransform" },
   { id: "parallax", label: "Parallax" },
   { id: "horizontalscroll", label: "HorizontalScroll" },
   { id: "videoscroll", label: "VideoScroll" },
@@ -1211,6 +1280,7 @@ export default function PlaygroundPage() {
           <CompareSliderPlayground />
           <MarqueePlayground />
           <ProgressPlayground />
+          <ScrollTransformPlayground />
           <ParallaxSection />
           <HorizontalScrollSection />
           <VideoScrollSection />
@@ -1229,7 +1299,7 @@ export default function PlaygroundPage() {
           }}
         >
           <p style={{ fontSize: "14px", color: "#444", marginBottom: "16px" }}>
-            All 12 components + 3 hooks documented above.
+            All 13 components + 3 hooks documented above.
           </p>
           <div style={{ display: "flex", gap: "24px", justifyContent: "center" }}>
             <Link href="/" className="nav-link" style={{ color: "#dc2626" }}>

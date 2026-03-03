@@ -315,6 +315,7 @@ function MarqueeStrip() {
     "VideoScroll",
     "Marquee",
     "StickyHeader",
+    "ScrollTransform",
     "Kino",
   ];
   return (
@@ -559,6 +560,152 @@ function RevealDemo() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      )}
+    </Scene>
+  );
+}
+
+/* ─── ScrollTransform Demo ─── */
+function ScrollTransformDemo() {
+  return (
+    <Scene duration="200vh">
+      {() => (
+        <div
+          style={{
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 24px",
+          }}
+        >
+          <span className="component-tag" style={{ marginBottom: "32px" }}>
+            {"<ScrollTransform>"}
+          </span>
+          <h2
+            className="section-heading"
+            style={{
+              fontSize: "clamp(32px, 5vw, 56px)",
+              marginBottom: "12px",
+              textAlign: "center",
+            }}
+          >
+            Transform on scroll.
+          </h2>
+          <p
+            style={{
+              fontSize: "16px",
+              color: "#666",
+              marginBottom: "56px",
+              textAlign: "center",
+              maxWidth: "480px",
+            }}
+          >
+            3D rotations, scale, and opacity — all driven by scroll progress.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "24px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            {/* Card 1: Device tilt */}
+            <ScrollTransform
+              from={{ rotateX: 35, rotateY: -10, scale: 0.8, opacity: 0.2 }}
+              to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+              perspective={1000}
+              span={0.5}
+              easing="ease-out-cubic"
+              transformOrigin="center bottom"
+            >
+              <div
+                className="gamer-card"
+                style={{
+                  padding: "40px 48px",
+                  textAlign: "center",
+                  minWidth: "200px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "32px",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    color: "#dc2626",
+                    marginBottom: "12px",
+                  }}
+                >
+                  {"{ 3D }"}
+                </div>
+                <div style={{ fontSize: "13px", color: "#555" }}>device tilt</div>
+              </div>
+            </ScrollTransform>
+
+            {/* Card 2: Slide in with rotation */}
+            <ScrollTransform
+              from={{ x: 120, rotate: 12, opacity: 0 }}
+              to={{ x: 0, rotate: 0, opacity: 1 }}
+              at={0.2}
+              span={0.4}
+              easing="ease-out-cubic"
+            >
+              <div
+                className="gamer-card"
+                style={{
+                  padding: "40px 48px",
+                  textAlign: "center",
+                  minWidth: "200px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "32px",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    color: "#dc2626",
+                    marginBottom: "12px",
+                  }}
+                >
+                  {"→ ↻"}
+                </div>
+                <div style={{ fontSize: "13px", color: "#555" }}>slide + rotate</div>
+              </div>
+            </ScrollTransform>
+
+            {/* Card 3: Scale up */}
+            <ScrollTransform
+              from={{ scale: 0.4, opacity: 0 }}
+              to={{ scale: 1, opacity: 1 }}
+              at={0.35}
+              span={0.4}
+              easing="ease-out"
+            >
+              <div
+                className="gamer-card"
+                style={{
+                  padding: "40px 48px",
+                  textAlign: "center",
+                  minWidth: "200px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "32px",
+                    fontFamily: "'JetBrains Mono', monospace",
+                    color: "#dc2626",
+                    marginBottom: "12px",
+                  }}
+                >
+                  {"⊕"}
+                </div>
+                <div style={{ fontSize: "13px", color: "#555" }}>scale reveal</div>
+              </div>
+            </ScrollTransform>
           </div>
         </div>
       )}
@@ -1435,6 +1582,7 @@ export default function LandingPage() {
         <SceneDemo />
         <TextRevealDemo />
         <RevealDemo />
+        <ScrollTransformDemo />
         <CounterDemo />
         <CompareDemo />
         <MarqueeStrip />
