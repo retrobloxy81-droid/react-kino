@@ -15,6 +15,7 @@
     "next": "^15",
     "react": "^19",
     "react-dom": "^19",
+    "@react-kino/templates": "workspace:*",
     "react-kino": "workspace:*"
   },
   "devDependencies": {

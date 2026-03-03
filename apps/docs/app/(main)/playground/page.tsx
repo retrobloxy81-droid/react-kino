@@ -1261,6 +1261,9 @@ export default function PlaygroundPage() {
               <Link href="/playground" className="nav-link" data-active="true">
                 Playground
               </Link>
+              <Link href="/templates" className="nav-link">
+                Templates
+              </Link>
               <Link href="/docs" className="nav-link">
                 Docs
               </Link>

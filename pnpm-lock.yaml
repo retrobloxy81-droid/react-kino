@@ -20,6 +20,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@react-kino/templates':
+        specifier: workspace:*
+        version: link:../../packages/templates
       fumadocs-core:
         specifier: ^14.7.7
         version: 14.7.7(@types/react@19.1.17)(next@15.5.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)

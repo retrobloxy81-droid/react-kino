@@ -1522,6 +1522,9 @@ function Footer() {
         <Link href="/playground" className="nav-link" style={{ color: "#dc2626" }}>
           Playground
         </Link>
+        <Link href="/templates" className="nav-link" style={{ color: "#dc2626" }}>
+          Templates
+        </Link>
         <Link href="/docs" className="nav-link" style={{ color: "#dc2626" }}>
           Documentation
         </Link>
@@ -1563,6 +1566,9 @@ export default function LandingPage() {
             <div className="site-nav-links">
               <Link href="/playground" className="nav-link">
                 Playground
+              </Link>
+              <Link href="/templates" className="nav-link">
+                Templates
               </Link>
               <Link href="/docs" className="nav-link">
                 Docs
