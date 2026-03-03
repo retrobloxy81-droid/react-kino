@@ -255,6 +255,138 @@ export function ProductLaunch({
           )}
         </Scene>
 
+        {/* 3D Product Showcase */}
+        <Scene duration="350vh">
+          {() => (
+            <div style={sectionCenter}>
+              <ScrollTransform
+                from={{
+                  rotateX: 40,
+                  rotateY: -12,
+                  scale: 0.82,
+                  y: 80,
+                  opacity: 0.3,
+                }}
+                to={{
+                  rotateX: 0,
+                  rotateY: 0,
+                  scale: 1,
+                  y: 0,
+                  opacity: 1,
+                }}
+                perspective={1200}
+                span={0.5}
+                easing="ease-out-cubic"
+                transformOrigin="center bottom"
+              >
+                <div
+                  style={{
+                    width: "min(85vw, 680px)",
+                    aspectRatio: "16 / 10",
+                    borderRadius: "20px",
+                    background: `linear-gradient(145deg, #0a0a0a, ${accentColor}15, #0a0a0a)`,
+                    boxShadow: [
+                      "0 0 0 0.5px rgba(255,255,255,0.06)",
+                      "0 2px 4px rgba(0,0,0,0.4)",
+                      `0 48px 96px -16px ${accentColor}30`,
+                    ].join(", "),
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                    gap: "16px",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "320px",
+                      height: "320px",
+                      borderRadius: "50%",
+                      top: "-80px",
+                      right: "-60px",
+                      background: `radial-gradient(circle, ${accentColor}18, transparent 70%)`,
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "240px",
+                      height: "240px",
+                      borderRadius: "50%",
+                      bottom: "-60px",
+                      left: "-40px",
+                      background: `radial-gradient(circle, ${accentColor}10, transparent 70%)`,
+                    }}
+                  />
+                  <h2
+                    style={{
+                      fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+                      fontWeight: 800,
+                      letterSpacing: "-0.04em",
+                      lineHeight: 1,
+                      margin: 0,
+                      backgroundImage: `linear-gradient(135deg, #ffffff 0%, ${accentColor} 100%)`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  >
+                    {name}
+                  </h2>
+                  <p
+                    style={{
+                      fontSize: "clamp(0.875rem, 1.5vw, 1.125rem)",
+                      color: "rgba(255, 255, 255, 0.4)",
+                      margin: 0,
+                      position: "relative",
+                      zIndex: 1,
+                      maxWidth: "400px",
+                      textAlign: "center",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {tagline}
+                  </p>
+                </div>
+              </ScrollTransform>
+
+              <Reveal animation="fade-up" at={0.55} duration={800}>
+                <h2
+                  style={{
+                    fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+                    fontWeight: 700,
+                    letterSpacing: "-0.03em",
+                    marginTop: "48px",
+                    textAlign: "center",
+                  }}
+                >
+                  Built different.
+                </h2>
+              </Reveal>
+              <Reveal animation="fade-up" at={0.65} duration={800}>
+                <p
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1.125rem)",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    maxWidth: "460px",
+                    lineHeight: 1.6,
+                    marginTop: "12px",
+                    textAlign: "center",
+                  }}
+                >
+                  Hardware-accelerated transforms and native scroll APIs. No
+                  JavaScript scroll hijacking. Just the platform, used right.
+                </p>
+              </Reveal>
+            </div>
+          )}
+        </Scene>
+
         {/* Reveal Section - Three feature cards */}
         <Scene duration="150vh">
           <div style={sectionCenter}>

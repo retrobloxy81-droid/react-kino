@@ -234,74 +234,174 @@ export function Portfolio({
           </div>
         </Scene>
 
-        {/* Projects with ScrollTransform cards */}
+        {/* Projects — Sticky Timeline */}
         {projects.length > 0 && (
-          <Scene duration={`${Math.max(projects.length * 80, 200)}vh`}>
-            <div style={sectionCenter}>
-              <div
-                style={{
-                  maxWidth: "900px",
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "40px",
-                  padding: "0 24px",
-                }}
-              >
-                <Reveal at={0.05} animation="fade">
+          <Scene duration={`${Math.max(projects.length * 150, 500)}vh`}>
+            {(progress) => {
+              const n = projects.length;
+              const active = Math.min(n - 1, Math.floor(progress * n));
+              const fill = Math.min(
+                100,
+                n > 1 ? ((progress * n) / (n - 1)) * 100 : progress * 100
+              );
+
+              return (
+                <section
+                  style={{
+                    height: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    maxWidth: "1080px",
+                    margin: "0 auto",
+                    padding: "0 48px",
+                  }}
+                >
                   <p
                     style={{
                       fontSize: "0.75rem",
                       textTransform: "uppercase",
                       letterSpacing: "0.2em",
                       color: "rgba(255, 255, 255, 0.35)",
-                      textAlign: "left",
-                      margin: 0,
+                      marginBottom: "48px",
                     }}
                   >
                     Selected Work
                   </p>
-                </Reveal>
-                {projects.map((project, i) => {
-                  const step =
-                    projects.length > 1 ? 0.7 / (projects.length - 1) : 0;
-                  return (
-                    <ScrollTransform
-                      key={project.title}
-                      from={{ y: 40, opacity: 0 }}
-                      to={{ y: 0, opacity: 1 }}
-                      at={0.15 + i * step}
-                      span={0.15}
-                      easing="ease-out"
+
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "clamp(40px, 6vw, 80px)",
+                    }}
+                  >
+                    {/* Left: Timeline */}
+                    <div
+                      style={{
+                        width: "180px",
+                        flexShrink: 0,
+                        position: "relative",
+                      }}
                     >
+                      {/* Track line */}
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: "10px",
+                          top: "10px",
+                          bottom: "10px",
+                          width: "2px",
+                          background: "rgba(255,255,255,0.06)",
+                          borderRadius: "1px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "100%",
+                            height: `${fill}%`,
+                            background: accentColor,
+                            transition: "height 0.4s ease-out",
+                            borderRadius: "1px",
+                          }}
+                        />
+                      </div>
+
+                      {/* Dots & labels */}
                       <div
                         style={{
                           display: "flex",
+                          flexDirection: "column",
                           justifyContent: "space-between",
-                          alignItems: "flex-start",
-                          padding: "32px 0",
-                          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-                          textAlign: "left",
-                          gap: "24px",
-                          flexWrap: "wrap",
+                          height: "300px",
                         }}
                       >
-                        <div style={{ flex: 1, minWidth: "200px" }}>
+                        {projects.map((project, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "18px",
+                              position: "relative",
+                              zIndex: 1,
+                              cursor: "default",
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: "22px",
+                                height: "22px",
+                                borderRadius: "50%",
+                                background:
+                                  i <= active
+                                    ? accentColor
+                                    : "rgba(255,255,255,0.08)",
+                                boxShadow:
+                                  i === active
+                                    ? `0 0 0 4px #050505, 0 0 20px ${accentColor}40`
+                                    : "none",
+                                transition: "all 0.4s",
+                                flexShrink: 0,
+                              }}
+                            />
+                            <span
+                              style={{
+                                fontSize: "15px",
+                                fontWeight: i === active ? 600 : 400,
+                                color:
+                                  i <= active
+                                    ? "#f5f5f7"
+                                    : "rgba(255,255,255,0.25)",
+                                transition: "all 0.4s",
+                              }}
+                            >
+                              {project.year}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Right: Content panels */}
+                    <div
+                      style={{
+                        flex: 1,
+                        position: "relative",
+                        minHeight: "300px",
+                      }}
+                    >
+                      {projects.map((project, i) => (
+                        <div
+                          key={i}
+                          style={{
+                            position: "absolute",
+                            top: "0",
+                            left: "0",
+                            right: "0",
+                            opacity: i === active ? 1 : 0,
+                            transform: `translateY(${i === active ? 0 : i > active ? 24 : -24}px)`,
+                            transition: "opacity 0.5s, transform 0.5s",
+                            pointerEvents: i === active ? "auto" : "none",
+                          }}
+                        >
                           <h3
                             style={{
-                              fontSize: "clamp(1.25rem, 3vw, 2rem)",
+                              fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
                               fontWeight: 700,
-                              margin: "0 0 8px",
+                              letterSpacing: "-0.02em",
+                              margin: "0 0 14px",
+                              color: "#f5f5f7",
                             }}
                           >
                             {project.title}
                           </h3>
                           <p
                             style={{
+                              fontSize: "1rem",
                               color: "rgba(255, 255, 255, 0.5)",
-                              margin: 0,
                               lineHeight: 1.6,
-                              fontSize: "0.95rem",
+                              maxWidth: "480px",
+                              margin: "0 0 20px",
                             }}
                           >
                             {project.description}
@@ -312,7 +412,6 @@ export function Portfolio({
                                 display: "flex",
                                 gap: "8px",
                                 flexWrap: "wrap",
-                                marginTop: "12px",
                               }}
                             >
                               {project.tags.map((tag) => (
@@ -333,21 +432,12 @@ export function Portfolio({
                             </div>
                           )}
                         </div>
-                        <span
-                          style={{
-                            fontSize: "0.875rem",
-                            color: "rgba(255, 255, 255, 0.3)",
-                            flexShrink: 0,
-                          }}
-                        >
-                          {project.year}
-                        </span>
-                      </div>
-                    </ScrollTransform>
-                  );
-                })}
-              </div>
-            </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              );
+            }}
           </Scene>
         )}
 
