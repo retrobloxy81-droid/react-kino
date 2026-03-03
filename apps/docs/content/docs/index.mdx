@@ -56,7 +56,7 @@ That is a complete scroll experience: the section pins in place, content fades i
 ## Why react-kino
 
 - **Tiny** -- the core scroll engine is under 1 KB gzipped. GSAP ScrollTrigger alone is 33 KB.
-- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
+- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<ScrollTransform>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
 - **Lightweight runtime** -- `react-kino` uses a tiny internal engine package (`@kino/core`) plus React peers.
 - **SSR-safe** -- every component renders children on the server and animates on the client.
 
@@ -90,6 +90,7 @@ react-kino respects the `prefers-reduced-motion` media query:
 
 - `<Reveal>` -- content renders immediately in its visible state
 - `<Parallax>` -- parallax offset is disabled
+- `<ScrollTransform>` -- jumps to the `to` state immediately, no interpolation
 - `<Counter>` -- displays the final value immediately
 
 No additional configuration is required.

@@ -11,6 +11,7 @@ import {
   Progress,
   Marquee,
   StickyHeader,
+  ScrollTransform,
 } from "react-kino";
 import Link from "next/link";
 import { useState } from "react";
@@ -627,7 +628,7 @@ function CounterDemo() {
                 to: 4.9,
                 fmt: (n: number) => `${n.toFixed(1)} KB`,
               },
-              { label: "Components", to: 12, fmt: (n: number) => `${n}` },
+              { label: "Components", to: 13, fmt: (n: number) => `${n}` },
             ].map((stat, i) => (
               <div key={stat.label} style={{ textAlign: "center", padding: "24px 8px" }}>
                 <div
@@ -1062,6 +1063,7 @@ function ComponentGallery() {
     { name: "VideoScroll", code: '<VideoScroll src="…">', desc: "Frame-by-frame video scrubbing on scroll" },
     { name: "Marquee", code: "<Marquee speed={40}>", desc: "Infinite looping ticker animation" },
     { name: "StickyHeader", code: "<StickyHeader>", desc: "Scroll-aware fixed header with blur" },
+    { name: "ScrollTransform", code: "<ScrollTransform>", desc: "Scroll-driven 3D transforms and opacity" },
   ];
 
   const hooks = [

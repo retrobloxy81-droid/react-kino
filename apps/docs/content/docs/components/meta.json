@@ -12,6 +12,7 @@
     "video-scroll",
     "text-reveal",
     "marquee",
-    "sticky-header"
+    "sticky-header",
+    "scroll-transform"
   ]
 }

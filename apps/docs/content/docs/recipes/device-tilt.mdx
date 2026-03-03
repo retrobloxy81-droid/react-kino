@@ -1,0 +1,135 @@
+---
+title: Device Tilt Effect
+description: Create Apple-style 3D device reveals that rotate into view as the user scrolls.
+---
+
+## Overview
+
+The device tilt effect is a popular pattern seen on Apple product pages: a device (laptop, phone, or card) starts tilted away from the viewer and gradually rotates into a flat, front-facing position as the user scrolls. This creates a cinematic 3D reveal that draws attention to the product.
+
+## Using ScrollTransform (recommended)
+
+The simplest approach is to use `<ScrollTransform>` with 3D rotation properties and a `perspective` value.
+
+```tsx
+import { Scene, ScrollTransform } from "react-kino";
+
+function DeviceTilt() {
+  return (
+    <Scene duration="250vh">
+      <ScrollTransform
+        from={{ rotateX: 40, rotateY: -12, scale: 0.82, opacity: 0.3 }}
+        to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+        perspective={1200}
+        easing="ease-out-cubic"
+      >
+        <img
+          src="/macbook.png"
+          alt="MacBook Pro"
+          style={{ width: "100%", maxWidth: 900 }}
+        />
+      </ScrollTransform>
+    </Scene>
+  );
+}
+```
+
+This gives you the full effect in five lines of JSX. The `perspective` prop sets the 3D viewing distance, and `ease-out-cubic` gives a natural deceleration as the device settles into place.
+
+## Manual approach
+
+For full control over the animation, use the `<Scene>` render prop to access progress directly and compute your own transforms.
+
+```tsx
+import { Scene } from "react-kino";
+
+function DeviceTiltManual() {
+  return (
+    <Scene duration="250vh">
+      {(progress) => {
+        const t = Math.min(1, progress * 1.2); // complete slightly before end
+        const rotateX = 40 * (1 - t);
+        const rotateY = -12 * (1 - t);
+        const scale = 0.82 + 0.18 * t;
+        const opacity = 0.3 + 0.7 * t;
+
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+              perspective: 1200,
+            }}
+          >
+            <img
+              src="/macbook.png"
+              alt="MacBook Pro"
+              style={{
+                width: "100%",
+                maxWidth: 900,
+                transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
+                opacity,
+                willChange: "transform, opacity",
+              }}
+            />
+          </div>
+        );
+      }}
+    </Scene>
+  );
+}
+```
+
+## Customization tips
+
+### Transform origin
+
+The default `transform-origin` is `center center`. For a device lying on a desk that tilts up toward the viewer, use `center bottom`:
+
+```tsx
+<ScrollTransform
+  from={{ rotateX: 60, opacity: 0 }}
+  to={{ rotateX: 0, opacity: 1 }}
+  perspective={1000}
+  style={{ transformOrigin: "center bottom" }}
+>
+  <img src="/laptop.png" alt="Laptop" />
+</ScrollTransform>
+```
+
+### Choosing perspective values
+
+- **800-1000px** -- Dramatic, exaggerated 3D effect
+- **1200-1600px** -- Natural, realistic perspective (recommended for most cases)
+- **2000px+** -- Subtle, almost flat feeling
+
+### Easing choices
+
+- **`ease-out-cubic`** -- Best for reveals. Fast start, gentle landing.
+- **`ease-in-out`** -- Smooth throughout. Good for back-and-forth transitions.
+- **`ease-out-quart`** -- Even more dramatic deceleration for a "snap into place" feel.
+
+### Adding a shadow animation
+
+Pair the tilt with a CSS shadow that grows as the device comes to rest:
+
+```tsx
+<Scene duration="250vh">
+  {(progress) => (
+    <ScrollTransform
+      from={{ rotateX: 40, scale: 0.85, opacity: 0.3 }}
+      to={{ rotateX: 0, scale: 1, opacity: 1 }}
+      perspective={1200}
+      easing="ease-out-cubic"
+      progress={progress}
+      style={{
+        filter: `drop-shadow(0 ${20 + progress * 30}px ${30 + progress * 40}px rgba(0,0,0,${0.1 + progress * 0.15}))`,
+      }}
+    >
+      <img src="/device.png" alt="Device" style={{ width: "100%", maxWidth: 900 }} />
+    </ScrollTransform>
+  )}
+</Scene>
+```

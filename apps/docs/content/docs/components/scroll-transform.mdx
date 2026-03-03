@@ -1,0 +1,114 @@
+---
+title: ScrollTransform
+description: Transforms an element from one visual state to another as the user scrolls.
+---
+
+## Overview
+
+`<ScrollTransform>` interpolates between two visual states (`from` and `to`) as scroll progress advances. Place it inside a `<Scene>` to automatically drive the transition, or provide a `progress` prop directly. Useful for 3D tilt effects, slide-in animations, scale reveals, and any scroll-driven transform.
+
+## Usage
+
+```tsx
+import { Scene, ScrollTransform } from "react-kino";
+
+<Scene duration="200vh">
+  <ScrollTransform
+    from={{ rotateX: 40, rotateY: -12, scale: 0.82, opacity: 0.3 }}
+    to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+    perspective={1200}
+    easing="ease-out-cubic"
+  >
+    <div className="card">Your content here</div>
+  </ScrollTransform>
+</Scene>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `from` | `TransformState` | -- | Starting visual state at progress `0` |
+| `to` | `TransformState` | -- | Ending visual state at progress `1` |
+| `perspective` | `number` | -- | CSS perspective value in pixels applied to the wrapper. Required for 3D rotation effects |
+| `easing` | `string \| (t: number) => number` | `"linear"` | Easing preset name or custom easing function |
+| `progress` | `number` | -- | Direct progress override (0-1). If omitted, reads from parent `<Scene>` context |
+| `children` | `ReactNode` | -- | Content to transform |
+| `className` | `string` | -- | CSS class for the wrapper element |
+| `style` | `CSSProperties` | -- | Inline styles (merged with computed transform) |
+
+## TransformState properties
+
+All properties are optional. Only the properties you specify will be interpolated.
+
+| Property | Type | Unit | Description |
+|----------|------|------|-------------|
+| `x` | `number` | `px` | Horizontal translation |
+| `y` | `number` | `px` | Vertical translation |
+| `z` | `number` | `px` | Depth translation (3D) |
+| `rotateX` | `number` | `deg` | Rotation around X-axis |
+| `rotateY` | `number` | `deg` | Rotation around Y-axis |
+| `rotateZ` | `number` | `deg` | Rotation around Z-axis |
+| `scale` | `number` | -- | Uniform scale factor |
+| `scaleX` | `number` | -- | Horizontal scale factor |
+| `scaleY` | `number` | -- | Vertical scale factor |
+| `opacity` | `number` | -- | Opacity (0-1) |
+| `blur` | `number` | `px` | CSS blur filter |
+| `brightness` | `number` | -- | CSS brightness filter (1 = normal) |
+
+## Available easing presets
+
+| Preset | Description |
+|--------|-------------|
+| `"linear"` | Constant speed, no acceleration |
+| `"ease-in"` | Quadratic ease in |
+| `"ease-out"` | Quadratic ease out |
+| `"ease-in-out"` | Quadratic ease in-out |
+| `"ease-in-cubic"` | Cubic ease in |
+| `"ease-out-cubic"` | Cubic ease out (great for scroll reveals) |
+| `"ease-in-out-cubic"` | Cubic ease in-out |
+| `"ease-in-quart"` | Quartic ease in |
+| `"ease-out-quart"` | Quartic ease out |
+| `"ease-in-out-quart"` | Quartic ease in-out |
+
+You can also pass a custom easing function `(t: number) => number` where `t` ranges from `0` to `1`.
+
+## Accessibility
+
+When `prefers-reduced-motion` is enabled, the element renders in its `to` state immediately with no interpolation. This ensures all content is visible and readable without requiring scroll interaction.
+
+## Example: Device tilt (3D rotation)
+
+```tsx
+<Scene duration="250vh">
+  <ScrollTransform
+    from={{ rotateX: 45, rotateY: -20, scale: 0.8, opacity: 0 }}
+    to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+    perspective={1200}
+    easing="ease-out-cubic"
+  >
+    <img
+      src="/macbook.png"
+      alt="MacBook Pro"
+      style={{ width: "100%", maxWidth: 800 }}
+    />
+  </ScrollTransform>
+</Scene>
+```
+
+## Example: Slide-in with rotation
+
+```tsx
+<Scene duration="200vh">
+  <ScrollTransform
+    from={{ x: -200, rotateZ: -8, opacity: 0 }}
+    to={{ x: 0, rotateZ: 0, opacity: 1 }}
+    easing="ease-out-quart"
+  >
+    <div className="feature-card">
+      <h3>Lightning fast</h3>
+      <p>Built for performance from the ground up.</p>
+    </div>
+  </ScrollTransform>
+</Scene>
+```

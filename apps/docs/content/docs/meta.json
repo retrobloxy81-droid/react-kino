@@ -1,5 +1,5 @@
 {
   "root": true,
   "title": "react-kino",
-  "pages": ["index", "---Components---", "components", "---Hooks---", "hooks"]
+  "pages": ["index", "---Components---", "components", "---Hooks---", "hooks", "---Recipes---", "recipes"]
 }

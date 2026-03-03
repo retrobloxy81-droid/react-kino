@@ -1,0 +1,221 @@
+---
+title: Sticky Timeline
+description: Build a pinned section with step-by-step timeline indicators driven by scroll progress.
+---
+
+## Overview
+
+The sticky timeline pattern creates a pinned section with a vertical (or horizontal) timeline that fills as the user scrolls. Each step activates in sequence, with content crossfading to match the active step. This is a common pattern for feature walkthroughs, product tours, and process explainers.
+
+## Implementation
+
+Use the `<Scene>` render prop to access scroll progress, then derive the active step and fill percentage from it.
+
+```tsx
+import { Scene } from "react-kino";
+
+const steps = [
+  { title: "Connect", description: "Link your accounts in one click." },
+  { title: "Configure", description: "Set your preferences and rules." },
+  { title: "Launch", description: "Go live with a single command." },
+  { title: "Monitor", description: "Track performance in real time." },
+];
+
+function StickyTimeline() {
+  return (
+    <Scene duration="400vh">
+      {(progress) => {
+        const activeStep = Math.min(
+          steps.length - 1,
+          Math.floor(progress * steps.length)
+        );
+        const fillPercent = progress * 100;
+
+        return (
+          <div style={{ display: "flex", height: "100vh", alignItems: "center", padding: "0 10%" }}>
+            {/* Timeline column */}
+            <div style={{ position: "relative", width: 40, marginRight: 60 }}>
+              {/* Track */}
+              <div className="timeline-track">
+                <div className="timeline-fill" style={{ height: `${fillPercent}%` }} />
+              </div>
+
+              {/* Dots */}
+              {steps.map((_, i) => (
+                <div
+                  key={i}
+                  className={`timeline-dot ${i <= activeStep ? "active" : ""}`}
+                  style={{ top: `${(i / (steps.length - 1)) * 100}%` }}
+                />
+              ))}
+            </div>
+
+            {/* Content column */}
+            <div style={{ flex: 1, position: "relative" }}>
+              {steps.map((step, i) => (
+                <div
+                  key={i}
+                  className="timeline-content"
+                  style={{
+                    opacity: i === activeStep ? 1 : 0,
+                    transform: `translateY(${i === activeStep ? 0 : 20}px)`,
+                    transition: "opacity 0.4s ease, transform 0.4s ease",
+                    position: i === 0 ? "relative" : "absolute",
+                    top: i === 0 ? undefined : 0,
+                    left: i === 0 ? undefined : 0,
+                  }}
+                >
+                  <h2>{step.title}</h2>
+                  <p>{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }}
+    </Scene>
+  );
+}
+```
+
+## CSS
+
+Add these styles for the timeline track, fill bar, and dots.
+
+```css
+.timeline-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: #e5e7eb;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+.timeline-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #3b82f6;
+  transition: height 0.1s linear;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  z-index: 1;
+}
+
+.timeline-dot.active {
+  border-color: #3b82f6;
+  background: #3b82f6;
+}
+
+.timeline-content h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+  font-size: 1.125rem;
+  color: #6b7280;
+  max-width: 500px;
+}
+```
+
+## Content crossfade
+
+The content switching uses CSS transitions for a smooth crossfade. The active step has `opacity: 1` and `translateY(0)`, while inactive steps have `opacity: 0` and `translateY(20px)`. The first step uses `position: relative` to maintain layout height, while the rest are `position: absolute` so they stack.
+
+If you need more control over the crossfade timing, you can use sub-progress values:
+
+```tsx
+{(progress) => {
+  const stepProgress = (progress * steps.length) % 1; // 0-1 within each step
+
+  // Use stepProgress for per-step animations like
+  // content slide-in, image transitions, etc.
+}}
+```
+
+## Customization tips
+
+### Horizontal timeline
+
+Rotate the timeline to horizontal by swapping axes. Use `width` instead of `height` for the fill, and lay out dots with `left` instead of `top`:
+
+```tsx
+<div className="timeline-track-horizontal">
+  <div className="timeline-fill-horizontal" style={{ width: `${fillPercent}%` }} />
+</div>
+
+{steps.map((_, i) => (
+  <div
+    key={i}
+    className={`timeline-dot-horizontal ${i <= activeStep ? "active" : ""}`}
+    style={{ left: `${(i / (steps.length - 1)) * 100}%` }}
+  />
+))}
+```
+
+### Numbered steps
+
+Replace the dots with numbered indicators:
+
+```tsx
+<div className={`timeline-dot ${i <= activeStep ? "active" : ""}`}>
+  <span style={{ fontSize: 10, fontWeight: 700, color: i <= activeStep ? "#fff" : "#9ca3af" }}>
+    {i + 1}
+  </span>
+</div>
+```
+
+### Custom dot styles
+
+Use a ring style for upcoming steps and a solid fill for completed ones:
+
+```css
+.timeline-dot.upcoming {
+  border-color: #d1d5db;
+  background: transparent;
+}
+
+.timeline-dot.completed {
+  border-color: #3b82f6;
+  background: #3b82f6;
+}
+
+.timeline-dot.current {
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+```
+
+### Adding icons
+
+Use step-specific icons inside each dot for a richer visual:
+
+```tsx
+const stepIcons = ["🔗", "⚙️", "🚀", "📊"];
+
+{steps.map((_, i) => (
+  <div
+    key={i}
+    className={`timeline-dot ${i <= activeStep ? "active" : ""}`}
+    style={{ top: `${(i / (steps.length - 1)) * 100}%`, width: 32, height: 32 }}
+  >
+    <span style={{ fontSize: 14 }}>{stepIcons[i]}</span>
+  </div>
+))}
+```

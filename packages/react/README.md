@@ -20,7 +20,7 @@ Core scroll engine under 1 KB gzipped.
 ## Why react-kino
 
 - **Tiny** -- the core scroll engine is under 1 KB gzipped. GSAP ScrollTrigger alone is 33 KB.
-- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
+- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<ScrollTransform>`, `<Parallax>`, and `<Counter>` like regular React components. No imperative timelines.
 - **Lightweight runtime** -- `react-kino` uses a tiny internal engine package (`@react-kino/core`) plus React peers.
 - **SSR-safe** -- every component renders children on the server and animates on the client.
 
@@ -226,6 +226,43 @@ import { Counter } from "react-kino";
 | `easing` | `string \| (t: number) => number` | `"ease-out"` | Easing preset name or custom easing function |
 | `progress` | `number` | -- | Direct progress override (0-1). If omitted, reads from parent `<Scene>` context |
 | `className` | `string` | -- | CSS class for the `<span>` element |
+
+---
+
+### `<ScrollTransform>`
+
+Interpolates CSS transforms and opacity between two states as the user scrolls. Perfect for 3D device tilts, slide-in effects, and any scroll-driven transform animation.
+
+```tsx
+import { ScrollTransform } from "react-kino";
+
+<Scene duration="350vh">
+  <ScrollTransform
+    from={{ rotateX: 40, rotateY: -12, scale: 0.82, opacity: 0.3 }}
+    to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
+    perspective={1200}
+    easing="ease-out-cubic"
+    transformOrigin="center bottom"
+  >
+    <div className="card">Your content</div>
+  </ScrollTransform>
+</Scene>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `from` | `TransformState` | -- | Starting transform state |
+| `to` | `TransformState` | -- | Ending transform state |
+| `at` | `number` | `0` | Progress value (0-1) when transform begins |
+| `span` | `number` | `1` | How much of the progress range the transform spans |
+| `easing` | `string \| (t: number) => number` | `"ease-out"` | Easing preset name or custom function |
+| `perspective` | `number` | -- | CSS perspective in px (enables 3D transforms) |
+| `transformOrigin` | `string` | `"center center"` | CSS transform-origin |
+| `progress` | `number` | -- | Direct progress override. If omitted, reads from parent `<Scene>` context |
+| `className` | `string` | -- | CSS class for the wrapper div |
+| `style` | `CSSProperties` | -- | Inline styles (merged with computed transform) |
+
+**TransformState properties:** `x`, `y`, `z` (px), `scale`, `scaleX`, `scaleY`, `rotate`, `rotateX`, `rotateY` (deg), `skewX`, `skewY` (deg), `opacity` (0-1).
 
 ---
 
@@ -484,6 +521,7 @@ react-kino respects the `prefers-reduced-motion` media query:
 
 - **`<Reveal>`** -- content renders immediately in its visible state, no animation
 - **`<Parallax>`** -- parallax offset is disabled, content scrolls normally
+- **`<ScrollTransform>`** -- jumps to the `to` state immediately, no interpolation
 - **`<Counter>`** -- displays the final `to` value immediately once progress reaches `at`
 
 No additional configuration is required. This behavior is automatic.
